@@ -1,0 +1,58 @@
+//Sophia sample code
+
+class A inherits B {
+	int a;
+	bool b;
+	string c;
+	func<int,bool->int> d;
+	list(2 # list(3 # int)) e;
+	list(int, bool, func<int,bool->int>) f;
+
+	def A(a:int, b:string) {
+		super(b);
+		this.a = a;
+		string a;
+	}
+
+	def void foo(r:int) {
+		print("hi");
+	}
+}
+
+class B {
+	def B(string b) {
+		print(b);
+	}
+
+	def int bar(a:bool, b:int) {
+        if(a == true) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+	def func<bool,int->int> bar() {
+        int r;
+        func<bool,int->int> myFptr = this.bar;
+        list(first:int, func<bool,int->int>, bool) myList = [2, myFptr, true];
+        print(myList[0]);
+		print(myList.first);
+        r = myList[1]();
+
+        list(2 # func<bool,int->int>) myList2 = [myFptr, myFptr];
+        foreach(func<bool,int:int> fptr in myList2) {
+            fptr();
+        }
+
+        list(2 # list(3 # int)) anotherList = [[1,2,3],[4,5,6]];
+        return myList2[0];
+    }
+}
+
+class Main {
+	def Main() {
+		A a = new A(2, "hello");
+	}
+}

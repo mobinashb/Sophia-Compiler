@@ -39,193 +39,169 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterActor(SophiaParser.ActorContext ctx) { }
+	@Override public void enterSophiaClass(SophiaParser.SophiaClassContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitActor(SophiaParser.ActorContext ctx) { }
+	@Override public void exitSophiaClass(SophiaParser.SophiaClassContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterActorBody(SophiaParser.ActorBodyContext ctx) { }
+	@Override public void enterClassBody(SophiaParser.ClassBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitActorBody(SophiaParser.ActorBodyContext ctx) { }
+	@Override public void exitClassBody(SophiaParser.ClassBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterKnownActors(SophiaParser.KnownActorsContext ctx) { }
+	@Override public void enterVarDeclaration(SophiaParser.VarDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitKnownActors(SophiaParser.KnownActorsContext ctx) { }
+	@Override public void exitVarDeclaration(SophiaParser.VarDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterKnownActorsBody(SophiaParser.KnownActorsBodyContext ctx) { }
+	@Override public void enterMethod(SophiaParser.MethodContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitKnownActorsBody(SophiaParser.KnownActorsBodyContext ctx) { }
+	@Override public void exitMethod(SophiaParser.MethodContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterKnownActorsStmt(SophiaParser.KnownActorsStmtContext ctx) { }
+	@Override public void enterConstructor(SophiaParser.ConstructorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitKnownActorsStmt(SophiaParser.KnownActorsStmtContext ctx) { }
+	@Override public void exitConstructor(SophiaParser.ConstructorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterActorVars(SophiaParser.ActorVarsContext ctx) { }
+	@Override public void enterMethodArguments(SophiaParser.MethodArgumentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitActorVars(SophiaParser.ActorVarsContext ctx) { }
+	@Override public void exitMethodArguments(SophiaParser.MethodArgumentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDefineVars(SophiaParser.DefineVarsContext ctx) { }
+	@Override public void enterVariableWithType(SophiaParser.VariableWithTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDefineVars(SophiaParser.DefineVarsContext ctx) { }
+	@Override public void exitVariableWithType(SophiaParser.VariableWithTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDefineVarsStmt(SophiaParser.DefineVarsStmtContext ctx) { }
+	@Override public void enterType(SophiaParser.TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDefineVarsStmt(SophiaParser.DefineVarsStmtContext ctx) { }
+	@Override public void exitType(SophiaParser.TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMsgHandler(SophiaParser.MsgHandlerContext ctx) { }
+	@Override public void enterClassType(SophiaParser.ClassTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMsgHandler(SophiaParser.MsgHandlerContext ctx) { }
+	@Override public void exitClassType(SophiaParser.ClassTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInitialMsgHandler(SophiaParser.InitialMsgHandlerContext ctx) { }
+	@Override public void enterListType(SophiaParser.ListTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInitialMsgHandler(SophiaParser.InitialMsgHandlerContext ctx) { }
+	@Override public void exitListType(SophiaParser.ListTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArgumentBody(SophiaParser.ArgumentBodyContext ctx) { }
+	@Override public void enterListItemsTypes(SophiaParser.ListItemsTypesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArgumentBody(SophiaParser.ArgumentBodyContext ctx) { }
+	@Override public void exitListItemsTypes(SophiaParser.ListItemsTypesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOneArgument(SophiaParser.OneArgumentContext ctx) { }
+	@Override public void enterListItemType(SophiaParser.ListItemTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOneArgument(SophiaParser.OneArgumentContext ctx) { }
+	@Override public void exitListItemType(SophiaParser.ListItemTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMain(SophiaParser.MainContext ctx) { }
+	@Override public void enterFunctioPointerType(SophiaParser.FunctioPointerTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMain(SophiaParser.MainContext ctx) { }
+	@Override public void exitFunctioPointerType(SophiaParser.FunctioPointerTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMainBody(SophiaParser.MainBodyContext ctx) { }
+	@Override public void enterTypesWithComma(SophiaParser.TypesWithCommaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMainBody(SophiaParser.MainBodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterMainStatement(SophiaParser.MainStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMainStatement(SophiaParser.MainStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDefineIntArray(SophiaParser.DefineIntArrayContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDefineIntArray(SophiaParser.DefineIntArrayContext ctx) { }
+	@Override public void exitTypesWithComma(SophiaParser.TypesWithCommaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -267,25 +243,25 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMsgHandlerBody(SophiaParser.MsgHandlerBodyContext ctx) { }
+	@Override public void enterListValus(SophiaParser.ListValusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMsgHandlerBody(SophiaParser.MsgHandlerBodyContext ctx) { }
+	@Override public void exitListValus(SophiaParser.ListValusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRestOfStatements(SophiaParser.RestOfStatementsContext ctx) { }
+	@Override public void enterMethodBody(SophiaParser.MethodBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRestOfStatements(SophiaParser.RestOfStatementsContext ctx) { }
+	@Override public void exitMethodBody(SophiaParser.MethodBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -303,13 +279,25 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterScopeStatement(SophiaParser.ScopeStatementContext ctx) { }
+	@Override public void enterScope(SophiaParser.ScopeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitScopeStatement(SophiaParser.ScopeStatementContext ctx) { }
+	@Override public void exitScope(SophiaParser.ScopeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSuperStatement(SophiaParser.SuperStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSuperStatement(SophiaParser.SuperStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -327,37 +315,121 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrintFunction(SophiaParser.PrintFunctionContext ctx) { }
+	@Override public void enterAssignment(SophiaParser.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPrintFunction(SophiaParser.PrintFunctionContext ctx) { }
+	@Override public void exitAssignment(SophiaParser.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCallMsgHandler(SophiaParser.CallMsgHandlerContext ctx) { }
+	@Override public void enterLvalue(SophiaParser.LvalueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCallMsgHandler(SophiaParser.CallMsgHandlerContext ctx) { }
+	@Override public void exitLvalue(SophiaParser.LvalueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayWithIndex(SophiaParser.ArrayWithIndexContext ctx) { }
+	@Override public void enterFieldAccess(SophiaParser.FieldAccessContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayWithIndex(SophiaParser.ArrayWithIndexContext ctx) { }
+	@Override public void exitFieldAccess(SophiaParser.FieldAccessContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListAccess(SophiaParser.ListAccessContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListAccess(SophiaParser.ListAccessContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrintStatement(SophiaParser.PrintStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrintStatement(SophiaParser.PrintStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReturnStatement(SophiaParser.ReturnStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReturnStatement(SophiaParser.ReturnStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethodCallStatement(SophiaParser.MethodCallStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodCallStatement(SophiaParser.MethodCallStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethodCall(SophiaParser.MethodCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodCall(SophiaParser.MethodCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethodCallArguments(SophiaParser.MethodCallArgumentsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodCallArguments(SophiaParser.MethodCallArgumentsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterContinueBreakStatement(SophiaParser.ContinueBreakStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitContinueBreakStatement(SophiaParser.ContinueBreakStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -375,13 +447,13 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterContinueBreak(SophiaParser.ContinueBreakContext ctx) { }
+	@Override public void enterForeachStatement(SophiaParser.ForeachStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitContinueBreak(SophiaParser.ContinueBreakContext ctx) { }
+	@Override public void exitForeachStatement(SophiaParser.ForeachStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -399,6 +471,18 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSingleOrMultiStatements(SophiaParser.SingleOrMultiStatementsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSingleOrMultiStatements(SophiaParser.SingleOrMultiStatementsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExpression(SophiaParser.ExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -411,145 +495,133 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression00(SophiaParser.Expression00Context ctx) { }
+	@Override public void enterOrExpression(SophiaParser.OrExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression00(SophiaParser.Expression00Context ctx) { }
+	@Override public void exitOrExpression(SophiaParser.OrExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression0(SophiaParser.Expression0Context ctx) { }
+	@Override public void enterAndExpression(SophiaParser.AndExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression0(SophiaParser.Expression0Context ctx) { }
+	@Override public void exitAndExpression(SophiaParser.AndExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression1(SophiaParser.Expression1Context ctx) { }
+	@Override public void enterEqualityExpression(SophiaParser.EqualityExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression1(SophiaParser.Expression1Context ctx) { }
+	@Override public void exitEqualityExpression(SophiaParser.EqualityExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression2(SophiaParser.Expression2Context ctx) { }
+	@Override public void enterRelationalExpression(SophiaParser.RelationalExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression2(SophiaParser.Expression2Context ctx) { }
+	@Override public void exitRelationalExpression(SophiaParser.RelationalExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression3(SophiaParser.Expression3Context ctx) { }
+	@Override public void enterAdditiveExpression(SophiaParser.AdditiveExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression3(SophiaParser.Expression3Context ctx) { }
+	@Override public void exitAdditiveExpression(SophiaParser.AdditiveExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression4(SophiaParser.Expression4Context ctx) { }
+	@Override public void enterMultiplicativeExpression(SophiaParser.MultiplicativeExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression4(SophiaParser.Expression4Context ctx) { }
+	@Override public void exitMultiplicativeExpression(SophiaParser.MultiplicativeExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression5(SophiaParser.Expression5Context ctx) { }
+	@Override public void enterPreUnaryExpression(SophiaParser.PreUnaryExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression5(SophiaParser.Expression5Context ctx) { }
+	@Override public void exitPreUnaryExpression(SophiaParser.PreUnaryExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression6(SophiaParser.Expression6Context ctx) { }
+	@Override public void enterPostUnaryExpression(SophiaParser.PostUnaryExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression6(SophiaParser.Expression6Context ctx) { }
+	@Override public void exitPostUnaryExpression(SophiaParser.PostUnaryExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression7(SophiaParser.Expression7Context ctx) { }
+	@Override public void enterParExpression(SophiaParser.ParExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression7(SophiaParser.Expression7Context ctx) { }
+	@Override public void exitParExpression(SophiaParser.ParExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression8(SophiaParser.Expression8Context ctx) { }
+	@Override public void enterOtherExpression(SophiaParser.OtherExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression8(SophiaParser.Expression8Context ctx) { }
+	@Override public void exitOtherExpression(SophiaParser.OtherExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression9(SophiaParser.Expression9Context ctx) { }
+	@Override public void enterNewExpression(SophiaParser.NewExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression9(SophiaParser.Expression9Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTernaryExpression(SophiaParser.TernaryExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTernaryExpression(SophiaParser.TernaryExpressionContext ctx) { }
+	@Override public void exitNewExpression(SophiaParser.NewExpressionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

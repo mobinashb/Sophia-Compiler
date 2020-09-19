@@ -2,210 +2,140 @@ grammar Sophia;
 
 sophia : program EOF;
 
-program: (actor)* main;
+program: (sophiaClass)*;
 
-actor: ACTOR actorName=IDENTIFIER (EXTENDS actorParent=IDENTIFIER)? LPAR INT_VALUE RPAR
-        {
-            System.out.print("ActorDec:");
-            System.out.print($actorName.text);
-            if($actorParent != null) {
-                System.out.print(",");
-                System.out.print($actorParent.text);
-            }
-            System.out.print("\n");
-       }
-        LBRACE actorBody RBRACE;
+sophiaClass: CLASS IDENTIFIER (INHERITS IDENTIFIER)? LBRACE classBody RBRACE;
 
-actorBody: knownActors actorVars (initialMsgHandler)? (msgHandler)*;
+classBody: (varDeclaration | method)* constructor (varDeclaration | method)*;
 
-//knownActors
+varDeclaration: type IDENTIFIER SEMICOLLON;
 
-knownActors: KNOWNACTORS LBRACE knownActorsBody RBRACE;
+method: DEF (type | VOID) IDENTIFIER LPAR methodArguments RPAR LBRACE methodBody RBRACE;
 
-knownActorsBody: (knownActorsStmt)*;
+constructor: DEF IDENTIFIER LPAR methodArguments RPAR LBRACE methodBody RBRACE;
 
-knownActorsStmt: knownActorType=IDENTIFIER knownActorName=IDENTIFIER SEMICOLLON
-                {
-                    System.out.print("KnownAcor:");
-                    System.out.print($knownActorType.text);
-                    System.out.print(",");
-                    System.out.print($knownActorName.text);
-                    System.out.print("\n");
-                };
+methodArguments: (variableWithType)(() | (COMMA variableWithType)*) | ();
 
-//actorVars
+variableWithType: IDENTIFIER COLON type;
 
-actorVars: ACTORVARS LBRACE defineVars RBRACE;
+type: primitiveDataType | listType | functioPointerType | classType;
 
-defineVars: (defineVarsStmt)*;
+classType: IDENTIFIER;
 
-defineVarsStmt:
-    ( (defineIntArray) | (actorVarType=primitiveDataType actorVarName=IDENTIFIER)) SEMICOLLON
-    {
-        if($actorVarName != null) {
-            System.out.print("VarDec:");
-            System.out.print($actorVarType.text);
-            System.out.print(",");
-            System.out.print($actorVarName.text);
-            System.out.print("\n");
-        }
-    };
+listType: LIST LPAR ((INT_VALUE SHARP type) | (listItemsTypes)) RPAR;
 
-//msgHandler
+listItemsTypes: (listItemType)(() | (COMMA listItemType)*) | ();
 
-msgHandler: MSGHANDLER msgHandlername=IDENTIFIER
-            {
-                            System.out.print("MsgHandlerDec:");
-                            System.out.print($msgHandlername.text);
-                            System.out.print("\n");
-            }
-            LPAR argumentBody RPAR LBRACE msgHandlerBody RBRACE;
+listItemType: variableWithType | type;
 
+functioPointerType: FUNC LESS_THAN (VOID | typesWithComma) ARROW (VOID | type) GREATER_THAN;
 
-initialMsgHandler: MSGHANDLER INITIAL LPAR argumentBody RPAR
-            {
-                System.out.print("MsgHandlerDec:");
-                System.out.print("initial");
-                System.out.print("\n");
-            }
-            LBRACE msgHandlerBody RBRACE;
-
-argumentBody: (oneArgument)(() | (COMMA oneArgument)*) | ();
-
-oneArgument: ((oneArgumentTypeName=primitiveDataType oneArgumentName=IDENTIFIER) | (defineIntArray))
-             {
-                System.out.print("VarDec:");
-                System.out.print($oneArgumentTypeName.text);
-                System.out.print(",");
-                System.out.print($oneArgumentName.text);
-                System.out.print("\n");
-             };
-
-//main
-
-main: MAIN LBRACE mainBody RBRACE;
-
-mainBody: (mainStatement)*;
-
-mainStatement: (actorInstantiationType=IDENTIFIER actorInstantiationName=IDENTIFIER)
-                {
-                    System.out.print("ActorInstantiation:");
-                    System.out.print($actorInstantiationType.text);
-                    System.out.print(",");
-                    System.out.print($actorInstantiationName.text);
-                }
-                LPAR ((mainKnownActorName1=IDENTIFIER)
-                {
-                    System.out.print(",");
-                    System.out.print($mainKnownActorName1.text);
-                }
-                (() | (COMMA mainKnownActorName2=IDENTIFIER
-                {
-                    System.out.print(",");
-                    System.out.print($mainKnownActorName2.text);
-                }
-                )*) | ())
-                {System.out.print("\n");}
-                RPAR COLON  LPAR
-               ((expression)(() | (COMMA expression)*) | ()) RPAR SEMICOLLON;
-
-//data types
-
-defineIntArray: INT defineIntArrayName=IDENTIFIER LBRACK INT_VALUE RBRACK {
-                    System.out.print("VarDec:int[],");
-                    System.out.print($defineIntArrayName.text);
-                    System.out.print("\n");
-                };
+typesWithComma: type (() | (COMMA type)*);
 
 primitiveDataType: INT | STRING | BOOLEAN;
 
-values: boolValue | STRING_VALUE | INT_VALUE;
+values: boolValue | STRING_VALUE | INT_VALUE | NULL | listValus;
 
 boolValue: TRUE | FALSE;
 
-//other
+listValus: LBRACK methodCallArguments RBRACK;
 
-msgHandlerBody: defineVars restOfStatements;
+methodBody: superStatement? (varDeclaration)* (statement)*;
 
-restOfStatements: (statement)*;
+statement: forStatement | foreachStatement | ifStatement | assignmentStatement | printStatement | continueBreakStatement | methodCallStatement | returnStatement | scope;
 
-statement: scopeStatement | forStatement | ifStatement | ((assignmentStatement |  callMsgHandler | printFunction | continueBreak ) SEMICOLLON);
+scope: LBRACE (statement)* RBRACE;
 
-scopeStatement: LBRACE (statement)* RBRACE;
+superStatement: SUPER LPAR methodCallArguments RPAR SEMICOLLON;
 
-assignmentStatement: ((SELF DOT IDENTIFIER) | arrayWithIndex | IDENTIFIER) ASSIGN { System.out.print("Operator:=\n");} expression;
+assignmentStatement: assignment SEMICOLLON;
 
-printFunction: PRINT { System.out.print("Built-in:Print\n");}
-               LPAR (values | arrayWithIndex | IDENTIFIER | expression) RPAR;
+assignment: lvalue ASSIGN expression;
 
-callMsgHandler: (actorInstance=(SELF | SENDER | IDENTIFIER) DOT) calledMsgHandler=IDENTIFIER
-                {
-                    System.out.print("MsgHandlerCall:");
-                    System.out.print($actorInstance.text);
-                    System.out.print(",");
-                    System.out.print($calledMsgHandler.text);
-                    System.out.print("\n");
-                }
-                LPAR ( (SELF DOT IDENTIFIER | expression)(() | (COMMA (SELF DOT IDENTIFIER | expression))*) | ()) RPAR;
+lvalue: fieldAccess | listAccess | IDENTIFIER;
 
-arrayWithIndex: IDENTIFIER LBRACK expression RBRACK;
+fieldAccess: (THIS | IDENTIFIER) (DOT (IDENTIFIER | listAccess))+;
 
-forStatement: FOR { System.out.print("Loop:for\n");}
-              LPAR (assignmentStatement)? SEMICOLLON (expression)? SEMICOLLON (assignmentStatement)? RPAR
-              ((LBRACE ((statement)*) RBRACE) | (statement));
+listAccess: IDENTIFIER ((LBRACK expression RBRACK) | (DOT IDENTIFIER))+;
 
-continueBreak: (BREAK | CONTINUE);
+printStatement: PRINT LPAR expression RPAR SEMICOLLON;
 
-ifStatement: IF { System.out.print("Conditional:if\n");}
-    LPAR expression RPAR ( (LBRACE ((statement)*) RBRACE) | (statement))
-    (ELSE { System.out.print("Conditional:else\n");} ( (LBRACE ((statement)*) RBRACE) | (statement)))? ;
+returnStatement: RETURN expression SEMICOLLON;
 
-expression: expression00 | ternaryExpression;
-expression00 : expression0 | {System.out.print("Operator:=\n");} assignmentStatement;
-expression0 : expression1 | {System.out.print("Operator:||\n");} expression1 OR expression0;
-expression1 : expression2 | {System.out.print("Operator:&&\n");} expression2 AND expression1;
-expression2 : expression3 | {System.out.print("Operator:==\n");} expression3 EQUAL expression2 | {System.out.print("Operator:!=\n");} expression3 NOT_EQUAL expression2;
-expression3 : expression4 | {System.out.print("Operator:<\n");} expression4 GREATER_THAN expression3 | {System.out.print("Operator:>\n");} expression4 LESS_THAN expression3;
-expression4 : {System.out.print("Operator:+\n");} expression5 PLUS expression4 | {System.out.print("Operator:-\n");} expression5 MINUS expression4 | expression5;
-expression5 : expression6 | {System.out.print("Operator:*\n");} expression6 MULT expression5 | {System.out.print("Operator:/\n");} expression6 DIVIDE expression5 | {System.out.print("Operator:%\n");} expression6 MOD expression5;
-expression6 : expression7 | {System.out.print("Operator:--\n");} INCREASE expression7 | {System.out.print("Operator:++\n");} DECREASE expression7 | {System.out.print("Operator:!\n");} NOT expression7 | {System.out.print("Operator:-\n");} MINUS expression7;
-expression7 : {System.out.print("Operator:++\n");} expression8 INCREASE | {System.out.print("Operator:--\n");} expression8 DECREASE | expression8;
-expression8 : expression9 | LPAR (expression00) RPAR;
-expression9 : SENDER |  (SELF DOT IDENTIFIER) | arrayWithIndex | values | IDENTIFIER;
+methodCallStatement: methodCall SEMICOLLON;
 
-ternaryExpression :  (((LPAR ternaryExpression RPAR) | expression00 ) QUESTION_MARK {System.out.print("Operator:?:\n");} (expression) COLON (expression)) | (LPAR ternaryExpression RPAR);
+methodCall: expression LPAR methodCallArguments RPAR;
 
-//tokens
+methodCallArguments: expression (() | (COMMA expression)*) | ();
 
-MSGHANDLER: 'msghandler';
-INITIAL: 'initial';
-EXTENDS: 'extends';
+continueBreakStatement: (BREAK | CONTINUE) SEMICOLLON;
 
-ACTORVARS: 'actorvars';
-KNOWNACTORS: 'knownactors';
-ACTOR: 'actor';
+forStatement: FOR LPAR (assignment)? SEMICOLLON (expression)? SEMICOLLON (assignment)? RPAR singleOrMultiStatements;
+
+foreachStatement: FOREACH LPAR IDENTIFIER IN expression RPAR singleOrMultiStatements;
+
+ifStatement: IF LPAR expression RPAR singleOrMultiStatements (ELSE singleOrMultiStatements)?;
+
+singleOrMultiStatements: LBRACE (statement)* RBRACE | statement;
+
+expression: orExpression | assignment;
+
+orExpression : andExpression | andExpression OR orExpression;
+
+andExpression : equalityExpression | equalityExpression AND andExpression;
+
+equalityExpression : relationalExpression | relationalExpression EQUAL equalityExpression | relationalExpression NOT_EQUAL equalityExpression;
+
+relationalExpression : additiveExpression | additiveExpression GREATER_THAN relationalExpression | additiveExpression LESS_THAN relationalExpression;
+
+additiveExpression : multiplicativeExpression PLUS additiveExpression | multiplicativeExpression MINUS additiveExpression | multiplicativeExpression;
+
+multiplicativeExpression : preUnaryExpression | preUnaryExpression MULT multiplicativeExpression |preUnaryExpression DIVIDE multiplicativeExpression | preUnaryExpression MOD multiplicativeExpression;
+
+preUnaryExpression : postUnaryExpression | INCREASE postUnaryExpression | DECREASE postUnaryExpression | NOT postUnaryExpression | MINUS postUnaryExpression;
+
+postUnaryExpression : parExpression INCREASE | parExpression DECREASE | parExpression;
+
+parExpression : otherExpression | LPAR (methodCall) RPAR | LPAR (expression) RPAR;
+
+otherExpression : fieldAccess | listAccess | newExpression | values | IDENTIFIER;
+
+newExpression: NEW classType LPAR methodCallArguments RPAR;
+
+
+DEF: 'def';
+INHERITS: 'inherits';
+CLASS: 'class';
 
 PRINT: 'print';
+FUNC: 'func';
 
-MAIN: 'main';
+NEW: 'new';
 
 CONTINUE: 'continue';
 BREAK: 'break';
+RETURN: 'return';
 
+FOREACH: 'foreach';
+IN: 'in';
 FOR: 'for';
 IF: 'if';
 ELSE: 'else';
 
-BOOLEAN: 'boolean';
+BOOLEAN: 'bool';
 STRING: 'string';
 INT: 'int';
+VOID: 'void';
+NULL: 'null';
+LIST: 'list';
 
 TRUE: 'true';
 FALSE: 'false';
 
-SELF: 'self';
-SENDER: 'sender';
+THIS: 'this';
+SUPER: 'super';
 
+ARROW: '->';
 GREATER_THAN: '>';
 LESS_THAN: '<';
 NOT_EQUAL: '=!';
@@ -233,6 +163,7 @@ RBRACK: ']';
 LBRACE: '{';
 RBRACE: '}';
 
+SHARP: '#';
 COMMA: ',';
 DOT: '.';
 COLON: ':';
@@ -241,4 +172,5 @@ SEMICOLLON: ';';
 INT_VALUE: '0' | [1-9][0-9]*;
 IDENTIFIER: [a-zA-Z_][A-Za-z0-9_]*;
 STRING_VALUE: '"'~["]*'"';
-WS: ([ \t\n\r] | '//' ~( '\r' | '\n')*) -> skip;
+COMMENT: ('//' ~( '\r' | '\n')*) -> skip;
+WS: ([ \t\n\r]) -> skip;

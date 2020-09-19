@@ -27,165 +27,145 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitProgram(SophiaParser.ProgramContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#actor}.
+	 * Enter a parse tree produced by {@link SophiaParser#sophiaClass}.
 	 * @param ctx the parse tree
 	 */
-	void enterActor(SophiaParser.ActorContext ctx);
+	void enterSophiaClass(SophiaParser.SophiaClassContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#actor}.
+	 * Exit a parse tree produced by {@link SophiaParser#sophiaClass}.
 	 * @param ctx the parse tree
 	 */
-	void exitActor(SophiaParser.ActorContext ctx);
+	void exitSophiaClass(SophiaParser.SophiaClassContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#actorBody}.
+	 * Enter a parse tree produced by {@link SophiaParser#classBody}.
 	 * @param ctx the parse tree
 	 */
-	void enterActorBody(SophiaParser.ActorBodyContext ctx);
+	void enterClassBody(SophiaParser.ClassBodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#actorBody}.
+	 * Exit a parse tree produced by {@link SophiaParser#classBody}.
 	 * @param ctx the parse tree
 	 */
-	void exitActorBody(SophiaParser.ActorBodyContext ctx);
+	void exitClassBody(SophiaParser.ClassBodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#knownActors}.
+	 * Enter a parse tree produced by {@link SophiaParser#varDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterKnownActors(SophiaParser.KnownActorsContext ctx);
+	void enterVarDeclaration(SophiaParser.VarDeclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#knownActors}.
+	 * Exit a parse tree produced by {@link SophiaParser#varDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitKnownActors(SophiaParser.KnownActorsContext ctx);
+	void exitVarDeclaration(SophiaParser.VarDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#knownActorsBody}.
+	 * Enter a parse tree produced by {@link SophiaParser#method}.
 	 * @param ctx the parse tree
 	 */
-	void enterKnownActorsBody(SophiaParser.KnownActorsBodyContext ctx);
+	void enterMethod(SophiaParser.MethodContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#knownActorsBody}.
+	 * Exit a parse tree produced by {@link SophiaParser#method}.
 	 * @param ctx the parse tree
 	 */
-	void exitKnownActorsBody(SophiaParser.KnownActorsBodyContext ctx);
+	void exitMethod(SophiaParser.MethodContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#knownActorsStmt}.
+	 * Enter a parse tree produced by {@link SophiaParser#constructor}.
 	 * @param ctx the parse tree
 	 */
-	void enterKnownActorsStmt(SophiaParser.KnownActorsStmtContext ctx);
+	void enterConstructor(SophiaParser.ConstructorContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#knownActorsStmt}.
+	 * Exit a parse tree produced by {@link SophiaParser#constructor}.
 	 * @param ctx the parse tree
 	 */
-	void exitKnownActorsStmt(SophiaParser.KnownActorsStmtContext ctx);
+	void exitConstructor(SophiaParser.ConstructorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#actorVars}.
+	 * Enter a parse tree produced by {@link SophiaParser#methodArguments}.
 	 * @param ctx the parse tree
 	 */
-	void enterActorVars(SophiaParser.ActorVarsContext ctx);
+	void enterMethodArguments(SophiaParser.MethodArgumentsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#actorVars}.
+	 * Exit a parse tree produced by {@link SophiaParser#methodArguments}.
 	 * @param ctx the parse tree
 	 */
-	void exitActorVars(SophiaParser.ActorVarsContext ctx);
+	void exitMethodArguments(SophiaParser.MethodArgumentsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#defineVars}.
+	 * Enter a parse tree produced by {@link SophiaParser#variableWithType}.
 	 * @param ctx the parse tree
 	 */
-	void enterDefineVars(SophiaParser.DefineVarsContext ctx);
+	void enterVariableWithType(SophiaParser.VariableWithTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#defineVars}.
+	 * Exit a parse tree produced by {@link SophiaParser#variableWithType}.
 	 * @param ctx the parse tree
 	 */
-	void exitDefineVars(SophiaParser.DefineVarsContext ctx);
+	void exitVariableWithType(SophiaParser.VariableWithTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#defineVarsStmt}.
+	 * Enter a parse tree produced by {@link SophiaParser#type}.
 	 * @param ctx the parse tree
 	 */
-	void enterDefineVarsStmt(SophiaParser.DefineVarsStmtContext ctx);
+	void enterType(SophiaParser.TypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#defineVarsStmt}.
+	 * Exit a parse tree produced by {@link SophiaParser#type}.
 	 * @param ctx the parse tree
 	 */
-	void exitDefineVarsStmt(SophiaParser.DefineVarsStmtContext ctx);
+	void exitType(SophiaParser.TypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#msgHandler}.
+	 * Enter a parse tree produced by {@link SophiaParser#classType}.
 	 * @param ctx the parse tree
 	 */
-	void enterMsgHandler(SophiaParser.MsgHandlerContext ctx);
+	void enterClassType(SophiaParser.ClassTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#msgHandler}.
+	 * Exit a parse tree produced by {@link SophiaParser#classType}.
 	 * @param ctx the parse tree
 	 */
-	void exitMsgHandler(SophiaParser.MsgHandlerContext ctx);
+	void exitClassType(SophiaParser.ClassTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#initialMsgHandler}.
+	 * Enter a parse tree produced by {@link SophiaParser#listType}.
 	 * @param ctx the parse tree
 	 */
-	void enterInitialMsgHandler(SophiaParser.InitialMsgHandlerContext ctx);
+	void enterListType(SophiaParser.ListTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#initialMsgHandler}.
+	 * Exit a parse tree produced by {@link SophiaParser#listType}.
 	 * @param ctx the parse tree
 	 */
-	void exitInitialMsgHandler(SophiaParser.InitialMsgHandlerContext ctx);
+	void exitListType(SophiaParser.ListTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#argumentBody}.
+	 * Enter a parse tree produced by {@link SophiaParser#listItemsTypes}.
 	 * @param ctx the parse tree
 	 */
-	void enterArgumentBody(SophiaParser.ArgumentBodyContext ctx);
+	void enterListItemsTypes(SophiaParser.ListItemsTypesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#argumentBody}.
+	 * Exit a parse tree produced by {@link SophiaParser#listItemsTypes}.
 	 * @param ctx the parse tree
 	 */
-	void exitArgumentBody(SophiaParser.ArgumentBodyContext ctx);
+	void exitListItemsTypes(SophiaParser.ListItemsTypesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#oneArgument}.
+	 * Enter a parse tree produced by {@link SophiaParser#listItemType}.
 	 * @param ctx the parse tree
 	 */
-	void enterOneArgument(SophiaParser.OneArgumentContext ctx);
+	void enterListItemType(SophiaParser.ListItemTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#oneArgument}.
+	 * Exit a parse tree produced by {@link SophiaParser#listItemType}.
 	 * @param ctx the parse tree
 	 */
-	void exitOneArgument(SophiaParser.OneArgumentContext ctx);
+	void exitListItemType(SophiaParser.ListItemTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#main}.
+	 * Enter a parse tree produced by {@link SophiaParser#functioPointerType}.
 	 * @param ctx the parse tree
 	 */
-	void enterMain(SophiaParser.MainContext ctx);
+	void enterFunctioPointerType(SophiaParser.FunctioPointerTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#main}.
+	 * Exit a parse tree produced by {@link SophiaParser#functioPointerType}.
 	 * @param ctx the parse tree
 	 */
-	void exitMain(SophiaParser.MainContext ctx);
+	void exitFunctioPointerType(SophiaParser.FunctioPointerTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#mainBody}.
+	 * Enter a parse tree produced by {@link SophiaParser#typesWithComma}.
 	 * @param ctx the parse tree
 	 */
-	void enterMainBody(SophiaParser.MainBodyContext ctx);
+	void enterTypesWithComma(SophiaParser.TypesWithCommaContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#mainBody}.
+	 * Exit a parse tree produced by {@link SophiaParser#typesWithComma}.
 	 * @param ctx the parse tree
 	 */
-	void exitMainBody(SophiaParser.MainBodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SophiaParser#mainStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterMainStatement(SophiaParser.MainStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#mainStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitMainStatement(SophiaParser.MainStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SophiaParser#defineIntArray}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefineIntArray(SophiaParser.DefineIntArrayContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#defineIntArray}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefineIntArray(SophiaParser.DefineIntArrayContext ctx);
+	void exitTypesWithComma(SophiaParser.TypesWithCommaContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#primitiveDataType}.
 	 * @param ctx the parse tree
@@ -217,25 +197,25 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitBoolValue(SophiaParser.BoolValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#msgHandlerBody}.
+	 * Enter a parse tree produced by {@link SophiaParser#listValus}.
 	 * @param ctx the parse tree
 	 */
-	void enterMsgHandlerBody(SophiaParser.MsgHandlerBodyContext ctx);
+	void enterListValus(SophiaParser.ListValusContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#msgHandlerBody}.
+	 * Exit a parse tree produced by {@link SophiaParser#listValus}.
 	 * @param ctx the parse tree
 	 */
-	void exitMsgHandlerBody(SophiaParser.MsgHandlerBodyContext ctx);
+	void exitListValus(SophiaParser.ListValusContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#restOfStatements}.
+	 * Enter a parse tree produced by {@link SophiaParser#methodBody}.
 	 * @param ctx the parse tree
 	 */
-	void enterRestOfStatements(SophiaParser.RestOfStatementsContext ctx);
+	void enterMethodBody(SophiaParser.MethodBodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#restOfStatements}.
+	 * Exit a parse tree produced by {@link SophiaParser#methodBody}.
 	 * @param ctx the parse tree
 	 */
-	void exitRestOfStatements(SophiaParser.RestOfStatementsContext ctx);
+	void exitMethodBody(SophiaParser.MethodBodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#statement}.
 	 * @param ctx the parse tree
@@ -247,15 +227,25 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitStatement(SophiaParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#scopeStatement}.
+	 * Enter a parse tree produced by {@link SophiaParser#scope}.
 	 * @param ctx the parse tree
 	 */
-	void enterScopeStatement(SophiaParser.ScopeStatementContext ctx);
+	void enterScope(SophiaParser.ScopeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#scopeStatement}.
+	 * Exit a parse tree produced by {@link SophiaParser#scope}.
 	 * @param ctx the parse tree
 	 */
-	void exitScopeStatement(SophiaParser.ScopeStatementContext ctx);
+	void exitScope(SophiaParser.ScopeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#superStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSuperStatement(SophiaParser.SuperStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#superStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSuperStatement(SophiaParser.SuperStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#assignmentStatement}.
 	 * @param ctx the parse tree
@@ -267,35 +257,105 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitAssignmentStatement(SophiaParser.AssignmentStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#printFunction}.
+	 * Enter a parse tree produced by {@link SophiaParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrintFunction(SophiaParser.PrintFunctionContext ctx);
+	void enterAssignment(SophiaParser.AssignmentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#printFunction}.
+	 * Exit a parse tree produced by {@link SophiaParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrintFunction(SophiaParser.PrintFunctionContext ctx);
+	void exitAssignment(SophiaParser.AssignmentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#callMsgHandler}.
+	 * Enter a parse tree produced by {@link SophiaParser#lvalue}.
 	 * @param ctx the parse tree
 	 */
-	void enterCallMsgHandler(SophiaParser.CallMsgHandlerContext ctx);
+	void enterLvalue(SophiaParser.LvalueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#callMsgHandler}.
+	 * Exit a parse tree produced by {@link SophiaParser#lvalue}.
 	 * @param ctx the parse tree
 	 */
-	void exitCallMsgHandler(SophiaParser.CallMsgHandlerContext ctx);
+	void exitLvalue(SophiaParser.LvalueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#arrayWithIndex}.
+	 * Enter a parse tree produced by {@link SophiaParser#fieldAccess}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayWithIndex(SophiaParser.ArrayWithIndexContext ctx);
+	void enterFieldAccess(SophiaParser.FieldAccessContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#arrayWithIndex}.
+	 * Exit a parse tree produced by {@link SophiaParser#fieldAccess}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayWithIndex(SophiaParser.ArrayWithIndexContext ctx);
+	void exitFieldAccess(SophiaParser.FieldAccessContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#listAccess}.
+	 * @param ctx the parse tree
+	 */
+	void enterListAccess(SophiaParser.ListAccessContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#listAccess}.
+	 * @param ctx the parse tree
+	 */
+	void exitListAccess(SophiaParser.ListAccessContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#printStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintStatement(SophiaParser.PrintStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#printStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintStatement(SophiaParser.PrintStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnStatement(SophiaParser.ReturnStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnStatement(SophiaParser.ReturnStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#methodCallStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCallStatement(SophiaParser.MethodCallStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#methodCallStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCallStatement(SophiaParser.MethodCallStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#methodCall}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCall(SophiaParser.MethodCallContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#methodCall}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCall(SophiaParser.MethodCallContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#methodCallArguments}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCallArguments(SophiaParser.MethodCallArgumentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#methodCallArguments}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCallArguments(SophiaParser.MethodCallArgumentsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#continueBreakStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterContinueBreakStatement(SophiaParser.ContinueBreakStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#continueBreakStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitContinueBreakStatement(SophiaParser.ContinueBreakStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#forStatement}.
 	 * @param ctx the parse tree
@@ -307,15 +367,15 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitForStatement(SophiaParser.ForStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#continueBreak}.
+	 * Enter a parse tree produced by {@link SophiaParser#foreachStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterContinueBreak(SophiaParser.ContinueBreakContext ctx);
+	void enterForeachStatement(SophiaParser.ForeachStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#continueBreak}.
+	 * Exit a parse tree produced by {@link SophiaParser#foreachStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitContinueBreak(SophiaParser.ContinueBreakContext ctx);
+	void exitForeachStatement(SophiaParser.ForeachStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#ifStatement}.
 	 * @param ctx the parse tree
@@ -327,6 +387,16 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitIfStatement(SophiaParser.IfStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SophiaParser#singleOrMultiStatements}.
+	 * @param ctx the parse tree
+	 */
+	void enterSingleOrMultiStatements(SophiaParser.SingleOrMultiStatementsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#singleOrMultiStatements}.
+	 * @param ctx the parse tree
+	 */
+	void exitSingleOrMultiStatements(SophiaParser.SingleOrMultiStatementsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SophiaParser#expression}.
 	 * @param ctx the parse tree
 	 */
@@ -337,123 +407,113 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitExpression(SophiaParser.ExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression00}.
+	 * Enter a parse tree produced by {@link SophiaParser#orExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression00(SophiaParser.Expression00Context ctx);
+	void enterOrExpression(SophiaParser.OrExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression00}.
+	 * Exit a parse tree produced by {@link SophiaParser#orExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression00(SophiaParser.Expression00Context ctx);
+	void exitOrExpression(SophiaParser.OrExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression0}.
+	 * Enter a parse tree produced by {@link SophiaParser#andExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression0(SophiaParser.Expression0Context ctx);
+	void enterAndExpression(SophiaParser.AndExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression0}.
+	 * Exit a parse tree produced by {@link SophiaParser#andExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression0(SophiaParser.Expression0Context ctx);
+	void exitAndExpression(SophiaParser.AndExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression1}.
+	 * Enter a parse tree produced by {@link SophiaParser#equalityExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression1(SophiaParser.Expression1Context ctx);
+	void enterEqualityExpression(SophiaParser.EqualityExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression1}.
+	 * Exit a parse tree produced by {@link SophiaParser#equalityExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression1(SophiaParser.Expression1Context ctx);
+	void exitEqualityExpression(SophiaParser.EqualityExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression2}.
+	 * Enter a parse tree produced by {@link SophiaParser#relationalExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression2(SophiaParser.Expression2Context ctx);
+	void enterRelationalExpression(SophiaParser.RelationalExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression2}.
+	 * Exit a parse tree produced by {@link SophiaParser#relationalExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression2(SophiaParser.Expression2Context ctx);
+	void exitRelationalExpression(SophiaParser.RelationalExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression3}.
+	 * Enter a parse tree produced by {@link SophiaParser#additiveExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression3(SophiaParser.Expression3Context ctx);
+	void enterAdditiveExpression(SophiaParser.AdditiveExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression3}.
+	 * Exit a parse tree produced by {@link SophiaParser#additiveExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression3(SophiaParser.Expression3Context ctx);
+	void exitAdditiveExpression(SophiaParser.AdditiveExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression4}.
+	 * Enter a parse tree produced by {@link SophiaParser#multiplicativeExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression4(SophiaParser.Expression4Context ctx);
+	void enterMultiplicativeExpression(SophiaParser.MultiplicativeExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression4}.
+	 * Exit a parse tree produced by {@link SophiaParser#multiplicativeExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression4(SophiaParser.Expression4Context ctx);
+	void exitMultiplicativeExpression(SophiaParser.MultiplicativeExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression5}.
+	 * Enter a parse tree produced by {@link SophiaParser#preUnaryExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression5(SophiaParser.Expression5Context ctx);
+	void enterPreUnaryExpression(SophiaParser.PreUnaryExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression5}.
+	 * Exit a parse tree produced by {@link SophiaParser#preUnaryExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression5(SophiaParser.Expression5Context ctx);
+	void exitPreUnaryExpression(SophiaParser.PreUnaryExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression6}.
+	 * Enter a parse tree produced by {@link SophiaParser#postUnaryExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression6(SophiaParser.Expression6Context ctx);
+	void enterPostUnaryExpression(SophiaParser.PostUnaryExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression6}.
+	 * Exit a parse tree produced by {@link SophiaParser#postUnaryExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression6(SophiaParser.Expression6Context ctx);
+	void exitPostUnaryExpression(SophiaParser.PostUnaryExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression7}.
+	 * Enter a parse tree produced by {@link SophiaParser#parExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression7(SophiaParser.Expression7Context ctx);
+	void enterParExpression(SophiaParser.ParExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression7}.
+	 * Exit a parse tree produced by {@link SophiaParser#parExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression7(SophiaParser.Expression7Context ctx);
+	void exitParExpression(SophiaParser.ParExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression8}.
+	 * Enter a parse tree produced by {@link SophiaParser#otherExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression8(SophiaParser.Expression8Context ctx);
+	void enterOtherExpression(SophiaParser.OtherExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression8}.
+	 * Exit a parse tree produced by {@link SophiaParser#otherExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression8(SophiaParser.Expression8Context ctx);
+	void exitOtherExpression(SophiaParser.OtherExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#expression9}.
+	 * Enter a parse tree produced by {@link SophiaParser#newExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression9(SophiaParser.Expression9Context ctx);
+	void enterNewExpression(SophiaParser.NewExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#expression9}.
+	 * Exit a parse tree produced by {@link SophiaParser#newExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression9(SophiaParser.Expression9Context ctx);
-	/**
-	 * Enter a parse tree produced by {@link SophiaParser#ternaryExpression}.
-	 * @param ctx the parse tree
-	 */
-	void enterTernaryExpression(SophiaParser.TernaryExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#ternaryExpression}.
-	 * @param ctx the parse tree
-	 */
-	void exitTernaryExpression(SophiaParser.TernaryExpressionContext ctx);
+	void exitNewExpression(SophiaParser.NewExpressionContext ctx);
 }

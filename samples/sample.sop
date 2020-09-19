@@ -50,7 +50,6 @@ class B {
         foreach(fptr in myList2) {
             fptr();
         }
-
         anotherList = [[1,2,3],[4,5,6]];
         return myList2[0];
     }

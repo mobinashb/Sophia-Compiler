@@ -50,13 +50,7 @@ superStatement: SUPER LPAR methodCallArguments RPAR SEMICOLLON;
 
 assignmentStatement: assignment SEMICOLLON;
 
-assignment: lvalue ASSIGN expression;
-
-lvalue: fieldAccess | listAccess | IDENTIFIER;
-
-fieldAccess: (THIS | IDENTIFIER) (DOT (IDENTIFIER | listAccess))+;
-
-listAccess: IDENTIFIER ((LBRACK expression RBRACK) | (DOT IDENTIFIER))+;
+assignment: orExpression ASSIGN expression;
 
 printStatement: PRINT LPAR expression RPAR SEMICOLLON;
 
@@ -64,7 +58,7 @@ returnStatement: RETURN expression SEMICOLLON;
 
 methodCallStatement: methodCall SEMICOLLON;
 
-methodCall: expression LPAR methodCallArguments RPAR;
+methodCall: otherExpression ((DOT (INVOKE | IDENTIFIER) LPAR methodCallArguments RPAR) | (DOT IDENTIFIER) | (LBRACK expression RBRACK))* (DOT (INVOKE | IDENTIFIER) LPAR methodCallArguments RPAR);
 
 methodCallArguments: expression (() | (COMMA expression)*) | ();
 
@@ -78,27 +72,27 @@ ifStatement: IF LPAR expression RPAR singleOrMultiStatements (ELSE singleOrMulti
 
 singleOrMultiStatements: LBRACE (statement)* RBRACE | statement;
 
-expression: orExpression | assignment;
+expression: orExpression (ASSIGN expression)?;
 
-orExpression : andExpression | andExpression OR orExpression;
+orExpression: andExpression (OR andExpression)*;
 
-andExpression : equalityExpression | equalityExpression AND andExpression;
+andExpression: equalityExpression (AND equalityExpression)*;
 
-equalityExpression : relationalExpression | relationalExpression EQUAL equalityExpression | relationalExpression NOT_EQUAL equalityExpression;
+equalityExpression: relationalExpression ((EQUAL | NOT_EQUAL) relationalExpression)*;
 
-relationalExpression : additiveExpression | additiveExpression GREATER_THAN relationalExpression | additiveExpression LESS_THAN relationalExpression;
+relationalExpression: additiveExpression ((GREATER_THAN | LESS_THAN) additiveExpression)*;
 
-additiveExpression : multiplicativeExpression PLUS additiveExpression | multiplicativeExpression MINUS additiveExpression | multiplicativeExpression;
+additiveExpression: multiplicativeExpression ((PLUS | MINUS) multiplicativeExpression)*;
 
-multiplicativeExpression : preUnaryExpression | preUnaryExpression MULT multiplicativeExpression |preUnaryExpression DIVIDE multiplicativeExpression | preUnaryExpression MOD multiplicativeExpression;
+multiplicativeExpression: preUnaryExpression ((MULT | DIVIDE | MOD) preUnaryExpression)*;
 
-preUnaryExpression : postUnaryExpression | INCREASE postUnaryExpression | DECREASE postUnaryExpression | NOT postUnaryExpression | MINUS postUnaryExpression;
+preUnaryExpression: NOT postUnaryExpression | MINUS postUnaryExpression | INCREMENT postUnaryExpression | DECREMENT postUnaryExpression | postUnaryExpression;
 
-postUnaryExpression : parExpression INCREASE | parExpression DECREASE | parExpression;
+postUnaryExpression: accessExpression (INCREMENT | DECREMENT)?;
 
-parExpression : otherExpression | LPAR (methodCall) RPAR | LPAR (expression) RPAR;
+accessExpression: otherExpression ((DOT (INVOKE | IDENTIFIER) LPAR methodCallArguments RPAR) | (DOT IDENTIFIER) | (LBRACK expression RBRACK))*;
 
-otherExpression : fieldAccess | listAccess | newExpression | values | IDENTIFIER;
+otherExpression: THIS | newExpression | values | IDENTIFIER | LPAR (expression) RPAR | IDENTIFIER LBRACK expression RBRACK;
 
 newExpression: NEW classType LPAR methodCallArguments RPAR;
 
@@ -109,6 +103,7 @@ CLASS: 'class';
 
 PRINT: 'print';
 FUNC: 'func';
+INVOKE: 'invoke';
 
 NEW: 'new';
 
@@ -153,8 +148,8 @@ QUESTION_MARK: '?';
 
 ASSIGN: '=';
 
-INCREASE: '++';
-DECREASE: '--';
+INCREMENT: '++';
+DECREMENT: '--';
 
 LPAR: '(';
 RPAR: ')';

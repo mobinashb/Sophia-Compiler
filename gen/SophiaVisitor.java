@@ -166,24 +166,6 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignment(SophiaParser.AssignmentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SophiaParser#lvalue}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLvalue(SophiaParser.LvalueContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SophiaParser#fieldAccess}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFieldAccess(SophiaParser.FieldAccessContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SophiaParser#listAccess}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListAccess(SophiaParser.ListAccessContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link SophiaParser#printStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -298,11 +280,11 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPostUnaryExpression(SophiaParser.PostUnaryExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SophiaParser#parExpression}.
+	 * Visit a parse tree produced by {@link SophiaParser#accessExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParExpression(SophiaParser.ParExpressionContext ctx);
+	T visitAccessExpression(SophiaParser.AccessExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SophiaParser#otherExpression}.
 	 * @param ctx the parse tree

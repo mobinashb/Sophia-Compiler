@@ -44,13 +44,17 @@ class B {
         myList = [2, myFptr, true];
         print(myList[0]);
 		print(myList.first);
-        r = myList[1]();
+        r = myList[1].invoke();
 
         myList2 = [myFptr, myFptr];
         foreach(fptr in myList2) {
-            fptr();
+            fptr.invoke();
         }
         anotherList = [[1,2,3],[4,5,6]];
+        {
+            a = b = c[1].t() + 1 * r.t[1].invoke().b[1].e() + [2,[r.t[1].invoke(),r],4] + this.a;
+            this.b(new R());
+        }
         return myList2[0];
     }
 }
@@ -59,6 +63,6 @@ class Main {
 	def Main() {
 	    A a;
 		a = new A(2, "hello");
-		(this.a())();
+		this.a().invoke();
 	}
 }

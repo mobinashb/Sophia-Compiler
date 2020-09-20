@@ -267,36 +267,6 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitAssignment(SophiaParser.AssignmentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#lvalue}.
-	 * @param ctx the parse tree
-	 */
-	void enterLvalue(SophiaParser.LvalueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#lvalue}.
-	 * @param ctx the parse tree
-	 */
-	void exitLvalue(SophiaParser.LvalueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SophiaParser#fieldAccess}.
-	 * @param ctx the parse tree
-	 */
-	void enterFieldAccess(SophiaParser.FieldAccessContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#fieldAccess}.
-	 * @param ctx the parse tree
-	 */
-	void exitFieldAccess(SophiaParser.FieldAccessContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SophiaParser#listAccess}.
-	 * @param ctx the parse tree
-	 */
-	void enterListAccess(SophiaParser.ListAccessContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#listAccess}.
-	 * @param ctx the parse tree
-	 */
-	void exitListAccess(SophiaParser.ListAccessContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link SophiaParser#printStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -487,15 +457,15 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitPostUnaryExpression(SophiaParser.PostUnaryExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#parExpression}.
+	 * Enter a parse tree produced by {@link SophiaParser#accessExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterParExpression(SophiaParser.ParExpressionContext ctx);
+	void enterAccessExpression(SophiaParser.AccessExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#parExpression}.
+	 * Exit a parse tree produced by {@link SophiaParser#accessExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitParExpression(SophiaParser.ParExpressionContext ctx);
+	void exitAccessExpression(SophiaParser.AccessExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#otherExpression}.
 	 * @param ctx the parse tree

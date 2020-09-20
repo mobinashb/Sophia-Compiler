@@ -327,42 +327,6 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLvalue(SophiaParser.LvalueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLvalue(SophiaParser.LvalueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFieldAccess(SophiaParser.FieldAccessContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFieldAccess(SophiaParser.FieldAccessContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterListAccess(SophiaParser.ListAccessContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitListAccess(SophiaParser.ListAccessContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPrintStatement(SophiaParser.PrintStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -591,13 +555,13 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParExpression(SophiaParser.ParExpressionContext ctx) { }
+	@Override public void enterAccessExpression(SophiaParser.AccessExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParExpression(SophiaParser.ParExpressionContext ctx) { }
+	@Override public void exitAccessExpression(SophiaParser.AccessExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

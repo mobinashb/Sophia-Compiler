@@ -1,6 +1,6 @@
 //Sophia sample code
 
-class A inherits B {
+class A extends B {
 	int a;
 	bool b;
 	string c;

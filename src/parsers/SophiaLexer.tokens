@@ -1,5 +1,5 @@
 DEF=1
-INHERITS=2
+EXTENDS=2
 CLASS=3
 PRINT=4
 FUNC=5
@@ -57,7 +57,7 @@ STRING_VALUE=56
 COMMENT=57
 WS=58
 'def'=1
-'inherits'=2
+'extends'=2
 'class'=3
 'print'=4
 'func'=5

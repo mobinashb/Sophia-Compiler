@@ -1,32 +1,10 @@
 grammar Sophia;
 
-@header{
-    import main.ast.types.*;
-    import main.ast.types.functionPointer.*;
-    import main.ast.types.list.*;
-    import main.ast.types.single.*;
-    import main.ast.nodes.*;
-    import main.ast.nodes.declaration.*;
-    import main.ast.nodes.declaration.classDec.*;
-    import main.ast.nodes.declaration.classDec.classMembersDec.*;
-    import main.ast.nodes.declaration.variableDec.*;
-    import main.ast.nodes.expression.*;
-    import main.ast.nodes.expression.operators.*;
-    import main.ast.nodes.expression.values.*;
-    import main.ast.nodes.expression.values.primitive.*;
-    import main.ast.nodes.statement.*;
-    import main.ast.nodes.statement.loop.*;
-}
-
-sophia returns [Program sophiaProgram]:
-    {$sophiaProgram = new Program();}
-    program EOF;
+sophia: program EOF;
 
 program: (sophiaClass)*;
 
-sophiaClass: CLASS identifier (EXTENDS identifier)? LBRACE classBody RBRACE;
-
-classBody: (varDeclaration | method)* constructor? (varDeclaration | method)*;
+sophiaClass: CLASS identifier (EXTENDS identifier)? LBRACE (varDeclaration | method)* constructor? (varDeclaration | method)* RBRACE;
 
 varDeclaration: type identifier SEMICOLLON;
 

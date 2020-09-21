@@ -13,15 +13,15 @@ public class SophiaCompiler {
         SophiaLexer sophiaLexer = new SophiaLexer(textStream);
         CommonTokenStream tokenStream = new CommonTokenStream(sophiaLexer);
         SophiaParser sophiaParser = new SophiaParser(tokenStream);
-        Program program = sophiaParser.sophia().sophiaProgram;
-        Reporter errorReporter = new Reporter();
-        NameAnalyzer nameAnalyzer = new NameAnalyzer(program);
-        nameAnalyzer.analyze();
-        int numberOfErrors = program.accept(errorReporter);
-        if(numberOfErrors > 0) {
-            System.out.println(numberOfErrors + " errors detected.");
-            return;
-        }
-        System.out.println("No errors detected.");
+//        Program program = sophiaParser.sophia().sophiaProgram;
+//        Reporter errorReporter = new Reporter();
+//        NameAnalyzer nameAnalyzer = new NameAnalyzer(program);
+//        nameAnalyzer.analyze();
+//        int numberOfErrors = program.accept(errorReporter);
+//        if(numberOfErrors > 0) {
+//            System.out.println(numberOfErrors + " errors detected.");
+//            return;
+//        }
+//        System.out.println("No errors detected.");
     }
 }

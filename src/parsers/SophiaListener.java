@@ -1,22 +1,5 @@
 // Generated from C:/Users/amirp/Desktop/Compiler-TA/Sophia/src/main/grammar\Sophia.g4 by ANTLR 4.8
 package parsers;
-
-    import main.ast.types.*;
-    import main.ast.types.functionPointer.*;
-    import main.ast.types.list.*;
-    import main.ast.types.single.*;
-    import main.ast.nodes.*;
-    import main.ast.nodes.declaration.*;
-    import main.ast.nodes.declaration.classDec.*;
-    import main.ast.nodes.declaration.classDec.classMembersDec.*;
-    import main.ast.nodes.declaration.variableDec.*;
-    import main.ast.nodes.expression.*;
-    import main.ast.nodes.expression.operators.*;
-    import main.ast.nodes.expression.values.*;
-    import main.ast.nodes.expression.values.primitive.*;
-    import main.ast.nodes.statement.*;
-    import main.ast.nodes.statement.loop.*;
-
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -54,16 +37,6 @@ public interface SophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSophiaClass(SophiaParser.SophiaClassContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SophiaParser#classBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterClassBody(SophiaParser.ClassBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#classBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitClassBody(SophiaParser.ClassBodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#varDeclaration}.
 	 * @param ctx the parse tree
@@ -504,4 +477,14 @@ public interface SophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNewExpression(SophiaParser.NewExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier(SophiaParser.IdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier(SophiaParser.IdentifierContext ctx);
 }

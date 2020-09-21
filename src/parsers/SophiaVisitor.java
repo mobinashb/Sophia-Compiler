@@ -1,22 +1,5 @@
 // Generated from C:/Users/amirp/Desktop/Compiler-TA/Sophia/src/main/grammar\Sophia.g4 by ANTLR 4.8
 package parsers;
-
-    import main.ast.types.*;
-    import main.ast.types.functionPointer.*;
-    import main.ast.types.list.*;
-    import main.ast.types.single.*;
-    import main.ast.nodes.*;
-    import main.ast.nodes.declaration.*;
-    import main.ast.nodes.declaration.classDec.*;
-    import main.ast.nodes.declaration.classDec.classMembersDec.*;
-    import main.ast.nodes.declaration.variableDec.*;
-    import main.ast.nodes.expression.*;
-    import main.ast.nodes.expression.operators.*;
-    import main.ast.nodes.expression.values.*;
-    import main.ast.nodes.expression.values.primitive.*;
-    import main.ast.nodes.statement.*;
-    import main.ast.nodes.statement.loop.*;
-
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -45,12 +28,6 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSophiaClass(SophiaParser.SophiaClassContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SophiaParser#classBody}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitClassBody(SophiaParser.ClassBodyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SophiaParser#varDeclaration}.
 	 * @param ctx the parse tree
@@ -315,4 +292,10 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNewExpression(SophiaParser.NewExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SophiaParser#identifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifier(SophiaParser.IdentifierContext ctx);
 }

@@ -24,7 +24,7 @@ sophia returns [Program sophiaProgram]:
 
 program: (sophiaClass)*;
 
-sophiaClass: CLASS IDENTIFIER (INHERITS IDENTIFIER)? LBRACE classBody RBRACE;
+sophiaClass: CLASS IDENTIFIER (EXTENDS IDENTIFIER)? LBRACE classBody RBRACE;
 
 classBody: (varDeclaration | method)* constructor? (varDeclaration | method)*;
 
@@ -74,7 +74,7 @@ assignmentStmt: orExpression ASSIGN expression;
 
 printStatement: PRINT LPAR expression RPAR SEMICOLLON;
 
-returnStatement: RETURN expression SEMICOLLON;
+returnStatement: RETURN expression? SEMICOLLON;
 
 methodCallStatement: methodCall SEMICOLLON;
 
@@ -118,7 +118,7 @@ newExpression: NEW classType LPAR methodCallArguments RPAR;
 
 
 DEF: 'def';
-INHERITS: 'inherits';
+EXTENDS: 'extends';
 CLASS: 'class';
 
 PRINT: 'print';

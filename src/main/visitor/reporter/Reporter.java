@@ -1,7 +1,11 @@
 package main.visitor.reporter;
 
+import main.ast.nodes.Program;
 import main.visitor.Visitor;
 
 public class Reporter extends Visitor<Integer> {
-    //TODO
+    @Override
+    public Integer visit(Program program) {
+        return 0;
+    }
 }

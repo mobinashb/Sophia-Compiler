@@ -6,7 +6,7 @@ program: (sophiaClass)*;
 
 sophiaClass: CLASS IDENTIFIER (INHERITS IDENTIFIER)? LBRACE classBody RBRACE;
 
-classBody: (varDeclaration | method)* constructor (varDeclaration | method)*;
+classBody: (varDeclaration | method)* constructor? (varDeclaration | method)*;
 
 varDeclaration: type IDENTIFIER SEMICOLLON;
 
@@ -14,7 +14,7 @@ method: DEF (type | VOID) IDENTIFIER LPAR methodArguments RPAR LBRACE methodBody
 
 constructor: DEF IDENTIFIER LPAR methodArguments RPAR LBRACE methodBody RBRACE;
 
-methodArguments: (variableWithType)(() | (COMMA variableWithType)*) | ();
+methodArguments: (variableWithType (COMMA variableWithType)*)?;
 
 variableWithType: IDENTIFIER COLON type;
 
@@ -24,13 +24,13 @@ classType: IDENTIFIER;
 
 listType: LIST LPAR ((INT_VALUE SHARP type) | (listItemsTypes)) RPAR;
 
-listItemsTypes: (listItemType)(() | (COMMA listItemType)*) | ();
+listItemsTypes: (listItemType (COMMA listItemType)*)?;
 
 listItemType: variableWithType | type;
 
 functioPointerType: FUNC LESS_THAN (VOID | typesWithComma) ARROW (VOID | type) GREATER_THAN;
 
-typesWithComma: type (() | (COMMA type)*);
+typesWithComma: type (COMMA type)*;
 
 primitiveDataType: INT | STRING | BOOLEAN;
 
@@ -42,15 +42,15 @@ listValus: LBRACK methodCallArguments RBRACK;
 
 methodBody: superStatement? (varDeclaration)* (statement)*;
 
-statement: forStatement | foreachStatement | ifStatement | assignmentStatement | printStatement | continueBreakStatement | methodCallStatement | returnStatement | scope;
+statement: forStatement | foreachStatement | ifStatement | assignmentStatement | printStatement | continueBreakStatement | methodCallStatement | returnStatement | block;
 
-scope: LBRACE (statement)* RBRACE;
+block: LBRACE (statement)* RBRACE;
 
 superStatement: SUPER LPAR methodCallArguments RPAR SEMICOLLON;
 
-assignmentStatement: assignment SEMICOLLON;
+assignmentStatement: assignmentStmt SEMICOLLON;
 
-assignment: orExpression ASSIGN expression;
+assignmentStmt: orExpression ASSIGN expression;
 
 printStatement: PRINT LPAR expression RPAR SEMICOLLON;
 
@@ -60,17 +60,17 @@ methodCallStatement: methodCall SEMICOLLON;
 
 methodCall: otherExpression ((DOT (INVOKE | IDENTIFIER) LPAR methodCallArguments RPAR) | (DOT IDENTIFIER) | (LBRACK expression RBRACK))* (DOT (INVOKE | IDENTIFIER) LPAR methodCallArguments RPAR);
 
-methodCallArguments: expression (() | (COMMA expression)*) | ();
+methodCallArguments: (expression (COMMA expression)*)?;
 
 continueBreakStatement: (BREAK | CONTINUE) SEMICOLLON;
 
-forStatement: FOR LPAR (assignment)? SEMICOLLON (expression)? SEMICOLLON (assignment)? RPAR singleOrMultiStatements;
+forStatement: FOR LPAR (assignmentStmt)? SEMICOLLON (expression)? SEMICOLLON (assignmentStmt)? RPAR singleOrMultiStatements;
 
 foreachStatement: FOREACH LPAR IDENTIFIER IN expression RPAR singleOrMultiStatements;
 
 ifStatement: IF LPAR expression RPAR singleOrMultiStatements (ELSE singleOrMultiStatements)?;
 
-singleOrMultiStatements: LBRACE (statement)* RBRACE | statement;
+singleOrMultiStatements: block | statement;
 
 expression: orExpression (ASSIGN expression)?;
 

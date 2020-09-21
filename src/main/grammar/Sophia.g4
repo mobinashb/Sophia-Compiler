@@ -24,23 +24,23 @@ sophia returns [Program sophiaProgram]:
 
 program: (sophiaClass)*;
 
-sophiaClass: CLASS IDENTIFIER (EXTENDS IDENTIFIER)? LBRACE classBody RBRACE;
+sophiaClass: CLASS identifier (EXTENDS identifier)? LBRACE classBody RBRACE;
 
 classBody: (varDeclaration | method)* constructor? (varDeclaration | method)*;
 
-varDeclaration: type IDENTIFIER SEMICOLLON;
+varDeclaration: type identifier SEMICOLLON;
 
-method: DEF (type | VOID) IDENTIFIER LPAR methodArguments RPAR LBRACE methodBody RBRACE;
+method: DEF (type | VOID) identifier LPAR methodArguments RPAR LBRACE methodBody RBRACE;
 
-constructor: DEF IDENTIFIER LPAR methodArguments RPAR LBRACE methodBody RBRACE;
+constructor: DEF identifier LPAR methodArguments RPAR LBRACE methodBody RBRACE;
 
 methodArguments: (variableWithType (COMMA variableWithType)*)?;
 
-variableWithType: IDENTIFIER COLON type;
+variableWithType: identifier COLON type;
 
 type: primitiveDataType | listType | functioPointerType | classType;
 
-classType: IDENTIFIER;
+classType: identifier;
 
 listType: LIST LPAR ((INT_VALUE SHARP type) | (listItemsTypes)) RPAR;
 
@@ -78,7 +78,7 @@ returnStatement: RETURN expression? SEMICOLLON;
 
 methodCallStatement: methodCall SEMICOLLON;
 
-methodCall: otherExpression ((DOT (INVOKE | IDENTIFIER) LPAR methodCallArguments RPAR) | (DOT IDENTIFIER) | (LBRACK expression RBRACK))* (DOT (INVOKE | IDENTIFIER) LPAR methodCallArguments RPAR);
+methodCall: otherExpression ((DOT (INVOKE | identifier) LPAR methodCallArguments RPAR) | (DOT identifier) | (LBRACK expression RBRACK))* (DOT (INVOKE | identifier) LPAR methodCallArguments RPAR);
 
 methodCallArguments: (expression (COMMA expression)*)?;
 
@@ -86,7 +86,7 @@ continueBreakStatement: (BREAK | CONTINUE) SEMICOLLON;
 
 forStatement: FOR LPAR (assignmentStmt)? SEMICOLLON (expression)? SEMICOLLON (assignmentStmt)? RPAR singleOrMultiStatements;
 
-foreachStatement: FOREACH LPAR IDENTIFIER IN expression RPAR singleOrMultiStatements;
+foreachStatement: FOREACH LPAR identifier IN expression RPAR singleOrMultiStatements;
 
 ifStatement: IF LPAR expression RPAR singleOrMultiStatements (ELSE singleOrMultiStatements)?;
 
@@ -110,11 +110,13 @@ preUnaryExpression: NOT postUnaryExpression | MINUS postUnaryExpression | INCREM
 
 postUnaryExpression: accessExpression (INCREMENT | DECREMENT)?;
 
-accessExpression: otherExpression ((DOT (INVOKE | IDENTIFIER) LPAR methodCallArguments RPAR) | (DOT IDENTIFIER) | (LBRACK expression RBRACK))*;
+accessExpression: otherExpression ((DOT (INVOKE | identifier) LPAR methodCallArguments RPAR) | (DOT identifier) | (LBRACK expression RBRACK))*;
 
-otherExpression: THIS | newExpression | values | IDENTIFIER | LPAR (expression) RPAR | IDENTIFIER LBRACK expression RBRACK;
+otherExpression: THIS | newExpression | values | identifier | LPAR (expression) RPAR | identifier LBRACK expression RBRACK;
 
 newExpression: NEW classType LPAR methodCallArguments RPAR;
+
+identifier: IDENTIFIER;
 
 
 DEF: 'def';

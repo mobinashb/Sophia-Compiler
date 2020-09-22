@@ -6,7 +6,7 @@ import main.ast.types.Type;
 import main.visitor.IVisitor;
 
 public class VarDeclaration extends Declaration {
-    protected Identifier varName;
+    private Identifier varName;
     private Type type;
 
     public VarDeclaration(Identifier varName, Type type) {

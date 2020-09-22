@@ -14,6 +14,12 @@ public class ListType extends Type {
         this.elementsTypes = elementsTypes;
     }
 
+    public ListType(int listSize, ListNameType listNameType) {
+        for(int i=0; i < listSize; i++) {
+            elementsTypes.add(listNameType);
+        }
+    }
+
     public ArrayList<ListNameType> getElementsTypes() {
         return elementsTypes;
     }

@@ -1,5 +1,22 @@
 // Generated from C:/Users/amirp/Desktop/Compiler-TA/Sophia/src/main/grammar\Sophia.g4 by ANTLR 4.8
 package parsers;
+
+    import main.ast.types.*;
+    import main.ast.types.functionPointer.*;
+    import main.ast.types.list.*;
+    import main.ast.types.single.*;
+    import main.ast.nodes.*;
+    import main.ast.nodes.declaration.*;
+    import main.ast.nodes.declaration.classDec.*;
+    import main.ast.nodes.declaration.classDec.classMembersDec.*;
+    import main.ast.nodes.declaration.variableDec.*;
+    import main.ast.nodes.expression.*;
+    import main.ast.nodes.expression.operators.*;
+    import main.ast.nodes.expression.values.*;
+    import main.ast.nodes.expression.values.primitive.*;
+    import main.ast.nodes.statement.*;
+    import main.ast.nodes.statement.loop.*;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -168,36 +185,6 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitPrimitiveDataType(SophiaParser.PrimitiveDataTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#values}.
-	 * @param ctx the parse tree
-	 */
-	void enterValues(SophiaParser.ValuesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#values}.
-	 * @param ctx the parse tree
-	 */
-	void exitValues(SophiaParser.ValuesContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SophiaParser#boolValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolValue(SophiaParser.BoolValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#boolValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolValue(SophiaParser.BoolValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SophiaParser#listValus}.
-	 * @param ctx the parse tree
-	 */
-	void enterListValus(SophiaParser.ListValusContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#listValus}.
-	 * @param ctx the parse tree
-	 */
-	void exitListValus(SophiaParser.ListValusContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link SophiaParser#methodBody}.
 	 * @param ctx the parse tree
 	 */
@@ -248,15 +235,15 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitAssignmentStatement(SophiaParser.AssignmentStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#assignmentStmt}.
+	 * Enter a parse tree produced by {@link SophiaParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignmentStmt(SophiaParser.AssignmentStmtContext ctx);
+	void enterAssignment(SophiaParser.AssignmentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#assignmentStmt}.
+	 * Exit a parse tree produced by {@link SophiaParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignmentStmt(SophiaParser.AssignmentStmtContext ctx);
+	void exitAssignment(SophiaParser.AssignmentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#printStatement}.
 	 * @param ctx the parse tree
@@ -477,6 +464,36 @@ public interface SophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNewExpression(SophiaParser.NewExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#values}.
+	 * @param ctx the parse tree
+	 */
+	void enterValues(SophiaParser.ValuesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#values}.
+	 * @param ctx the parse tree
+	 */
+	void exitValues(SophiaParser.ValuesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#boolValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolValue(SophiaParser.BoolValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#boolValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolValue(SophiaParser.BoolValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SophiaParser#listValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterListValue(SophiaParser.ListValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SophiaParser#listValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitListValue(SophiaParser.ListValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#identifier}.
 	 * @param ctx the parse tree

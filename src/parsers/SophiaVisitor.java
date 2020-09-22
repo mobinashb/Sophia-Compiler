@@ -1,5 +1,22 @@
 // Generated from C:/Users/amirp/Desktop/Compiler-TA/Sophia/src/main/grammar\Sophia.g4 by ANTLR 4.8
 package parsers;
+
+    import main.ast.types.*;
+    import main.ast.types.functionPointer.*;
+    import main.ast.types.list.*;
+    import main.ast.types.single.*;
+    import main.ast.nodes.*;
+    import main.ast.nodes.declaration.*;
+    import main.ast.nodes.declaration.classDec.*;
+    import main.ast.nodes.declaration.classDec.classMembersDec.*;
+    import main.ast.nodes.declaration.variableDec.*;
+    import main.ast.nodes.expression.*;
+    import main.ast.nodes.expression.operators.*;
+    import main.ast.nodes.expression.values.*;
+    import main.ast.nodes.expression.values.primitive.*;
+    import main.ast.nodes.statement.*;
+    import main.ast.nodes.statement.loop.*;
+
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -107,24 +124,6 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrimitiveDataType(SophiaParser.PrimitiveDataTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SophiaParser#values}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitValues(SophiaParser.ValuesContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SophiaParser#boolValue}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBoolValue(SophiaParser.BoolValueContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SophiaParser#listValus}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListValus(SophiaParser.ListValusContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link SophiaParser#methodBody}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -155,11 +154,11 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignmentStatement(SophiaParser.AssignmentStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SophiaParser#assignmentStmt}.
+	 * Visit a parse tree produced by {@link SophiaParser#assignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignmentStmt(SophiaParser.AssignmentStmtContext ctx);
+	T visitAssignment(SophiaParser.AssignmentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SophiaParser#printStatement}.
 	 * @param ctx the parse tree
@@ -292,6 +291,24 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNewExpression(SophiaParser.NewExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SophiaParser#values}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValues(SophiaParser.ValuesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SophiaParser#boolValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolValue(SophiaParser.BoolValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SophiaParser#listValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListValue(SophiaParser.ListValueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SophiaParser#identifier}.
 	 * @param ctx the parse tree

@@ -1,28 +1,29 @@
 package main.ast.nodes.expression;
 
+import main.ast.types.single.ClassType;
 import main.visitor.IVisitor;
 
 import java.util.ArrayList;
 
 public class NewClassInstance extends Expression{
-    private Identifier className;
+    private ClassType classType;
     private ArrayList<Expression> args = new ArrayList<>();
 
-    public NewClassInstance(Identifier className) {
-        this.className = className;
+    public NewClassInstance(ClassType classType) {
+        this.classType = classType;
     }
 
-    public NewClassInstance(Identifier className, ArrayList<Expression> args) {
-        this.className = className;
+    public NewClassInstance(ClassType classType, ArrayList<Expression> args) {
+        this.classType = classType;
         this.args = args;
     }
 
-    public Identifier getClassName() {
-        return className;
+    public ClassType getClassType() {
+        return classType;
     }
 
-    public void setClassName(Identifier className) {
-        this.className = className;
+    public void setClassType(ClassType classType) {
+        this.classType = classType;
     }
 
     public ArrayList<Expression> getArgs() {
@@ -39,7 +40,7 @@ public class NewClassInstance extends Expression{
 
     @Override
     public String toString() {
-        return "NewClassInstance_" + this.className.getName();
+        return "NewClassInstance_" + this.classType.getClassName().getName();
     }
 
     @Override

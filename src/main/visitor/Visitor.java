@@ -106,6 +106,11 @@ public class Visitor<T> implements IVisitor<T> {
     }
 
     @Override
+    public T visit(SuperStmt superStmt) {
+        return null;
+    }
+
+    @Override
     public T visit(BinaryExpression binaryExpression) {
         return null;
     }

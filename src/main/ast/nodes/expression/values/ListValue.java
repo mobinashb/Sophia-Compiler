@@ -11,12 +11,20 @@ public class ListValue extends Value{
     public ListValue() {
     }
 
+    public ListValue(ArrayList<Expression> elements) {
+        this.elements = elements;
+    }
+
     public ArrayList<Expression> getElements() {
         return elements;
     }
 
     public void setElements(ArrayList<Expression> elements) {
         this.elements = elements;
+    }
+
+    public void addElement(Expression expression) {
+        this.elements.add(expression);
     }
 
     @Override

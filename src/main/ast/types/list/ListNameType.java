@@ -1,5 +1,6 @@
 package main.ast.types.list;
 
+import main.ast.nodes.declaration.variableDec.VarDeclaration;
 import main.ast.nodes.expression.Identifier;
 import main.ast.types.Type;
 
@@ -10,6 +11,11 @@ public class ListNameType {
     public ListNameType(Type type) {
         this.name = new Identifier("");
         this.type = type;
+    }
+
+    public ListNameType(VarDeclaration varDeclaration) {
+        this.name = varDeclaration.getVarName();
+        this.type = varDeclaration.getType();
     }
 
     public ListNameType(Identifier name, Type type) {

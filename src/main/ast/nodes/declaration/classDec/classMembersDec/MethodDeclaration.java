@@ -4,6 +4,7 @@ import main.ast.nodes.declaration.Declaration;
 import main.ast.nodes.declaration.variableDec.VarDeclaration;
 import main.ast.nodes.expression.Identifier;
 import main.ast.nodes.statement.Statement;
+import main.ast.nodes.statement.SuperStmt;
 import main.ast.types.Type;
 import main.visitor.IVisitor;
 
@@ -12,10 +13,12 @@ import java.util.ArrayList;
 public class MethodDeclaration extends Declaration {
     protected Identifier methodName;
     private Type returnType;
+    private SuperStmt superStmt;
     private ArrayList<VarDeclaration> args = new ArrayList<>();
     private ArrayList<VarDeclaration> localVars = new ArrayList<>();
     private ArrayList<Statement> body = new ArrayList<>();
 
+    //returnType NullType on when it is Void
     public MethodDeclaration(Identifier methodName, Type returnType) {
         this.methodName = methodName;
         this.returnType = returnType;
@@ -59,6 +62,14 @@ public class MethodDeclaration extends Declaration {
 
     public void setBody(ArrayList<Statement> body) {
         this.body = body;
+    }
+
+    public SuperStmt getSuperStmt() {
+        return superStmt;
+    }
+
+    public void setSuperStmt(SuperStmt superStmt) {
+        this.superStmt = superStmt;
     }
 
     public void addArg(VarDeclaration varDeclaration) {

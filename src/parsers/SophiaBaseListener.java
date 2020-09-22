@@ -1,6 +1,23 @@
 // Generated from C:/Users/amirp/Desktop/Compiler-TA/Sophia/src/main/grammar\Sophia.g4 by ANTLR 4.8
 package parsers;
 
+    import main.ast.types.*;
+    import main.ast.types.functionPointer.*;
+    import main.ast.types.list.*;
+    import main.ast.types.single.*;
+    import main.ast.nodes.*;
+    import main.ast.nodes.declaration.*;
+    import main.ast.nodes.declaration.classDec.*;
+    import main.ast.nodes.declaration.classDec.classMembersDec.*;
+    import main.ast.nodes.declaration.variableDec.*;
+    import main.ast.nodes.expression.*;
+    import main.ast.nodes.expression.operators.*;
+    import main.ast.nodes.expression.values.*;
+    import main.ast.nodes.expression.values.primitive.*;
+    import main.ast.nodes.statement.*;
+    import main.ast.nodes.statement.loop.*;
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -208,42 +225,6 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValues(SophiaParser.ValuesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitValues(SophiaParser.ValuesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBoolValue(SophiaParser.BoolValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBoolValue(SophiaParser.BoolValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterListValus(SophiaParser.ListValusContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitListValus(SophiaParser.ListValusContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterMethodBody(SophiaParser.MethodBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -304,13 +285,13 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignmentStmt(SophiaParser.AssignmentStmtContext ctx) { }
+	@Override public void enterAssignment(SophiaParser.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignmentStmt(SophiaParser.AssignmentStmtContext ctx) { }
+	@Override public void exitAssignment(SophiaParser.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -575,6 +556,42 @@ public class SophiaBaseListener implements SophiaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNewExpression(SophiaParser.NewExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValues(SophiaParser.ValuesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValues(SophiaParser.ValuesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBoolValue(SophiaParser.BoolValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBoolValue(SophiaParser.BoolValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListValue(SophiaParser.ListValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListValue(SophiaParser.ListValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

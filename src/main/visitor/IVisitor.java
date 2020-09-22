@@ -38,6 +38,7 @@ public interface IVisitor<T> {
     T visit(ContinueStmt continueStmt);
     T visit(ForeachStmt foreachStmt);
     T visit(ForStmt forStmt);
+    T visit(SuperStmt superStmt);
 
     T visit(BinaryExpression binaryExpression);
     T visit(UnaryExpression unaryExpression);

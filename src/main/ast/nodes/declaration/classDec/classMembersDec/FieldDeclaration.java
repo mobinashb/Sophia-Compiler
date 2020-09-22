@@ -1,19 +1,21 @@
 package main.ast.nodes.declaration.classDec.classMembersDec;
 
+import main.ast.nodes.declaration.Declaration;
 import main.ast.nodes.declaration.variableDec.VarDeclaration;
 import main.ast.nodes.expression.Identifier;
 import main.ast.types.Type;
 import main.visitor.IVisitor;
 
-public class FieldDeclaration extends VarDeclaration {
+public class FieldDeclaration extends Declaration {
+    VarDeclaration varDeclaration;
 
-    public FieldDeclaration(Identifier varName, Type type) {
-        super(varName, type);
+    public FieldDeclaration(VarDeclaration varDeclaration) {
+        this.varDeclaration = varDeclaration;
     }
 
     @Override
     public String toString() {
-        return "FieldDeclaration_" + this.varName.getName();
+        return "FieldDeclaration_" + this.varDeclaration.getVarName().getName();
     }
 
     @Override

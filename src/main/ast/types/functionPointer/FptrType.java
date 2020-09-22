@@ -8,11 +8,11 @@ public class FptrType extends Type {
     private ArrayList<Type> argumentsTypes = new ArrayList<>();
     private Type returnType;
 
-    public FptrType(Type returnType) {
-        this.returnType = returnType;
+    public FptrType() {
     }
 
     //empty ArrayList when no arguments
+    //NullType on returnType when void
     public FptrType(ArrayList<Type> argumentsTypes, Type returnType) {
         this.argumentsTypes = argumentsTypes;
         this.returnType = returnType;

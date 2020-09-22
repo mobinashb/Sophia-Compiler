@@ -32,12 +32,6 @@ typesWithComma: type (COMMA type)*;
 
 primitiveDataType: INT | STRING | BOOLEAN;
 
-values: boolValue | STRING_VALUE | INT_VALUE | NULL | listValus;
-
-boolValue: TRUE | FALSE;
-
-listValus: LBRACK methodCallArguments RBRACK;
-
 methodBody: superStatement? (varDeclaration)* (statement)*;
 
 statement: forStatement | foreachStatement | ifStatement | assignmentStatement | printStatement | continueBreakStatement | methodCallStatement | returnStatement | block;
@@ -46,9 +40,9 @@ block: LBRACE (statement)* RBRACE;
 
 superStatement: SUPER LPAR methodCallArguments RPAR SEMICOLLON;
 
-assignmentStatement: assignmentStmt SEMICOLLON;
+assignmentStatement: assignment SEMICOLLON;
 
-assignmentStmt: orExpression ASSIGN expression;
+assignment: orExpression ASSIGN expression;
 
 printStatement: PRINT LPAR expression RPAR SEMICOLLON;
 
@@ -56,13 +50,13 @@ returnStatement: RETURN expression? SEMICOLLON;
 
 methodCallStatement: methodCall SEMICOLLON;
 
-methodCall: otherExpression ((DOT (INVOKE | identifier) LPAR methodCallArguments RPAR) | (DOT identifier) | (LBRACK expression RBRACK))* (DOT (INVOKE | identifier) LPAR methodCallArguments RPAR);
+methodCall: otherExpression ((DOT INVOKE LPAR methodCallArguments RPAR) | (DOT identifier LPAR methodCallArguments RPAR) | (DOT identifier) | (LBRACK expression RBRACK))* ((DOT INVOKE LPAR methodCallArguments RPAR) | (DOT identifier LPAR methodCallArguments RPAR));
 
 methodCallArguments: (expression (COMMA expression)*)?;
 
 continueBreakStatement: (BREAK | CONTINUE) SEMICOLLON;
 
-forStatement: FOR LPAR (assignmentStmt)? SEMICOLLON (expression)? SEMICOLLON (assignmentStmt)? RPAR singleOrMultiStatements;
+forStatement: FOR LPAR (assignment)? SEMICOLLON (expression)? SEMICOLLON (assignment)? RPAR singleOrMultiStatements;
 
 foreachStatement: FOREACH LPAR identifier IN expression RPAR singleOrMultiStatements;
 
@@ -84,15 +78,21 @@ additiveExpression: multiplicativeExpression ((PLUS | MINUS) multiplicativeExpre
 
 multiplicativeExpression: preUnaryExpression ((MULT | DIVIDE | MOD) preUnaryExpression)*;
 
-preUnaryExpression: NOT postUnaryExpression | MINUS postUnaryExpression | INCREMENT postUnaryExpression | DECREMENT postUnaryExpression | postUnaryExpression;
+preUnaryExpression: ((NOT | MINUS | INCREMENT | DECREMENT) preUnaryExpression) | postUnaryExpression;
 
 postUnaryExpression: accessExpression (INCREMENT | DECREMENT)?;
 
-accessExpression: otherExpression ((DOT (INVOKE | identifier) LPAR methodCallArguments RPAR) | (DOT identifier) | (LBRACK expression RBRACK))*;
+accessExpression: otherExpression ((DOT INVOKE LPAR methodCallArguments RPAR) | (DOT identifier LPAR methodCallArguments RPAR) | (DOT identifier) | (LBRACK expression RBRACK))*;
 
 otherExpression: THIS | newExpression | values | identifier | LPAR (expression) RPAR | identifier LBRACK expression RBRACK;
 
 newExpression: NEW classType LPAR methodCallArguments RPAR;
+
+values: boolValue | STRING_VALUE | INT_VALUE | NULL | listValue;
+
+boolValue: TRUE | FALSE;
+
+listValue: LBRACK methodCallArguments RBRACK;
 
 identifier: IDENTIFIER;
 

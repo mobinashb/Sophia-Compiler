@@ -13,6 +13,14 @@ public class FieldDeclaration extends Declaration {
         this.varDeclaration = varDeclaration;
     }
 
+    public VarDeclaration getVarDeclaration() {
+        return varDeclaration;
+    }
+
+    public void setVarDeclaration(VarDeclaration varDeclaration) {
+        this.varDeclaration = varDeclaration;
+    }
+
     @Override
     public String toString() {
         return "FieldDeclaration_" + this.varDeclaration.getVarName().getName();

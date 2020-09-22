@@ -1,4 +1,4 @@
-package main.visitor.NameAnalyser;
+package main.visitor.nameAnalyzer;
 
 import main.ast.nodes.Program;
 

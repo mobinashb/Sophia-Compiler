@@ -1,4 +1,4 @@
-package main.visitor;
+package main.visitor.utils;
 
 import main.ast.nodes.Program;
 import main.ast.nodes.declaration.classDec.ClassDeclaration;
@@ -17,166 +17,167 @@ import main.ast.nodes.statement.loop.BreakStmt;
 import main.ast.nodes.statement.loop.ContinueStmt;
 import main.ast.nodes.statement.loop.ForStmt;
 import main.ast.nodes.statement.loop.ForeachStmt;
+import main.visitor.Visitor;
 
-public class Visitor<T> implements IVisitor<T> {
+public class Reporter extends Visitor<Integer> {
+    
+    @Override
+    public Integer visit(Program program) {
+        return 0;
+    }
 
     @Override
-    public T visit(Program program) {
+    public Integer visit(ClassDeclaration classDeclaration) {
         return null;
     }
 
     @Override
-    public T visit(ClassDeclaration classDeclaration) {
+    public Integer visit(ConstructorDeclaration constructorDeclaration) {
         return null;
     }
 
     @Override
-    public T visit(ConstructorDeclaration constructorDeclaration) {
+    public Integer visit(MethodDeclaration methodDeclaration) {
         return null;
     }
 
     @Override
-    public T visit(MethodDeclaration methodDeclaration) {
+    public Integer visit(FieldDeclaration fieldDeclaration) {
         return null;
     }
 
     @Override
-    public T visit(FieldDeclaration fieldDeclaration) {
+    public Integer visit(VarDeclaration varDeclaration) {
         return null;
     }
 
     @Override
-    public T visit(VarDeclaration varDeclaration) {
+    public Integer visit(AssignmentStmt assignmentStmt) {
         return null;
     }
 
     @Override
-    public T visit(AssignmentStmt assignmentStmt) {
+    public Integer visit(BlockStmt blockStmt) {
         return null;
     }
 
     @Override
-    public T visit(BlockStmt blockStmt) {
+    public Integer visit(ConditionalStmt conditionalStmt) {
         return null;
     }
 
     @Override
-    public T visit(ConditionalStmt conditionalStmt) {
+    public Integer visit(FptrInvokeStmt fptrInvokeStmt) {
         return null;
     }
 
     @Override
-    public T visit(FptrInvokeStmt fptrInvokeStmt) {
+    public Integer visit(MethodCallStmt methodCallStmt) {
         return null;
     }
 
     @Override
-    public T visit(MethodCallStmt methodCallStmt) {
+    public Integer visit(PrintStmt print) {
         return null;
     }
 
     @Override
-    public T visit(PrintStmt print) {
+    public Integer visit(ReturnStmt returnStmt) {
         return null;
     }
 
     @Override
-    public T visit(ReturnStmt returnStmt) {
+    public Integer visit(BreakStmt breakStmt) {
         return null;
     }
 
     @Override
-    public T visit(BreakStmt breakStmt) {
+    public Integer visit(ContinueStmt continueStmt) {
         return null;
     }
 
     @Override
-    public T visit(ContinueStmt continueStmt) {
+    public Integer visit(ForeachStmt foreachStmt) {
         return null;
     }
 
     @Override
-    public T visit(ForeachStmt foreachStmt) {
+    public Integer visit(ForStmt forStmt) {
         return null;
     }
 
     @Override
-    public T visit(ForStmt forStmt) {
+    public Integer visit(SuperStmt superStmt) {
         return null;
     }
 
     @Override
-    public T visit(SuperStmt superStmt) {
+    public Integer visit(BinaryExpression binaryExpression) {
         return null;
     }
 
     @Override
-    public T visit(BinaryExpression binaryExpression) {
+    public Integer visit(UnaryExpression unaryExpression) {
         return null;
     }
 
     @Override
-    public T visit(UnaryExpression unaryExpression) {
+    public Integer visit(FieldOrListAccess fieldOrListAccess) {
         return null;
     }
 
     @Override
-    public T visit(FieldOrListAccess fieldOrListAccess) {
+    public Integer visit(FptrInvoke fptrInvoke) {
         return null;
     }
 
     @Override
-    public T visit(FptrInvoke fptrInvoke) {
+    public Integer visit(Identifier identifier) {
         return null;
     }
 
     @Override
-    public T visit(Identifier identifier) {
+    public Integer visit(ListAccessByIndex listAccessByIndex) {
         return null;
     }
 
     @Override
-    public T visit(ListAccessByIndex listAccessByIndex) {
+    public Integer visit(MethodCall methodCall) {
         return null;
     }
 
     @Override
-    public T visit(MethodCall methodCall) {
+    public Integer visit(NewClassInstance newClassInstance) {
         return null;
     }
 
     @Override
-    public T visit(NewClassInstance newClassInstance) {
+    public Integer visit(ThisClass thisClass) {
         return null;
     }
 
     @Override
-    public T visit(ThisClass thisClass) {
+    public Integer visit(ListValue listValue) {
         return null;
     }
 
     @Override
-    public T visit(ListValue listValue) {
+    public Integer visit(NullValue nullValue) {
         return null;
     }
 
     @Override
-    public T visit(NullValue nullValue) {
+    public Integer visit(IntValue intValue) {
         return null;
     }
 
     @Override
-    public T visit(IntValue intValue) {
+    public Integer visit(BoolValue boolValue) {
         return null;
     }
 
     @Override
-    public T visit(BoolValue boolValue) {
-        return null;
-    }
-
-    @Override
-    public T visit(StringValue stringValue) {
+    public Integer visit(StringValue stringValue) {
         return null;
     }
 

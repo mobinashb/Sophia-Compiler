@@ -19,6 +19,7 @@ import main.ast.nodes.statement.loop.ForStmt;
 import main.ast.nodes.statement.loop.ForeachStmt;
 
 public interface IVisitor<T> {
+
     T visit(Program program);
 
     T visit(ClassDeclaration classDeclaration);
@@ -54,4 +55,5 @@ public interface IVisitor<T> {
     T visit(IntValue intValue);
     T visit(BoolValue boolValue);
     T visit(StringValue stringValue);
+
 }

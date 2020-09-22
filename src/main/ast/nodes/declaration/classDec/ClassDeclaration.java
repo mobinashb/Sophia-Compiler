@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class ClassDeclaration extends Declaration {
     private Identifier className;
     private Identifier parentClassName;
+    private ArrayList<FieldDeclaration> fields = new ArrayList<>();
     private ConstructorDeclaration constructor;
     private ArrayList<MethodDeclaration> methods = new ArrayList<>();
-    private ArrayList<FieldDeclaration> fields = new ArrayList<>();
 
     public ClassDeclaration(Identifier className) {
         this.className = className;

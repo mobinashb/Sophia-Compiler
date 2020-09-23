@@ -7,12 +7,12 @@ public class CompileErrorException extends Exception {
     public CompileErrorException() {
     }
 
-    public CompileErrorException(int line_, String message_) {
-        this.line = line_;
-        this.message = message_;
+    public CompileErrorException(int line, String message) {
+        this.line = line;
+        this.message = message;
     }
 
     public String getMessage() {
-        return "Line:" + line + ":" + message;
+        return "Line:" + this.line + ":" + this.message;
     }
 }

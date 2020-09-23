@@ -3,7 +3,7 @@ package main;
 import main.ast.nodes.Program;
 import main.visitor.nameAnalyzer.NameAnalyzer;
 import main.visitor.utils.ASTTreePrinter;
-import main.visitor.utils.Reporter;
+import main.visitor.utils.ErrorReporter;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import parsers.SophiaLexer;
@@ -16,7 +16,7 @@ public class SophiaCompiler {
         SophiaParser sophiaParser = new SophiaParser(tokenStream);
         Program program = sophiaParser.sophia().sophiaProgram;
 
-        Reporter errorReporter = new Reporter();
+        ErrorReporter errorReporter = new ErrorReporter();
         NameAnalyzer nameAnalyzer = new NameAnalyzer(program);
         ASTTreePrinter astTreePrinter = new ASTTreePrinter();
 

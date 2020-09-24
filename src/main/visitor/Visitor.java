@@ -66,11 +66,6 @@ public class Visitor<T> implements IVisitor<T> {
     }
 
     @Override
-    public T visit(FptrInvokeStmt fptrInvokeStmt) {
-        return null;
-    }
-
-    @Override
     public T visit(MethodCallStmt methodCallStmt) {
         return null;
     }
@@ -121,12 +116,7 @@ public class Visitor<T> implements IVisitor<T> {
     }
 
     @Override
-    public T visit(FieldOrListAccess fieldOrListAccess) {
-        return null;
-    }
-
-    @Override
-    public T visit(FptrInvoke fptrInvoke) {
+    public T visit(ObjectOrListMemberAccess objectOrListMemberAccess) {
         return null;
     }
 

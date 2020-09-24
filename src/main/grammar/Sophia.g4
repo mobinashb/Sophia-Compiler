@@ -317,21 +317,15 @@ methodCall returns[Statement methodCallRet]
     oe=otherExpression
     { $tempExpr = $oe.otherExprRet; }
     (
-    (DOT inv=INVOKE LPAR m1=methodCallArguments
+    (l=LPAR m1=methodCallArguments
     {
-        $tempExpr = new FptrInvoke($tempExpr, $m1.methodCallArgsRet);
-        $tempExpr.setLine($inv.getLine());
-    }
-    RPAR)
-    | (DOT mthd=identifier LPAR m2=methodCallArguments
-    {
-        $tempExpr = new MethodCall($tempExpr, $mthd.idRet, $m2.methodCallArgsRet);
-        $tempExpr.setLine($mthd.line);
+        $tempExpr = new MethodCall($tempExpr, $m1.methodCallArgsRet);
+        $tempExpr.setLine($l.line);
     }
     RPAR)
     | (DOT i=identifier)
     {
-        $tempExpr = new FieldOrListAccess($tempExpr, $i.idRet);
+        $tempExpr = new ObjectOrListMemberAccess($tempExpr, $i.idRet);
         $tempExpr.setLine($i.line);
     }
     | (l=LBRACK index=expression RBRACK)
@@ -340,23 +334,14 @@ methodCall returns[Statement methodCallRet]
         $tempExpr.setLine($l.getLine());
     }
     )*
-    (
-    (DOT inv2=INVOKE LPAR m3=methodCallArguments
+    (l=LPAR m2=methodCallArguments
     {
-        FptrInvoke fptrInvoke = new FptrInvoke($tempExpr, $m3.methodCallArgsRet);
-        fptrInvoke.setLine($inv2.getLine());
-        $methodCallRet = new FptrInvokeStmt(fptrInvoke);
-        $methodCallRet.setLine($inv2.getLine());
+        MethodCall methodCall = new MethodCall($tempExpr, $m2.methodCallArgsRet);
+        methodCall.setLine($l.line);
+        $methodCallRet = new MethodCallStmt(methodCall);
+        $methodCallRet.setLine($l.line);
     }
     RPAR)
-    | (DOT mthd2=identifier LPAR m4=methodCallArguments
-    {
-        MethodCall methodCall = new MethodCall($tempExpr, $mthd2.idRet, $m4.methodCallArgsRet);
-        methodCall.setLine($mthd2.line);
-        $methodCallRet = new MethodCallStmt(methodCall);
-        $methodCallRet.setLine($mthd2.line);
-    }
-    RPAR))
     ;
 
 methodCallArguments returns[ArrayList<Expression> methodCallArgsRet]:
@@ -610,21 +595,15 @@ accessExpression returns[Expression accessExprRet]:
     oe=otherExpression
     { $accessExprRet = $oe.otherExprRet; }
     (
-    (DOT inv=INVOKE LPAR m1=methodCallArguments
+    (l=LPAR m=methodCallArguments
     {
-        $accessExprRet = new FptrInvoke($accessExprRet, $m1.methodCallArgsRet);
-        $accessExprRet.setLine($inv.getLine());
-    }
-    RPAR)
-    | (DOT mthd=identifier LPAR m2=methodCallArguments
-    {
-        $accessExprRet = new MethodCall($accessExprRet, $mthd.idRet, $m2.methodCallArgsRet);
-        $accessExprRet.setLine($mthd.line);
+        $accessExprRet = new MethodCall($accessExprRet, $m.methodCallArgsRet);
+        $accessExprRet.setLine($l.line);
     }
     RPAR)
     | (DOT i=identifier)
     {
-        $accessExprRet = new FieldOrListAccess($accessExprRet, $i.idRet);
+        $accessExprRet = new ObjectOrListMemberAccess($accessExprRet, $i.idRet);
         $accessExprRet.setLine($i.line);
     }
     | (l=LBRACK index=expression RBRACK)
@@ -727,7 +706,6 @@ CLASS: 'class';
 
 PRINT: 'print';
 FUNC: 'func';
-INVOKE: 'invoke';
 
 NEW: 'new';
 

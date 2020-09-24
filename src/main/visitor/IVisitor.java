@@ -31,7 +31,6 @@ public interface IVisitor<T> {
     T visit(AssignmentStmt assignmentStmt);
     T visit(BlockStmt blockStmt);
     T visit(ConditionalStmt conditionalStmt);
-    T visit(FptrInvokeStmt fptrInvokeStmt);
     T visit(MethodCallStmt methodCallStmt);
     T visit(PrintStmt print);
     T visit(ReturnStmt returnStmt);
@@ -43,8 +42,7 @@ public interface IVisitor<T> {
 
     T visit(BinaryExpression binaryExpression);
     T visit(UnaryExpression unaryExpression);
-    T visit(FieldOrListAccess fieldOrListAccess);
-    T visit(FptrInvoke fptrInvoke);
+    T visit(ObjectOrListMemberAccess objectOrListMemberAccess);
     T visit(Identifier identifier);
     T visit(ListAccessByIndex listAccessByIndex);
     T visit(MethodCall methodCall);

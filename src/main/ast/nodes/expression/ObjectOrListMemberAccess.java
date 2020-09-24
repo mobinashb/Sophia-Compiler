@@ -2,13 +2,13 @@ package main.ast.nodes.expression;
 
 import main.visitor.IVisitor;
 
-public class FieldOrListAccess extends Expression{
+public class ObjectOrListMemberAccess extends Expression{
     private Expression instance;
-    private Identifier field;
+    private Identifier memberName;
 
-    public FieldOrListAccess(Expression instance, Identifier field) {
+    public ObjectOrListMemberAccess(Expression instance, Identifier memberName) {
         this.instance = instance;
-        this.field = field;
+        this.memberName = memberName;
     }
 
     public Expression getInstance() {
@@ -19,17 +19,17 @@ public class FieldOrListAccess extends Expression{
         this.instance = instance;
     }
 
-    public Identifier getField() {
-        return field;
+    public Identifier getMemberName() {
+        return memberName;
     }
 
-    public void setField(Identifier field) {
-        this.field = field;
+    public void setMemberName(Identifier memberName) {
+        this.memberName = memberName;
     }
 
     @Override
     public String toString() {
-        return "FieldOrListAccess_" + this.field.getName();
+        return "FieldOrListAccess_" + this.memberName.getName();
     }
 
     @Override

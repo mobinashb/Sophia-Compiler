@@ -6,10 +6,10 @@ import main.symbolTable.SymbolTable;
 import main.symbolTable.exceptions.ItemAlreadyExistsException;
 import main.symbolTable.items.ClassSymbolTableItem;
 
-public class ClassRedefinitionException extends CompileErrorException {
+public class ClassRedefinition extends CompileErrorException {
     private ClassDeclaration classDeclaration;
 
-    public ClassRedefinitionException(ClassDeclaration classDeclaration) {
+    public ClassRedefinition(ClassDeclaration classDeclaration) {
         super(classDeclaration.getLine(), "Redefinition of class " + classDeclaration.getClassName().getName());
         this.classDeclaration = classDeclaration;
     }

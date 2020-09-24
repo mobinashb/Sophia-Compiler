@@ -2,6 +2,7 @@ package main;
 
 import main.ast.nodes.Program;
 import main.visitor.nameAnalyzer.NameAnalyzer;
+import main.visitor.typeChecker.TypeChecker;
 import main.visitor.utils.ASTTreePrinter;
 import main.visitor.utils.ErrorReporter;
 import org.antlr.v4.runtime.CharStream;
@@ -17,8 +18,9 @@ public class SophiaCompiler {
         Program program = sophiaParser.sophia().sophiaProgram;
 
         ErrorReporter errorReporter = new ErrorReporter();
+//        ASTTreePrinter astTreePrinter = new ASTTreePrinter();
         NameAnalyzer nameAnalyzer = new NameAnalyzer(program);
-        ASTTreePrinter astTreePrinter = new ASTTreePrinter();
+        TypeChecker typeChecker = new TypeChecker();
 
         nameAnalyzer.analyze();
         int numberOfErrors = program.accept(errorReporter);
@@ -26,6 +28,12 @@ public class SophiaCompiler {
             System.out.println("\n" + numberOfErrors + " errors detected");
             System.exit(1);
         }
-        program.accept(astTreePrinter);
+//        program.accept(astTreePrinter);
+        program.accept(typeChecker);
+        numberOfErrors = program.accept(errorReporter);
+        if(numberOfErrors > 0) {
+            System.out.println("\n" + numberOfErrors + " errors detected");
+            System.exit(1);
+        }
     }
 }

@@ -6,17 +6,14 @@ import java.util.ArrayList;
 
 public class MethodCall extends Expression {
     private Expression instance;
-    private Identifier methodName;
     private ArrayList<Expression> args = new ArrayList<>();
 
-    public MethodCall(Expression instance, Identifier methodName) {
+    public MethodCall(Expression instance) {
         this.instance = instance;
-        this.methodName = methodName;
     }
 
-    public MethodCall(Expression instance, Identifier methodName, ArrayList<Expression> args) {
+    public MethodCall(Expression instance, ArrayList<Expression> args) {
         this.instance = instance;
-        this.methodName = methodName;
         this.args = args;
     }
 
@@ -26,14 +23,6 @@ public class MethodCall extends Expression {
 
     public void setInstance(Expression instance) {
         this.instance = instance;
-    }
-
-    public Identifier getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(Identifier methodName) {
-        this.methodName = methodName;
     }
 
     public ArrayList<Expression> getArgs() {
@@ -50,7 +39,7 @@ public class MethodCall extends Expression {
 
     @Override
     public String toString() {
-        return "MethodCall_" + this.methodName.getName();
+        return "MethodCall";
     }
 
     @Override

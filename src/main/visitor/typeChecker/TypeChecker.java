@@ -1,4 +1,4 @@
-package main.visitor.utils;
+package main.visitor.typeChecker;
 
 import main.ast.nodes.Node;
 import main.ast.nodes.Program;
@@ -20,7 +20,7 @@ import main.ast.nodes.statement.loop.ForStmt;
 import main.ast.nodes.statement.loop.ForeachStmt;
 import main.visitor.Visitor;
 
-public class ASTTreePrinter extends Visitor<Void> {
+public class TypeChecker extends Visitor<Void> {
 
     private void print(Node node) {
         System.out.println(node.getLine() + ":" + node.toString());

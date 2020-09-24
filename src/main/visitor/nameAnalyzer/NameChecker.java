@@ -5,18 +5,28 @@ import main.ast.nodes.declaration.classDec.ClassDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
-import main.compileErrorException.nameErrors.FieldRedefinitionException;
-import main.compileErrorException.nameErrors.MethodRedefinitionException;
+import main.compileErrorException.nameErrors.FieldRedefinition;
+import main.compileErrorException.nameErrors.MethodNameConflictWithField;
+import main.compileErrorException.nameErrors.MethodRedefinition;
 import main.symbolTable.SymbolTable;
-import main.symbolTable.exceptions.ItemAlreadyExistsException;
 import main.symbolTable.exceptions.ItemNotFoundException;
 import main.symbolTable.items.ClassSymbolTableItem;
 import main.symbolTable.items.MethodSymbolTableItem;
 import main.symbolTable.items.varItems.FieldSymbolTableItem;
 import main.visitor.Visitor;
 
-public class ParentsNameChecker extends Visitor<Void> {
+public class NameChecker extends Visitor<Void> {
     private String currentClassName;
+
+    private SymbolTable getCurrentClassSymbolTable() {
+        try {
+            ClassSymbolTableItem classSymbolTableItem = (ClassSymbolTableItem)
+                    SymbolTable.root.getItem(ClassSymbolTableItem.START_KEY + this.currentClassName, true);
+            return classSymbolTableItem.getClassSymbolTable();
+        } catch (ItemNotFoundException ignored) {
+            return null;
+        }
+    }
 
     @Override
     public Void visit(Program program) {
@@ -51,14 +61,19 @@ public class ParentsNameChecker extends Visitor<Void> {
     public Void visit(MethodDeclaration methodDeclaration) {
         if(!methodDeclaration.hasError()) {
             try {
-                ClassSymbolTableItem classSymbolTableItem = (ClassSymbolTableItem)
-                        SymbolTable.root.getItem(ClassSymbolTableItem.START_KEY + this.currentClassName, true);
-                SymbolTable classSymbolTable = classSymbolTableItem.getClassSymbolTable();
+                SymbolTable classSymbolTable = this.getCurrentClassSymbolTable();
                 classSymbolTable.getItem(MethodSymbolTableItem.START_KEY + methodDeclaration.getMethodName().getName(), false);
-                MethodRedefinitionException exception = new MethodRedefinitionException(methodDeclaration);
+                MethodRedefinition exception = new MethodRedefinition(methodDeclaration);
                 methodDeclaration.addError(exception);
             } catch (ItemNotFoundException ignored) {
             }
+        }
+        try {
+            SymbolTable classSymbolTable = this.getCurrentClassSymbolTable();
+            classSymbolTable.getItem(FieldSymbolTableItem.START_KEY + methodDeclaration.getMethodName().getName(), true);
+            MethodNameConflictWithField exception = new MethodNameConflictWithField(methodDeclaration);
+            methodDeclaration.addError(exception);
+        } catch (ItemNotFoundException ignored) {
         }
         return null;
     }
@@ -67,11 +82,9 @@ public class ParentsNameChecker extends Visitor<Void> {
     public Void visit(FieldDeclaration fieldDeclaration) {
         if(!fieldDeclaration.hasError()) {
             try {
-                ClassSymbolTableItem classSymbolTableItem = (ClassSymbolTableItem)
-                        SymbolTable.root.getItem(ClassSymbolTableItem.START_KEY + this.currentClassName, true);
-                SymbolTable classSymbolTable = classSymbolTableItem.getClassSymbolTable();
+                SymbolTable classSymbolTable = this.getCurrentClassSymbolTable();
                 classSymbolTable.getItem(FieldSymbolTableItem.START_KEY + fieldDeclaration.getVarDeclaration().getVarName().getName(), false);
-                FieldRedefinitionException exception = new FieldRedefinitionException(fieldDeclaration);
+                FieldRedefinition exception = new FieldRedefinition(fieldDeclaration);
                 fieldDeclaration.addError(exception);
             } catch (ItemNotFoundException ignored) {
             }

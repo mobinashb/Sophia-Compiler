@@ -139,13 +139,6 @@ public class ErrorReporter extends Visitor<Integer> {
     }
 
     @Override
-    public Integer visit(FptrInvokeStmt fptrInvokeStmt) {
-        int numOfErrors = printErrors(fptrInvokeStmt);
-        numOfErrors += fptrInvokeStmt.getFptrInvoke().accept(this);
-        return numOfErrors;
-    }
-
-    @Override
     public Integer visit(MethodCallStmt methodCallStmt) {
         int numOfErrors = printErrors(methodCallStmt);
         numOfErrors += methodCallStmt.getMethodCall().accept(this);
@@ -226,20 +219,10 @@ public class ErrorReporter extends Visitor<Integer> {
     }
 
     @Override
-    public Integer visit(FieldOrListAccess fieldOrListAccess) {
-        int numOfErrors = printErrors(fieldOrListAccess);
-        numOfErrors += fieldOrListAccess.getInstance().accept(this);
-        numOfErrors += fieldOrListAccess.getField().accept(this);
-        return numOfErrors;
-    }
-
-    @Override
-    public Integer visit(FptrInvoke fptrInvoke) {
-        int numOfErrors = printErrors(fptrInvoke);
-        numOfErrors += fptrInvoke.getInstance().accept(this);
-        for(Expression expression : fptrInvoke.getArgs()) {
-            numOfErrors += expression.accept(this);
-        }
+    public Integer visit(ObjectOrListMemberAccess objectOrListMemberAccess) {
+        int numOfErrors = printErrors(objectOrListMemberAccess);
+        numOfErrors += objectOrListMemberAccess.getInstance().accept(this);
+        numOfErrors += objectOrListMemberAccess.getMemberName().accept(this);
         return numOfErrors;
     }
 
@@ -260,7 +243,6 @@ public class ErrorReporter extends Visitor<Integer> {
     public Integer visit(MethodCall methodCall) {
         int numOfErrors = printErrors(methodCall);
         numOfErrors += methodCall.getInstance().accept(this);
-        numOfErrors += methodCall.getMethodName().accept(this);
         for(Expression expression : methodCall.getArgs()) {
             numOfErrors += expression.accept(this);
         }

@@ -6,15 +6,14 @@ import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaratio
 import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
 import main.ast.nodes.declaration.variableDec.VarDeclaration;
-import main.compileErrorException.nameErrors.ClassRedefinitionException;
-import main.compileErrorException.nameErrors.FieldRedefinitionException;
-import main.compileErrorException.nameErrors.LocalVarRedefinitionException;
-import main.compileErrorException.nameErrors.MethodRedefinitionException;
+import main.compileErrorException.nameErrors.ClassRedefinition;
+import main.compileErrorException.nameErrors.FieldRedefinition;
+import main.compileErrorException.nameErrors.LocalVarRedefinition;
+import main.compileErrorException.nameErrors.MethodRedefinition;
 import main.symbolTable.SymbolTable;
 import main.symbolTable.exceptions.ItemAlreadyExistsException;
 import main.symbolTable.items.ClassSymbolTableItem;
 import main.symbolTable.items.MethodSymbolTableItem;
-import main.symbolTable.items.SymbolTableItem;
 import main.symbolTable.items.varItems.FieldSymbolTableItem;
 import main.symbolTable.items.varItems.LocalVariableSymbolTableItem;
 import main.visitor.Visitor;
@@ -39,7 +38,7 @@ public class NameCollector extends Visitor<Void> {
         try {
             SymbolTable.root.put(classSymbolTableItem);
         } catch (ItemAlreadyExistsException e) {
-            ClassRedefinitionException exception = new ClassRedefinitionException(classDeclaration);
+            ClassRedefinition exception = new ClassRedefinition(classDeclaration);
             classDeclaration.addError(exception);
             exception.handleException();
         }
@@ -70,7 +69,7 @@ public class NameCollector extends Visitor<Void> {
         try {
             SymbolTable.top.put(methodSymbolTableItem);
         } catch (ItemAlreadyExistsException e) {
-            MethodRedefinitionException exception = new MethodRedefinitionException(methodDeclaration);
+            MethodRedefinition exception = new MethodRedefinition(methodDeclaration);
             methodDeclaration.addError(exception);
         }
         SymbolTable.push(methodSymbolTable);
@@ -89,7 +88,7 @@ public class NameCollector extends Visitor<Void> {
         try {
             SymbolTable.top.put(new FieldSymbolTableItem(fieldDeclaration));
         } catch (ItemAlreadyExistsException e) {
-            FieldRedefinitionException exception = new FieldRedefinitionException(fieldDeclaration);
+            FieldRedefinition exception = new FieldRedefinition(fieldDeclaration);
             fieldDeclaration.addError(exception);
         }
         return null;
@@ -100,7 +99,7 @@ public class NameCollector extends Visitor<Void> {
         try {
             SymbolTable.top.put(new LocalVariableSymbolTableItem(varDeclaration));
         } catch (ItemAlreadyExistsException e) {
-            LocalVarRedefinitionException exception = new LocalVarRedefinitionException(varDeclaration);
+            LocalVarRedefinition exception = new LocalVarRedefinition(varDeclaration);
             varDeclaration.addError(exception);
         }
         return null;

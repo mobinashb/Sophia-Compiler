@@ -87,9 +87,6 @@ public class ErrorReporter extends Visitor<Integer> {
         for(VarDeclaration varDeclaration : methodDeclaration.getArgs()) {
             numOfErrors += varDeclaration.accept(this);
         }
-        if(methodDeclaration.getSuperStmt() != null) {
-            numOfErrors += methodDeclaration.getSuperStmt().accept(this);
-        }
         for(VarDeclaration varDeclaration : methodDeclaration.getLocalVars()) {
             numOfErrors += varDeclaration.accept(this);
         }

@@ -80,9 +80,6 @@ public class ASTTreePrinter extends Visitor<Void> {
         for(VarDeclaration varDeclaration : methodDeclaration.getArgs()) {
             varDeclaration.accept(this);
         }
-        if(methodDeclaration.getSuperStmt() != null) {
-            methodDeclaration.getSuperStmt().accept(this);
-        }
         for(VarDeclaration varDeclaration : methodDeclaration.getLocalVars()) {
             varDeclaration.accept(this);
         }

@@ -23,8 +23,8 @@ public class SophiaCompiler {
         nameAnalyzer.analyze();
         int numberOfErrors = program.accept(errorReporter);
         if(numberOfErrors > 0) {
-            System.out.println("\n" + numberOfErrors + " errors detected.");
-            return;
+            System.out.println("\n" + numberOfErrors + " errors detected");
+            System.exit(1);
         }
         program.accept(astTreePrinter);
     }

@@ -4,9 +4,6 @@ public class CompileErrorException extends Exception {
     private int line;
     private String message;
 
-    public CompileErrorException() {
-    }
-
     public CompileErrorException(int line, String message) {
         this.line = line;
         this.message = message;

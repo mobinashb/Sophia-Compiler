@@ -20,6 +20,8 @@ class A extends B {
 }
 
 class B {
+    int b;
+
 	def B(b:string) {
 		print(b);
 	}

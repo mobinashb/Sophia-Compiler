@@ -1,7 +1,6 @@
 package main.visitor.nameAnalyzer;
 
 import main.ast.nodes.Program;
-import main.symbolTable.SymbolTable;
 import main.symbolTable.utils.graph.Graph;
 
 public class NameAnalyzer {
@@ -15,13 +14,10 @@ public class NameAnalyzer {
     public void analyze() {
         NameCollector nameCollector = new NameCollector();
         ParentLinker parentLinker = new ParentLinker();
-        NameChecker nameChecker = new NameChecker();
-        SymbolTable.push(new SymbolTable());
-        SymbolTable.root = SymbolTable.top;
+        ParentsNameChecker parentsNameChecker = new ParentsNameChecker();
         this.program.accept(nameCollector);
         this.classHierarchy = parentLinker.analyze(program);
-        this.program.accept(nameChecker);
-
+        this.program.accept(parentsNameChecker);
     }
 
     public Graph<String> getClassHierarchy() {

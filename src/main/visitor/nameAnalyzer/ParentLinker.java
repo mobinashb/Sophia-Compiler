@@ -26,7 +26,7 @@ public class ParentLinker {
                         .getItem(ClassSymbolTableItem.START_KEY + parentName, true);
                 ClassSymbolTableItem thisClassSTI = (ClassSymbolTableItem) SymbolTable.root
                         .getItem(ClassSymbolTableItem.START_KEY + className, true);
-                thisClassSTI.setClassSymbolTable(parentSTI.getClassSymbolTable());
+                thisClassSTI.getClassSymbolTable().pre = parentSTI.getClassSymbolTable();
             } catch (ItemNotFoundException | GraphDoesNotContainNodeException ignored) { }
         }
         return classHierarchy;

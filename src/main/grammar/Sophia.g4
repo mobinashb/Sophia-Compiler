@@ -95,9 +95,6 @@ method returns[MethodDeclaration methodRet]
     { $methodRet.setArgs($args.argsRet); }
     RPAR LBRACE body=methodBody
     {
-        if($body.superStmt != null) {
-            $methodRet.setSuperStmt($body.superStmt);
-        }
         $methodRet.setLocalVars($body.localVars);
         $methodRet.setBody($body.statements);
     }
@@ -112,11 +109,12 @@ constructor returns[ConstructorDeclaration constructorRet]:
     }
     LPAR args=methodArguments
     { $constructorRet.setArgs($args.argsRet); }
-    RPAR LBRACE body=methodBody
+    RPAR LBRACE
+    (ss=superStatement
+    { $constructorRet.setSuperStmt($ss.superStatementRet); }
+    )?
+    body=methodBody
     {
-        if($body.superStmt != null) {
-            $constructorRet.setSuperStmt($body.superStmt);
-        }
         $constructorRet.setLocalVars($body.localVars);
         $constructorRet.setBody($body.statements);
     }
@@ -219,10 +217,7 @@ primitiveDataType returns[Type primitiveTypeRet]:
     { $primitiveTypeRet = new BoolType(); }
     ;
 
-methodBody returns[SuperStmt superStmt, ArrayList<VarDeclaration> localVars, ArrayList<Statement> statements]:
-    (ss=superStatement
-    { $superStmt = $ss.superStatementRet; }
-    )?
+methodBody returns[ArrayList<VarDeclaration> localVars, ArrayList<Statement> statements]:
     {
         $localVars = new ArrayList<>();
         $statements = new ArrayList<>();

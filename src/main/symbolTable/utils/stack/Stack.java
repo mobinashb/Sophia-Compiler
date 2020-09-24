@@ -1,4 +1,4 @@
-package main.symbolTable;
+package main.symbolTable.utils.stack;
 
 import java.util.ArrayList;
 

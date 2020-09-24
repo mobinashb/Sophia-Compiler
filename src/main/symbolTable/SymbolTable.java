@@ -4,6 +4,8 @@ package main.symbolTable;
 import main.symbolTable.exceptions.ItemAlreadyExistsException;
 import main.symbolTable.exceptions.ItemNotFoundException;
 import main.symbolTable.items.SymbolTableItem;
+import main.symbolTable.utils.stack.Stack;
+
 import java.util.*;
 
 
@@ -12,7 +14,7 @@ public class SymbolTable {
 
     //Start of static members
 
-    private static SymbolTable top;
+    public static SymbolTable top;
     public static SymbolTable root;
     private static Stack<SymbolTable> stack = new Stack<>();
 
@@ -28,7 +30,7 @@ public class SymbolTable {
 
     //End of static members
 
-    private SymbolTable pre;
+    public SymbolTable pre;
     private Map<String, SymbolTableItem> items;
 
     public SymbolTable() {
@@ -46,7 +48,7 @@ public class SymbolTable {
         items.put(item.getKey(), item);
     }
 
-    private SymbolTableItem getItem(String key, Boolean searchCurrent) throws ItemNotFoundException {
+    public SymbolTableItem getItem(String key, Boolean searchCurrent) throws ItemNotFoundException {
         Set<SymbolTable> visitedSymbolTables = new HashSet<>();
         SymbolTable currentSymbolTable = this;
         if(!searchCurrent) {

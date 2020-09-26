@@ -1,16 +1,16 @@
 //Sophia sample code
 
 class A extends B {
-	int a;
-	bool b;
-	string c;
-	func<int,bool->int> d;
-	list(2 # list(3 # int)) e;
-	list(int, bool, func<int,bool->int>) f;
+	a:int;
+	b:bool;
+	c:string;
+	d:func<int,bool->int>;
+	e:list(2 # list(3 # int));
+	f:list(int, bool, func<int,bool->int>);
 
 	def A(a:int, b:string) {
 		super(b);
-		string a;
+		a:string;
 		this.a = a;
 	}
 
@@ -20,7 +20,7 @@ class A extends B {
 }
 
 class B {
-    int b;
+    b:int;
 
 	def B(b:string) {
 		print(b);
@@ -36,12 +36,12 @@ class B {
     }
 
 	def func<bool,int->int> bar() {
-        int r;
-        func<bool,int->int> myFptr;
-        list(first:int, func<bool,int->int>, bool) myList;
-        list(2 # func<bool,int->int>) myList2;
-        list(2 # list(3 # int)) anotherList;
-        func<bool,int->int> fptr;
+        r:int;
+        myFptr:func<bool,int->int>;
+        myList:list(first:int, func<bool,int->int>, bool);
+        myList2:list(2 # func<bool,int->int>);
+        anotherList:list(2 # list(3 # int));
+        fptr:func<bool,int->int>;
         myFptr = this.bar;
         myList = [2, myFptr, true];
         print(myList[0]);
@@ -63,7 +63,7 @@ class B {
 
 class Main {
 	def Main() {
-	    A a;
+	    a:A;
 		a = new A(2, "hello");
 		this.a()();
 	}

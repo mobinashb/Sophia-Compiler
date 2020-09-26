@@ -70,7 +70,7 @@ sophiaClass returns[ClassDeclaration sophiaClassRet]:
     ;
 
 varDeclaration returns[VarDeclaration varDeclarationRet, int line]:
-    t=type id=identifier 
+    id=identifier COLON t=type
     {
         $varDeclarationRet = new VarDeclaration($id.idRet, $t.typeRet);
         $varDeclarationRet.setLine($id.line);

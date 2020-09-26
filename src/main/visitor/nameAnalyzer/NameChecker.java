@@ -12,7 +12,7 @@ import main.symbolTable.SymbolTable;
 import main.symbolTable.exceptions.ItemNotFoundException;
 import main.symbolTable.items.ClassSymbolTableItem;
 import main.symbolTable.items.MethodSymbolTableItem;
-import main.symbolTable.items.varItems.FieldSymbolTableItem;
+import main.symbolTable.items.FieldSymbolTableItem;
 import main.visitor.Visitor;
 
 public class NameChecker extends Visitor<Void> {

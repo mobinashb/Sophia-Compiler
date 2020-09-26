@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public abstract class Node {
     private int line;
     private ArrayList<CompileErrorException> errors = new ArrayList<>();
+    public static boolean isCatchErrorsActive = true;
 
     public ArrayList<CompileErrorException> flushErrors() {
         ArrayList<CompileErrorException> errors = this.errors;
@@ -16,7 +17,9 @@ public abstract class Node {
     }
 
     public void addError(CompileErrorException e) {
-        this.errors.add(e);
+        if(Node.isCatchErrorsActive) {
+            this.errors.add(e);
+        }
     }
 
     public boolean hasError() {

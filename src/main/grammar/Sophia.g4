@@ -168,12 +168,11 @@ listType returns[ListType listTypeRet]:
 
 listItemsTypes returns[ArrayList<ListNameType> listItemsTypesRet]:
     { $listItemsTypesRet = new ArrayList<>(); }
-    (l1=listItemType
+    l1=listItemType
     { $listItemsTypesRet.add($l1.listItemTypeRet); }
     (COMMA l2=listItemType
     { $listItemsTypesRet.add($l2.listItemTypeRet); }
     )*
-    )?
     ;
 
 listItemType returns[ListNameType listItemTypeRet]:

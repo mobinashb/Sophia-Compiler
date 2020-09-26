@@ -14,8 +14,8 @@ import main.symbolTable.SymbolTable;
 import main.symbolTable.exceptions.ItemAlreadyExistsException;
 import main.symbolTable.items.ClassSymbolTableItem;
 import main.symbolTable.items.MethodSymbolTableItem;
-import main.symbolTable.items.varItems.FieldSymbolTableItem;
-import main.symbolTable.items.varItems.LocalVariableSymbolTableItem;
+import main.symbolTable.items.FieldSymbolTableItem;
+import main.symbolTable.items.LocalVariableSymbolTableItem;
 import main.visitor.Visitor;
 
 public class NameCollector extends Visitor<Void> {

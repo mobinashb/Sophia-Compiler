@@ -324,11 +324,19 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         Type instanceType = listAccessByIndex.getInstance().accept(this);
         Type indexType = listAccessByIndex.getIndex().accept(this);
         if(instanceType instanceof ListType) {
+            boolean hasError = false;
             if(!(indexType instanceof IntType)) {
                 ListIndexNotInt exception = new ListIndexNotInt(listAccessByIndex.getLine());
                 listAccessByIndex.addError(exception);
-                return new NoType();
+                hasError = true;
             }
+            if(((ListType)instanceType).getElementsTypes().size() == 0) {
+                AccessWithIndexOnEmptyList exception = new AccessWithIndexOnEmptyList(listAccessByIndex.getLine());
+                listAccessByIndex.addError(exception);
+                hasError = true;
+            }
+            if(hasError)
+                return new NoType();
             ArrayList<Type> types = new ArrayList<>();
             for(ListNameType listNameType : ((ListType)instanceType).getElementsTypes())
                 types.add(listNameType.getType());

@@ -46,6 +46,11 @@ public class TypeChecker extends Visitor<RetConBreak> {
             return;
         if(type instanceof ListType) {
             ArrayList<ListNameType> types = ((ListType) type).getElementsTypes();
+            if(types.size() == 0) {
+                CannotHaveEmptyList exception = new CannotHaveEmptyList(node.getLine());
+                node.addError(exception);
+                return;
+            }
             boolean flag = false;
             for(int i = 0; i < types.size()-1; i++) {
                 for(int j = i+1; j < types.size(); j++) {

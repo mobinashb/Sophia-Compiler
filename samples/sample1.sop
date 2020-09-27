@@ -46,7 +46,17 @@ class B extends A{
         print(myList[0]);
 		print(myList.first);
         r = myList[1]();
-
+        if(true){
+            r=1;
+        } else if(true) {
+            r=1;
+        } else {
+            r=1;
+        }
+        if(true) print(2);
+        for(;;) {
+            print(1);
+        }
         myList2 = [myFptr, myFptr];
         foreach(fptr in myList2) {
             fptr();

@@ -106,11 +106,11 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitListItemType(SophiaParser.ListItemTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SophiaParser#functioPointerType}.
+	 * Visit a parse tree produced by {@link SophiaParser#functionPointerType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunctioPointerType(SophiaParser.FunctioPointerTypeContext ctx);
+	T visitFunctionPointerType(SophiaParser.FunctionPointerTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SophiaParser#typesWithComma}.
 	 * @param ctx the parse tree
@@ -141,12 +141,6 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBlock(SophiaParser.BlockContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SophiaParser#superStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSuperStatement(SophiaParser.SuperStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SophiaParser#assignmentStatement}.
 	 * @param ctx the parse tree

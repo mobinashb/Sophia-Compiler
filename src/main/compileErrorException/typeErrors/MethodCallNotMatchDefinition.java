@@ -7,7 +7,7 @@ import main.compileErrorException.CompileErrorException;
 public class MethodCallNotMatchDefinition extends CompileErrorException {
 
     public MethodCallNotMatchDefinition(int line) {
-        super(line, "Args in method call or function pointer invocation doesn't match definition");
+        super(line, "Args in method call doesn't match definition");
     }
 
 }

@@ -16,24 +16,23 @@ public class SophiaCompiler {
         CommonTokenStream tokenStream = new CommonTokenStream(sophiaLexer);
         SophiaParser sophiaParser = new SophiaParser(tokenStream);
         Program program = sophiaParser.sophia().sophiaProgram;
-
         ErrorReporter errorReporter = new ErrorReporter();
-//        ASTTreePrinter astTreePrinter = new ASTTreePrinter();
         NameAnalyzer nameAnalyzer = new NameAnalyzer(program);
-        TypeChecker typeChecker = new TypeChecker();
-
         nameAnalyzer.analyze();
         int numberOfErrors = program.accept(errorReporter);
         if(numberOfErrors > 0) {
             System.out.println("\n" + numberOfErrors + " errors detected");
             System.exit(1);
         }
+//        ASTTreePrinter astTreePrinter = new ASTTreePrinter();
 //        program.accept(astTreePrinter);
+        TypeChecker typeChecker = new TypeChecker(nameAnalyzer.getClassHierarchy());
         program.accept(typeChecker);
         numberOfErrors = program.accept(errorReporter);
         if(numberOfErrors > 0) {
             System.out.println("\n" + numberOfErrors + " errors detected");
             System.exit(1);
         }
+        System.out.println("\nNo errors detected");
     }
 }

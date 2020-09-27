@@ -155,15 +155,15 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitListItemType(SophiaParser.ListItemTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#functioPointerType}.
+	 * Enter a parse tree produced by {@link SophiaParser#functionPointerType}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctioPointerType(SophiaParser.FunctioPointerTypeContext ctx);
+	void enterFunctionPointerType(SophiaParser.FunctionPointerTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SophiaParser#functioPointerType}.
+	 * Exit a parse tree produced by {@link SophiaParser#functionPointerType}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctioPointerType(SophiaParser.FunctioPointerTypeContext ctx);
+	void exitFunctionPointerType(SophiaParser.FunctionPointerTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#typesWithComma}.
 	 * @param ctx the parse tree
@@ -214,16 +214,6 @@ public interface SophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBlock(SophiaParser.BlockContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SophiaParser#superStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterSuperStatement(SophiaParser.SuperStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#superStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitSuperStatement(SophiaParser.SuperStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SophiaParser#assignmentStatement}.
 	 * @param ctx the parse tree

@@ -189,13 +189,13 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctioPointerType(SophiaParser.FunctioPointerTypeContext ctx) { }
+	@Override public void enterFunctionPointerType(SophiaParser.FunctionPointerTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctioPointerType(SophiaParser.FunctioPointerTypeContext ctx) { }
+	@Override public void exitFunctionPointerType(SophiaParser.FunctionPointerTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -256,18 +256,6 @@ public class SophiaBaseListener implements SophiaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBlock(SophiaParser.BlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSuperStatement(SophiaParser.SuperStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSuperStatement(SophiaParser.SuperStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

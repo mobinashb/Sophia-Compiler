@@ -61,9 +61,6 @@ public class ASTTreePrinter extends Visitor<Void> {
         for(VarDeclaration varDeclaration : constructorDeclaration.getArgs()) {
             varDeclaration.accept(this);
         }
-        if(constructorDeclaration.getSuperStmt() != null) {
-            constructorDeclaration.getSuperStmt().accept(this);
-        }
         for(VarDeclaration varDeclaration : constructorDeclaration.getLocalVars()) {
             varDeclaration.accept(this);
         }
@@ -186,15 +183,6 @@ public class ASTTreePrinter extends Visitor<Void> {
             forStmt.getUpdate().accept(this);
         }
         forStmt.getBody().accept(this);
-        return null;
-    }
-
-    @Override
-    public Void visit(SuperStmt superStmt) {
-        print(superStmt);
-        for(Expression expression : superStmt.getArgs()) {
-            expression.accept(this);
-        }
         return null;
     }
 

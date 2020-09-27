@@ -63,21 +63,7 @@ public class ErrorReporter extends Visitor<Integer> {
 
     @Override
     public Integer visit(ConstructorDeclaration constructorDeclaration) {
-        int numOfErrors = printErrors(constructorDeclaration);
-        numOfErrors += constructorDeclaration.getMethodName().accept(this);
-        for(VarDeclaration varDeclaration : constructorDeclaration.getArgs()) {
-            numOfErrors += varDeclaration.accept(this);
-        }
-        if(constructorDeclaration.getSuperStmt() != null) {
-            numOfErrors += constructorDeclaration.getSuperStmt().accept(this);
-        }
-        for(VarDeclaration varDeclaration : constructorDeclaration.getLocalVars()) {
-            numOfErrors += varDeclaration.accept(this);
-        }
-        for(Statement statement : constructorDeclaration.getBody()) {
-            numOfErrors += statement.accept(this);
-        }
-        return numOfErrors;
+        return this.visit((MethodDeclaration) constructorDeclaration);
     }
 
     @Override
@@ -191,15 +177,6 @@ public class ErrorReporter extends Visitor<Integer> {
             numOfErrors += forStmt.getUpdate().accept(this);
         }
         numOfErrors += forStmt.getBody().accept(this);
-        return numOfErrors;
-    }
-
-    @Override
-    public Integer visit(SuperStmt superStmt) {
-        int numOfErrors = printErrors(superStmt);
-        for(Expression expression : superStmt.getArgs()) {
-            numOfErrors += expression.accept(this);
-        }
         return numOfErrors;
     }
 

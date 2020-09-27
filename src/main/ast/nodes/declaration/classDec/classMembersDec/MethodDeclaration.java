@@ -4,7 +4,6 @@ import main.ast.nodes.declaration.Declaration;
 import main.ast.nodes.declaration.variableDec.VarDeclaration;
 import main.ast.nodes.expression.Identifier;
 import main.ast.nodes.statement.Statement;
-import main.ast.nodes.statement.SuperStmt;
 import main.ast.types.Type;
 import main.visitor.IVisitor;
 

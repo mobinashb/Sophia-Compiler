@@ -6,10 +6,7 @@ import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaratio
 import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
 import main.ast.nodes.declaration.variableDec.VarDeclaration;
-import main.compileErrorException.nameErrors.ClassRedefinition;
-import main.compileErrorException.nameErrors.FieldRedefinition;
-import main.compileErrorException.nameErrors.LocalVarRedefinition;
-import main.compileErrorException.nameErrors.MethodRedefinition;
+import main.compileErrorException.nameErrors.*;
 import main.symbolTable.SymbolTable;
 import main.symbolTable.exceptions.ItemAlreadyExistsException;
 import main.symbolTable.items.ClassSymbolTableItem;

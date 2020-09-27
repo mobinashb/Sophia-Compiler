@@ -110,9 +110,6 @@ constructor returns[ConstructorDeclaration constructorRet]:
     LPAR args=methodArguments
     { $constructorRet.setArgs($args.argsRet); }
     RPAR LBRACE
-    (ss=superStatement
-    { $constructorRet.setSuperStmt($ss.superStatementRet); }
-    )?
     body=methodBody
     {
         $constructorRet.setLocalVars($body.localVars);
@@ -144,7 +141,7 @@ type returns[Type typeRet]:
     { $typeRet = $p.primitiveTypeRet; }
     | l=listType
     { $typeRet = $l.listTypeRet; }
-    | f=functioPointerType
+    | f=functionPointerType
     { $typeRet = $f.fptrTypeRet; }
     | c=classType
     { $typeRet = $c.classTypeRet; }
@@ -182,7 +179,7 @@ listItemType returns[ListNameType listItemTypeRet]:
     { $listItemTypeRet = new ListNameType($t.typeRet); }
     ;
 
-functioPointerType returns[FptrType fptrTypeRet]:
+functionPointerType returns[FptrType fptrTypeRet]:
     FUNC
     { $fptrTypeRet = new FptrType(); }
     LESS_THAN
@@ -259,16 +256,6 @@ block returns[BlockStmt blockRet]:
     (s=statement
         { $blockRet.addStatement($s.sRet); }
     )* RBRACE
-    ;
-
-superStatement returns[SuperStmt superStatementRet]: 
-    s=SUPER LPAR 
-    m=methodCallArguments 
-    RPAR SEMICOLLON
-    {
-        $superStatementRet = new SuperStmt($m.methodCallArgsRet);
-        $superStatementRet.setLine($s.getLine());
-    }
     ;
 
 assignmentStatement returns[AssignmentStmt assignStmtRet]: 
@@ -729,7 +716,6 @@ TRUE: 'true';
 FALSE: 'false';
 
 THIS: 'this';
-SUPER: 'super';
 
 ARROW: '->';
 GREATER_THAN: '>';

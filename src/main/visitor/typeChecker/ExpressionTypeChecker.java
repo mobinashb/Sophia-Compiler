@@ -34,7 +34,7 @@ import main.visitor.Visitor;
 import java.util.ArrayList;
 
 public class ExpressionTypeChecker extends Visitor<Type> {
-    private Graph<String> classHierarchy;
+    private final Graph<String> classHierarchy;
     private ClassDeclaration currentClass;
     private MethodDeclaration currentMethod;
     private boolean seenNoneLvalue = false;
@@ -65,7 +65,7 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         if(first instanceof NoType)
             return true;
         else if(first instanceof IntType || first instanceof BoolType || first instanceof StringType)
-            return first.equals(second);
+            return first.toString().equals(second.toString());
         else if(first instanceof NullType)
             return second instanceof NullType || second instanceof FptrType || second instanceof ClassType;
         else if(first instanceof ClassType) {
@@ -115,9 +115,13 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     public boolean areAllSameType(ArrayList<Type> types) {
         Type firstType = types.get(0);
         for(Type type : types)
-            if(!(isFirstSubTypeOfSecond(firstType, type) && isFirstSubTypeOfSecond(type, firstType)))
+            if(!isSameType(firstType, type))
                 return false;
         return true;
+    }
+
+    public boolean isSameType(Type t1, Type t2) {
+        return isFirstSubTypeOfSecond(t1, t2) && isFirstSubTypeOfSecond(t2, t1);
     }
 
     public boolean isLvalue(Expression expression) {
@@ -145,8 +149,10 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                 binaryExpression.addError(exception);
                 return new NoType();
             }
+            else if(firstType instanceof NoType || secondType instanceof NoType)
+                return new NoType();
             if(firstType instanceof IntType || firstType instanceof BoolType || firstType instanceof StringType)
-                if(firstType.equals(secondType))
+                if(firstType.toString().equals(secondType.toString()))
                     return new BoolType();
             if(firstType instanceof ListType && secondType instanceof ListType) {
                 if(isFirstSubTypeOfSecond(firstType, secondType) && isFirstSubTypeOfSecond(secondType, firstType))
@@ -166,6 +172,8 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                 binaryExpression.addError(exception);
                 return new NoType();
             }
+            else if(firstType instanceof NoType || secondType instanceof NoType)
+                return new NoType();
             if((firstType instanceof IntType) && (secondType instanceof IntType))
                 return new BoolType();
         }
@@ -177,6 +185,8 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                 binaryExpression.addError(exception);
                 return new NoType();
             }
+            else if(firstType instanceof NoType || secondType instanceof NoType)
+                return new NoType();
             if((firstType instanceof IntType) && (secondType instanceof IntType))
                 return new IntType();
         }
@@ -188,6 +198,8 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                 binaryExpression.addError(exception);
                 return new NoType();
             }
+            else if(firstType instanceof NoType || secondType instanceof NoType)
+                return new NoType();
             if((firstType instanceof BoolType) && (secondType instanceof BoolType))
                 return new BoolType();
         }
@@ -395,15 +407,14 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     public Type visit(NewClassInstance newClassInstance) {
         this.seenNoneLvalue = true;
         String className = newClassInstance.getClassType().getClassName().getName();
+        ArrayList<Type> newInstanceTypes = new ArrayList<>();
+        for(Expression expression : newClassInstance.getArgs())
+            newInstanceTypes.add(expression.accept(this));
         if(this.classHierarchy.doesGraphContainNode(className)) {
             try {
                 ClassSymbolTableItem classSymbolTableItem = (ClassSymbolTableItem) SymbolTable.root.getItem(ClassSymbolTableItem.START_KEY + className, true);
                 MethodSymbolTableItem methodSymbolTableItem = (MethodSymbolTableItem) classSymbolTableItem.getClassSymbolTable().getItem(MethodSymbolTableItem.START_KEY + className, true);
                 ArrayList<Type> constructorActualTypes = methodSymbolTableItem.getArgTypes();
-                ArrayList<Type> newInstanceTypes = new ArrayList<>();
-                for(Expression expression : newClassInstance.getArgs()) {
-                    newInstanceTypes.add(expression.accept(this));
-                }
                 if(this.isFirstSubTypeOfSecondMultiple(newInstanceTypes, constructorActualTypes)) {
                     return newClassInstance.getClassType();
                 }
@@ -413,13 +424,14 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                     return new NoType();
                 }
             } catch (ItemNotFoundException ignored) {
-                ConstructorArgsNotMatchDefinition exception = new ConstructorArgsNotMatchDefinition(newClassInstance);
-                newClassInstance.addError(exception);
-                //to also catch errors in args
-                for(Expression expression : newClassInstance.getArgs()) {
-                    expression.accept(this);
+                if(newInstanceTypes.size() != 0) {
+                    ConstructorArgsNotMatchDefinition exception = new ConstructorArgsNotMatchDefinition(newClassInstance);
+                    newClassInstance.addError(exception);
+                    return new NoType();
                 }
-                return new NoType();
+                else {
+                    return newClassInstance.getClassType();
+                }
             }
         }
         else {

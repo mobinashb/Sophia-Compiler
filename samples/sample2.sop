@@ -1,0 +1,42 @@
+class Cart {
+  orders: list(4 # list(name: string, price: int, quantity: int));
+  def void addToCart(product: list(string, int, int), idx: int) {
+    this.orders[idx] = product;
+  }
+  def void getReceipt() {
+    total: int;
+    current: int;
+    order: list(name: string, price: int, quantity: int);
+    total = 0;
+    foreach(order in this.orders) {
+      current = order.price * order.quantity;
+      total = total + current;
+      print(order.name);
+      print(", ");
+      print(current);
+      print("\n");
+    }
+    print(total);
+    print("\n");
+  }
+}
+
+class Main{
+    def Main() {
+        cart: Cart;
+        i: int;
+        product: list(string, int, int);
+        p: list(string, int);
+        productCatalog: list(4 # list(string, int));
+        productCatalog = [["Doughnut", 5000], ["Croissant", 4000],
+                          ["Cookies", 2000],
+                          ["Chocolate Cake", 8000]];
+        cart = new Cart();
+        i = 0;
+        foreach(p in productCatalog) {
+            product = [p[0], p[1], i + 1];
+            cart.addToCart(product, i + 1);
+        }
+        cart.getReceipt();
+    }
+}

@@ -1,6 +1,7 @@
 .class public Cart
 .super java/lang/Object
 		 
+.field u Ljava/lang/Integer;
 .field orders LList;
 		
 .method public <init>()V
@@ -8,6 +9,10 @@
 .limit locals 128
 		aload 0
 		invokespecial java/lang/Object/<init>()V
+		aload 0
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		putfield Cart/u Ljava/lang/Integer;
 		aload 0
 		new java/util/ArrayList
 		dup

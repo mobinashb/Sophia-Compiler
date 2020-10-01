@@ -398,12 +398,16 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         else {
             ArrayList<Type> actualArgsTypes = ((FptrType) instanceType).getArgumentsTypes();
             Type returnType = ((FptrType) instanceType).getReturnType();
+            boolean hasError = false;
+            if(!isInMethodCallStmt && returnType instanceof NullType) {
+                CantUseValueOfVoidMethod exception = new CantUseValueOfVoidMethod(methodCall.getLine());
+                methodCall.addError(exception);
+                hasError = true;
+
+            }
             if(this.isFirstSubTypeOfSecondMultiple(argsTypes, actualArgsTypes)) {
-                if(!isInMethodCallStmt && returnType instanceof NullType) {
-                    CantUseValueOfVoidMethod exception = new CantUseValueOfVoidMethod(methodCall.getLine());
-                    methodCall.addError(exception);
+                if(hasError)
                     return new NoType();
-                }
                 return this.refineType(returnType);
             }
             else {

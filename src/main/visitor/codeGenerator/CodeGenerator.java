@@ -226,7 +226,7 @@ public class CodeGenerator extends Visitor<String> {
             else
                 return expr.accept(this);
         }
-        else if(type instanceof ClassType || type instanceof FptrType) {
+        else if(type instanceof ClassType || type instanceof FptrType || type instanceof NullType) {
             if(isInitialization)
                 return "aconst_null";
             else
@@ -328,16 +328,8 @@ public class CodeGenerator extends Visitor<String> {
                 this.addStaticMainMethod();
             addCommand(".method public <init>(" + argsSignature + ")V");
         }
-        else {
-            String retSign = "";
-            if(methodDeclaration.getReturnType() instanceof IntType)
-                retSign = "I";
-            else if(methodDeclaration.getReturnType() instanceof BoolType)
-                retSign = "Z";
-            else
-                retSign =  makeTypeSignature(methodDeclaration.getReturnType());
-            addCommand(".method public " + methodDeclaration.getMethodName().getName() + "(" + argsSignature + ")" + retSign);
-        }
+        else
+            addCommand(".method public " + methodDeclaration.getMethodName().getName() + "(" + argsSignature + ")" + makeTypeSignature(methodDeclaration.getReturnType()));
         addCommand(".limit stack 128");
         addCommand(".limit locals 128");
         if(methodDeclaration instanceof ConstructorDeclaration) {
@@ -404,7 +396,9 @@ public class CodeGenerator extends Visitor<String> {
 
     @Override
     public String visit(MethodCallStmt methodCallStmt) {
+        expressionTypeChecker.setIsInMethodCallStmt(true);
         addCommand(methodCallStmt.getMethodCall().accept(this));
+        expressionTypeChecker.setIsInMethodCallStmt(false);
         addCommand("pop");
         return null;
     }
@@ -430,10 +424,11 @@ public class CodeGenerator extends Visitor<String> {
             addCommand("return");
         else {
             addCommand(returnStmt.getReturnedExpr().accept(this));
-            if(type instanceof IntType || type instanceof BoolType)
-                addCommand("ireturn");
-            else
-                addCommand("areturn");
+            if(type instanceof IntType)
+                addCommand("invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;");
+            else if(type instanceof BoolType)
+                addCommand("invokestatic java/lang/Boolean/valueOf(Z)Ljava/lang/Boolean;");
+            addCommand("areturn");
         }
         return null;
     }
@@ -620,7 +615,7 @@ public class CodeGenerator extends Visitor<String> {
                     for(int i = 0; i < ((ListType) instanceType).getElementsTypes().size(); i++)
                         if(((ListType) instanceType).getElementsTypes().get(i).getName().getName().equals(memberName))
                             index = i;
-                    commands += ((ListAccessByIndex) binaryExpression.getFirstOperand()).getInstance().accept(this) + "\n";
+                    commands += ((ObjectOrListMemberAccess) binaryExpression.getFirstOperand()).getInstance().accept(this) + "\n";
                     commands += "ldc " + index + "\n";
                     commands += secondCommands + "\n";
                     commands += "dup_x2\n";
@@ -885,8 +880,10 @@ public class CodeGenerator extends Visitor<String> {
         }
         commands += methodCall.getInstance().accept(this) + "\n";
         commands += "aload " + tempVar + "\n";
-        commands += "invokevirtual Fptr/invoke(Ljava/util/ArrayList;)Ljava/lang/Object;";
+        commands += "invokevirtual Fptr/invoke(Ljava/util/ArrayList;)Ljava/lang/Object;\n";
         Type type = methodCall.accept(expressionTypeChecker);
+        if(!(type instanceof NullType))
+            commands += "\ncheckcast " + getClass(type);
         if(type instanceof IntType)
             commands += "\ninvokevirtual java/lang/Integer/intValue()I";
         else if(type instanceof  BoolType)

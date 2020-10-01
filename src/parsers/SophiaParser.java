@@ -80,7 +80,7 @@ public class SophiaParser extends Parser {
 			null, "'def'", "'extends'", "'class'", "'print'", "'func'", "'new'", 
 			"'continue'", "'break'", "'return'", "'foreach'", "'in'", "'for'", "'if'", 
 			"'else'", "'bool'", "'string'", "'int'", "'void'", "'null'", "'list'", 
-			"'true'", "'false'", "'this'", "'->'", "'>'", "'<'", "'=!'", "'=='", 
+			"'true'", "'false'", "'this'", "'->'", "'>'", "'<'", "'!='", "'=='", 
 			"'*'", "'/'", "'%'", "'+'", "'-'", "'&&'", "'||'", "'!'", "'?'", "'='", 
 			"'++'", "'--'", "'('", "')'", "'['", "']'", "'{'", "'}'", "'#'", "','", 
 			"'.'", "':'", "';'"

@@ -6,7 +6,7 @@ import main.compileErrorException.CompileErrorException;
 public class NoConstructorInMainClass extends CompileErrorException {
 
     public NoConstructorInMainClass(ClassDeclaration mainClassDeclaration) {
-        super(mainClassDeclaration.getLine(), "Class Main does't have a constructor");
+        super(mainClassDeclaration.getLine(), "Class Main doesn't have a constructor");
     }
 
 }

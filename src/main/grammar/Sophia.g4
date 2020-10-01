@@ -720,7 +720,7 @@ THIS: 'this';
 ARROW: '->';
 GREATER_THAN: '>';
 LESS_THAN: '<';
-NOT_EQUAL: '=!';
+NOT_EQUAL: '!=';
 EQUAL: '==';
 
 MULT: '*';

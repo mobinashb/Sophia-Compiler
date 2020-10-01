@@ -11,10 +11,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import parsers.SophiaLexer;
 import parsers.SophiaParser;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class SophiaCompiler {
     public void compile(CharStream textStream) {
@@ -51,13 +48,21 @@ public class SophiaCompiler {
             System.out.println("\n-------------------Generating Class Files-------------------");
             File dir = new File("./output");
             Process process = Runtime.getRuntime().exec("java -jar jasmin.jar *.j", null, dir);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null)
-                System.out.println(line);
+            printResults(process.getInputStream());
+            printResults(process.getErrorStream());
             System.out.println("\n---------------------------Output---------------------------");
             process = Runtime.getRuntime().exec("java Main", null, dir);
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            printResults(process.getInputStream());
+            printResults(process.getErrorStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void printResults(InputStream stream) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        String line;
+        try {
             while ((line = reader.readLine()) != null)
                 System.out.println(line);
         } catch (IOException e) {

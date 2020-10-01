@@ -4074,7 +4074,7 @@ public class SophiaParser extends Parser {
 				setState(663);
 				((ValuesContext)_localctx).s = match(STRING_VALUE);
 
-				        ((ValuesContext)_localctx).valuesRet =  new StringValue((((ValuesContext)_localctx).s!=null?((ValuesContext)_localctx).s.getText():null));
+				        ((ValuesContext)_localctx).valuesRet =  new StringValue(((((ValuesContext)_localctx).s!=null?((ValuesContext)_localctx).s.getText():null)).substring(1, ((((ValuesContext)_localctx).s!=null?((ValuesContext)_localctx).s.getText():null)).length()-1));
 				        _localctx.valuesRet.setLine(((ValuesContext)_localctx).s.getLine());
 				    
 				}

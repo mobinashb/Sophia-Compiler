@@ -7,6 +7,7 @@ import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaratio
 import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
 import main.ast.nodes.declaration.variableDec.VarDeclaration;
+import main.ast.nodes.expression.MethodCall;
 import main.ast.nodes.expression.operators.BinaryOperator;
 import main.ast.nodes.statement.*;
 import main.ast.nodes.statement.loop.BreakStmt;
@@ -137,6 +138,7 @@ public class TypeChecker extends Visitor<RetConBreak> {
             this.expressionTypeChecker.setCurrentMethod(methodDeclaration);
             this.currentMethod = methodDeclaration;
             boolean doesReturn = methodDeclaration.accept(this).doesReturn;
+            methodDeclaration.setDoesReturn(doesReturn);
             if(!doesReturn && !(methodDeclaration.getReturnType() instanceof NullType)) {
                 MissingReturnStatement exception = new MissingReturnStatement(methodDeclaration);
                 methodDeclaration.addError(exception);
@@ -183,7 +185,7 @@ public class TypeChecker extends Visitor<RetConBreak> {
 
     @Override
     public RetConBreak visit(FieldDeclaration fieldDeclaration) {
-        fieldDeclaration.getVarDeclaration().accept(this);
+//        fieldDeclaration.getVarDeclaration().accept(this);
         return null;
     }
 
@@ -206,11 +208,11 @@ public class TypeChecker extends Visitor<RetConBreak> {
             return new RetConBreak(false, false);
         }
         boolean isSubtype = expressionTypeChecker.isFirstSubTypeOfSecond(secondType, firstType);
-        if(isSubtype) {
+        if((assignmentStmt.getrValue() instanceof MethodCall && secondType instanceof NullType) || !isSubtype) {
+            UnsupportedOperandType exception = new UnsupportedOperandType(assignmentStmt.getLine(), BinaryOperator.assign.name());
+            assignmentStmt.addError(exception);
             return new RetConBreak(false, false);
         }
-        UnsupportedOperandType exception = new UnsupportedOperandType(assignmentStmt.getLine(), BinaryOperator.assign.name());
-        assignmentStmt.addError(exception);
         return new RetConBreak(false, false);
     }
 
@@ -254,7 +256,9 @@ public class TypeChecker extends Visitor<RetConBreak> {
 
     @Override
     public RetConBreak visit(MethodCallStmt methodCallStmt) {
+        expressionTypeChecker.setIsInMethodCallStmt(true);
         methodCallStmt.getMethodCall().accept(expressionTypeChecker);
+        expressionTypeChecker.setIsInMethodCallStmt(false);
         return new RetConBreak(false, false);
     }
 

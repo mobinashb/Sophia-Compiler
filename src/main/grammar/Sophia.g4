@@ -637,7 +637,7 @@ values returns[Value valuesRet]:
     }
     | s=STRING_VALUE
     {
-        $valuesRet = new StringValue($s.text);
+        $valuesRet = new StringValue(($s.text).substring(1, ($s.text).length()-1));
         $valuesRet.setLine($s.getLine());
     }
     | i=INT_VALUE

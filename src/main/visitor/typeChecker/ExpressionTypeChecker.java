@@ -38,6 +38,7 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     private ClassDeclaration currentClass;
     private MethodDeclaration currentMethod;
     private boolean seenNoneLvalue = false;
+    private boolean isInMethodCallStmt = false;
 
     public ExpressionTypeChecker(Graph<String> classHierarchy) {
         this.classHierarchy = classHierarchy;
@@ -49,6 +50,10 @@ public class ExpressionTypeChecker extends Visitor<Type> {
 
     public void setCurrentMethod(MethodDeclaration currentMethod) {
         this.currentMethod = currentMethod;
+    }
+
+    public void setIsInMethodCallStmt(boolean inIsMethodCallStmt) {
+        isInMethodCallStmt = inIsMethodCallStmt;
     }
 
     public boolean isFirstSubTypeOfSecondMultiple(ArrayList<Type> first, ArrayList<Type> second) {
@@ -156,16 +161,18 @@ public class ExpressionTypeChecker extends Visitor<Type> {
             if(firstType instanceof IntType || firstType instanceof BoolType || firstType instanceof StringType)
                 if(firstType.toString().equals(secondType.toString()))
                     return new BoolType();
-            if(firstType instanceof ListType && secondType instanceof ListType) {
-                if(isFirstSubTypeOfSecond(firstType, secondType) && isFirstSubTypeOfSecond(secondType, firstType))
-                    return new BoolType();
-            }
             if((firstType instanceof ClassType && secondType instanceof NullType) ||
                     (firstType instanceof NullType && secondType instanceof ClassType) ||
                     (firstType instanceof ClassType && secondType instanceof ClassType &&
                             ((ClassType)firstType).getClassName().getName().equals(((ClassType)secondType).getClassName().getName()))) {
                 return new BoolType();
             }
+            if((firstType instanceof FptrType && secondType instanceof NullType) ||
+                    (firstType instanceof NullType && secondType instanceof FptrType)) {
+                return new BoolType();
+            }
+            if(firstType instanceof NullType && secondType instanceof NullType)
+                return new BoolType();
         }
         if((operator == BinaryOperator.gt) || (operator == BinaryOperator.lt)) {
             if((firstType instanceof NoType && !(secondType instanceof IntType)) ||
@@ -336,7 +343,9 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     @Override
     public Type visit(ListAccessByIndex listAccessByIndex) {
         Type instanceType = listAccessByIndex.getInstance().accept(this);
+        boolean prevSeenNoneLvalue = this.seenNoneLvalue;
         Type indexType = listAccessByIndex.getIndex().accept(this);
+        this.seenNoneLvalue = prevSeenNoneLvalue;
         if(instanceType instanceof ListType) {
             if(!(indexType instanceof IntType)) {
                 ListIndexNotInt exception = new ListIndexNotInt(listAccessByIndex.getLine());
@@ -371,10 +380,13 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     public Type visit(MethodCall methodCall) {
         this.seenNoneLvalue = true;
         Type instanceType = methodCall.getInstance().accept(this);
+        boolean prevIsInMethodCallStmt = this.isInMethodCallStmt;
+        this.setIsInMethodCallStmt(false);
         ArrayList<Type> argsTypes = new ArrayList<>();
         for(Expression arg : methodCall.getArgs()) {
             argsTypes.add(arg.accept(this));
         }
+        this.setIsInMethodCallStmt(prevIsInMethodCallStmt);
         if(!(instanceType instanceof FptrType || instanceType instanceof NoType)) {
             CallOnNoneFptrType exception = new CallOnNoneFptrType(methodCall.getLine());
             methodCall.addError(exception);
@@ -387,6 +399,11 @@ public class ExpressionTypeChecker extends Visitor<Type> {
             ArrayList<Type> actualArgsTypes = ((FptrType) instanceType).getArgumentsTypes();
             Type returnType = ((FptrType) instanceType).getReturnType();
             if(this.isFirstSubTypeOfSecondMultiple(argsTypes, actualArgsTypes)) {
+                if(!isInMethodCallStmt && returnType instanceof NullType) {
+                    CantUseValueOfVoidMethod exception = new CantUseValueOfVoidMethod(methodCall.getLine());
+                    methodCall.addError(exception);
+                    return new NoType();
+                }
                 return this.refineType(returnType);
             }
             else {

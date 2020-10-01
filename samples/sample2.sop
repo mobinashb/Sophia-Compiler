@@ -1,8 +1,10 @@
 class Cart {
   orders: list(4 # list(name: string, price: int, quantity: int));
+
   def void addToCart(product: list(string, int, int), idx: int) {
     this.orders[idx] = product;
   }
+
   def void getReceipt() {
     total: int;
     current: int;
@@ -35,7 +37,8 @@ class Main{
         i = 0;
         foreach(p in productCatalog) {
             product = [p[0], p[1], i + 1];
-            cart.addToCart(product, i + 1);
+            cart.addToCart(product, i);
+            i = i + 1;
         }
         cart.getReceipt();
     }

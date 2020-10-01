@@ -15,6 +15,8 @@ public class MethodDeclaration extends Declaration {
     protected ArrayList<VarDeclaration> args = new ArrayList<>();
     protected ArrayList<VarDeclaration> localVars = new ArrayList<>();
     protected ArrayList<Statement> body = new ArrayList<>();
+    //don't need this until code generation
+    protected boolean doesReturn;
 
     //returnType NullType on when it is Void
     public MethodDeclaration(Identifier methodName, Type returnType) {
@@ -72,6 +74,14 @@ public class MethodDeclaration extends Declaration {
 
     public void addBodyStatement(Statement statement) {
         this.body.add(statement);
+    }
+
+    public boolean getDoesReturn() {
+        return doesReturn;
+    }
+
+    public void setDoesReturn(boolean doesReturn) {
+        this.doesReturn = doesReturn;
     }
 
     @Override

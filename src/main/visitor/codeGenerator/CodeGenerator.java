@@ -253,7 +253,7 @@ public class CodeGenerator extends Visitor<String> {
             else
                 for(Expression expression : ((ListValue) expr).getElements()) {
                     commands += "aload " + tempVar + "\n";
-                    commands += this.generateValue(false, expression, expression.accept(expressionTypeChecker)) + "\n";
+                    commands += expression.accept(this) + "\n";
                     Type t = expression.accept(expressionTypeChecker);
                     if(t instanceof IntType)
                         commands += "invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;\n";

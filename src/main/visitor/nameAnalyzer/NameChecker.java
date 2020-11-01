@@ -5,6 +5,7 @@ import main.ast.nodes.declaration.classDec.ClassDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
+import main.compileErrorException.nameErrors.ClassInCyclicInheritance;
 import main.compileErrorException.nameErrors.FieldRedefinition;
 import main.compileErrorException.nameErrors.MethodNameConflictWithField;
 import main.compileErrorException.nameErrors.MethodRedefinition;
@@ -13,10 +14,16 @@ import main.symbolTable.exceptions.ItemNotFoundException;
 import main.symbolTable.items.ClassSymbolTableItem;
 import main.symbolTable.items.MethodSymbolTableItem;
 import main.symbolTable.items.FieldSymbolTableItem;
+import main.symbolTable.utils.graph.Graph;
 import main.visitor.Visitor;
 
 public class NameChecker extends Visitor<Void> {
     private String currentClassName;
+    private Graph<String> classHierarchy;
+
+    public NameChecker(Graph<String> classHierarchy) {
+        this.classHierarchy = classHierarchy;
+    }
 
     private SymbolTable getCurrentClassSymbolTable() {
         try {
@@ -39,6 +46,12 @@ public class NameChecker extends Visitor<Void> {
 
     @Override
     public Void visit(ClassDeclaration classDeclaration) {
+        if(classDeclaration.getParentClassName() != null) {
+            if (this.classHierarchy.isSecondNodeAncestorOf(classDeclaration.getParentClassName().getName(), classDeclaration.getClassName().getName())) {
+                ClassInCyclicInheritance exception = new ClassInCyclicInheritance(classDeclaration);
+                classDeclaration.addError(exception);
+            }
+        }
         for(FieldDeclaration fieldDeclaration : classDeclaration.getFields()) {
             fieldDeclaration.accept(this);
         }

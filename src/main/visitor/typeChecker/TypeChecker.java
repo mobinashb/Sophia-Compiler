@@ -24,6 +24,7 @@ import main.ast.types.single.BoolType;
 import main.ast.types.single.ClassType;
 import main.ast.types.single.IntType;
 import main.ast.types.single.StringType;
+import main.compileErrorException.nameErrors.ClassInCyclicInheritance;
 import main.compileErrorException.typeErrors.*;
 import main.symbolTable.utils.graph.Graph;
 import main.visitor.Visitor;
@@ -109,10 +110,6 @@ public class TypeChecker extends Visitor<RetConBreak> {
     public RetConBreak visit(ClassDeclaration classDeclaration) {
         if(classDeclaration.getParentClassName() != null) {
             this.checkTypeValidation(new ClassType(classDeclaration.getParentClassName()), classDeclaration);
-            if(this.classHierarchy.isSecondNodeAncestorOf(classDeclaration.getParentClassName().getName(), classDeclaration.getClassName().getName())){
-                ClassInCyclicInheritance exception = new ClassInCyclicInheritance(classDeclaration);
-                classDeclaration.addError(exception);
-            }
             if(classDeclaration.getClassName().getName().equals("Main")) {
                 MainClassCantExtend exception = new MainClassCantExtend(classDeclaration.getLine());
                 classDeclaration.addError(exception);

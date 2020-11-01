@@ -19,9 +19,9 @@ public class NameAnalyzer {
 
     public void analyze() {
         NameCollector nameCollector = new NameCollector();
-        NameChecker nameChecker = new NameChecker();
         this.program.accept(nameCollector);
         this.linkParentSymbolTables();
+        NameChecker nameChecker = new NameChecker(classHierarchy);
         this.program.accept(nameChecker);
     }
 

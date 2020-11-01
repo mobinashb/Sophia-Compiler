@@ -1,4 +1,4 @@
-package main.compileErrorException.typeErrors;
+package main.compileErrorException.nameErrors;
 
 import main.ast.nodes.declaration.classDec.ClassDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;

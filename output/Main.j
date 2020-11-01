@@ -17,506 +17,62 @@
 		invokespecial java/lang/Object/<init>()V
 		aconst_null
 		astore 1
-		new java/util/ArrayList
-		dup
-		invokespecial java/util/ArrayList/<init>()V
-		astore 4
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		aload 4
-		ldc ""
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
-		new List
-		dup
-		aload 4
-		invokespecial List/<init>(Ljava/util/ArrayList;)V
+		aconst_null
 		astore 2
-		ldc 0
-		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
-		astore 3
-		new WordProcessor
+		new Employee
 		dup
-		invokespecial WordProcessor/<init>()V
+		ldc "Hannah"
+		ldc 21
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		ldc 3000
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokespecial Employee/<init>(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;)V
 		dup
 		astore 1
 		pop
-		ldc 0
-		dup
-		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
-		astore 3
-		pop
-	Label_20:
-		aload 3
-		invokevirtual java/lang/Integer/intValue()I
-		ldc 50
-		if_icmpge Label_23
-		ldc 1
-		goto Label_24
-		Label_23:
-		ldc 0
-		Label_24:
-		ifeq Label_21
-		aload 2
-		aload 3
-		invokevirtual java/lang/Integer/intValue()I
-		ldc "amir"
-		dup_x2
-		invokevirtual List/setElement(ILjava/lang/Object;)V
-		pop
-	Label_22:
-		aload 3
-		invokevirtual java/lang/Integer/intValue()I
-		ldc 1
-		iadd
-		dup
-		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
-		astore 3
-		pop
-		goto Label_20
-	Label_21:
-		ldc 50
-		dup
-		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
-		astore 3
-		pop
-	Label_25:
-		aload 3
-		invokevirtual java/lang/Integer/intValue()I
-		ldc 100
-		if_icmpge Label_28
-		ldc 1
-		goto Label_29
-		Label_28:
-		ldc 0
-		Label_29:
-		ifeq Label_26
-		aload 2
-		aload 3
-		invokevirtual java/lang/Integer/intValue()I
-		ldc "ali"
-		dup_x2
-		invokevirtual List/setElement(ILjava/lang/Object;)V
-		pop
-	Label_27:
-		aload 3
-		invokevirtual java/lang/Integer/intValue()I
-		ldc 1
-		iadd
-		dup
-		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
-		astore 3
-		pop
-		goto Label_25
-	Label_26:
 		new java/util/ArrayList
 		dup
 		invokespecial java/util/ArrayList/<init>()V
-		astore 4
-		aload 4
-		aload 2
-		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
-		pop
+		astore 3
 		new Fptr
 		dup
 		aload 1
-		ldc "wordProcess"
+		ldc "showName"
 		invokespecial Fptr/<init>(Ljava/lang/Object;Ljava/lang/String;)V
-		aload 4
+		aload 3
+		invokevirtual Fptr/invoke(Ljava/util/ArrayList;)Ljava/lang/Object;
+		pop
+		new java/util/ArrayList
+		dup
+		invokespecial java/util/ArrayList/<init>()V
+		astore 3
+		new Fptr
+		dup
+		aload 1
+		ldc "showSalary"
+		invokespecial Fptr/<init>(Ljava/lang/Object;Ljava/lang/String;)V
+		aload 3
+		invokevirtual Fptr/invoke(Ljava/util/ArrayList;)Ljava/lang/Object;
+		pop
+		new Person
+		dup
+		ldc "Sophia"
+		ldc 30
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokespecial Person/<init>(Ljava/lang/String;Ljava/lang/Integer;)V
+		dup
+		astore 2
+		pop
+		new java/util/ArrayList
+		dup
+		invokespecial java/util/ArrayList/<init>()V
+		astore 3
+		new Fptr
+		dup
+		aload 2
+		ldc "showName"
+		invokespecial Fptr/<init>(Ljava/lang/Object;Ljava/lang/String;)V
+		aload 3
 		invokevirtual Fptr/invoke(Ljava/util/ArrayList;)Ljava/lang/Object;
 		pop
 		return

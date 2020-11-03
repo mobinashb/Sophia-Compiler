@@ -114,6 +114,10 @@ public class TypeChecker extends Visitor<RetConBreak> {
                 MainClassCantExtend exception = new MainClassCantExtend(classDeclaration.getLine());
                 classDeclaration.addError(exception);
             }
+            if(classDeclaration.getParentClassName().getName().equals("Main")) {
+                CannotExtendFromMainClass exception = new CannotExtendFromMainClass(classDeclaration.getLine());
+                classDeclaration.addError(exception);
+            }
         }
         for(FieldDeclaration fieldDeclaration : classDeclaration.getFields()) {
             fieldDeclaration.accept(this);

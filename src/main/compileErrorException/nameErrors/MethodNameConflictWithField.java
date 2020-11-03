@@ -1,6 +1,5 @@
 package main.compileErrorException.nameErrors;
 
-import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
 import main.compileErrorException.CompileErrorException;
 

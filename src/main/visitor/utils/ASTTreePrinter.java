@@ -23,7 +23,7 @@ import main.visitor.Visitor;
 public class ASTTreePrinter extends Visitor<Void> {
 
     private void print(Node node) {
-        System.out.println(node.getLine() + ":" + node.toString());
+        System.out.println("Line:" + node.getLine() + ":" + node.toString());
     }
 
     @Override

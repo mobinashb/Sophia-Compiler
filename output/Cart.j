@@ -1,0 +1,260 @@
+.class public Cart
+.super java/lang/Object
+		 
+.field orders LList;
+		
+.method public <init>()V
+.limit stack 128
+.limit locals 128
+		aload 0
+		invokespecial java/lang/Object/<init>()V
+		aload 0
+		new java/util/ArrayList
+		dup
+		invokespecial java/util/ArrayList/<init>()V
+		astore 0
+		aload 0
+		new java/util/ArrayList
+		dup
+		invokespecial java/util/ArrayList/<init>()V
+		astore 1
+		aload 1
+		ldc ""
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 1
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 1
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		new List
+		dup
+		aload 1
+		invokespecial List/<init>(Ljava/util/ArrayList;)V
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 0
+		new java/util/ArrayList
+		dup
+		invokespecial java/util/ArrayList/<init>()V
+		astore 1
+		aload 1
+		ldc ""
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 1
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 1
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		new List
+		dup
+		aload 1
+		invokespecial List/<init>(Ljava/util/ArrayList;)V
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 0
+		new java/util/ArrayList
+		dup
+		invokespecial java/util/ArrayList/<init>()V
+		astore 1
+		aload 1
+		ldc ""
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 1
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 1
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		new List
+		dup
+		aload 1
+		invokespecial List/<init>(Ljava/util/ArrayList;)V
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 0
+		new java/util/ArrayList
+		dup
+		invokespecial java/util/ArrayList/<init>()V
+		astore 1
+		aload 1
+		ldc ""
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 1
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 1
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		new List
+		dup
+		aload 1
+		invokespecial List/<init>(Ljava/util/ArrayList;)V
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		new List
+		dup
+		aload 0
+		invokespecial List/<init>(Ljava/util/ArrayList;)V
+		putfield Cart/orders LList;
+		return
+.end method
+		 
+.method public addToCart(LList;Ljava/lang/Integer;)V
+.limit stack 128
+.limit locals 128
+		aload 0
+		getfield Cart/orders LList;
+		aload 2
+		invokevirtual java/lang/Integer/intValue()I
+		new List
+		dup
+		aload 1
+		invokespecial List/<init>(LList;)V
+		dup_x2
+		invokevirtual List/setElement(ILjava/lang/Object;)V
+		pop
+		return
+.end method
+		 
+.method public getSum()Ljava/lang/Integer;
+.limit stack 128
+.limit locals 128
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		astore 1
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		astore 2
+		new java/util/ArrayList
+		dup
+		invokespecial java/util/ArrayList/<init>()V
+		astore 4
+		aload 4
+		ldc ""
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 4
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		aload 4
+		ldc 0
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		invokevirtual java/util/ArrayList/add(Ljava/lang/Object;)Z
+		pop
+		new List
+		dup
+		aload 4
+		invokespecial List/<init>(Ljava/util/ArrayList;)V
+		astore 3
+		ldc 0
+		dup
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		astore 1
+		pop
+		ldc 0
+		istore 4
+	Label_0:
+		iload 4
+		aload 0
+		getfield Cart/orders LList;
+		getfield List/elements Ljava/util/ArrayList;
+		invokevirtual java/util/ArrayList/size()I
+		if_icmpge Label_1
+		aload 0
+		getfield Cart/orders LList;
+		iload 4
+		invokevirtual List/getElement(I)Ljava/lang/Object;
+		checkcast List
+		astore 3
+		iinc 4 1
+		aload 3
+		ldc 2
+		invokevirtual List/getElement(I)Ljava/lang/Object;
+		checkcast java/lang/Integer
+		invokevirtual java/lang/Integer/intValue()I
+		ldc 0
+		if_icmpne Label_4
+		ldc 1
+		goto Label_5
+		Label_4:
+		ldc 0
+		Label_5:
+		ifeq Label_2
+		goto Label_1
+		goto Label_3
+	Label_2:
+	Label_3:
+		aload 3
+		ldc 1
+		invokevirtual List/getElement(I)Ljava/lang/Object;
+		checkcast java/lang/Integer
+		invokevirtual java/lang/Integer/intValue()I
+		aload 3
+		ldc 2
+		invokevirtual List/getElement(I)Ljava/lang/Object;
+		checkcast java/lang/Integer
+		invokevirtual java/lang/Integer/intValue()I
+		imul
+		aload 3
+		ldc 2
+		invokevirtual List/getElement(I)Ljava/lang/Object;
+		checkcast java/lang/Integer
+		invokevirtual java/lang/Integer/intValue()I
+		ldc 100
+		imul
+		ldc 1000
+		irem
+		iadd
+		aload 3
+		ldc 1
+		invokevirtual List/getElement(I)Ljava/lang/Object;
+		checkcast java/lang/Integer
+		invokevirtual java/lang/Integer/intValue()I
+		ldc 100
+		idiv
+		isub
+		dup
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		astore 2
+		pop
+		aload 1
+		invokevirtual java/lang/Integer/intValue()I
+		aload 2
+		invokevirtual java/lang/Integer/intValue()I
+		iadd
+		dup
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		astore 1
+		pop
+		goto Label_0
+	Label_1:
+		aload 1
+		invokevirtual java/lang/Integer/intValue()I
+		invokestatic java/lang/Integer/valueOf(I)Ljava/lang/Integer;
+		areturn
+.end method
+		 

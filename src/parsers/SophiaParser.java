@@ -1,4 +1,4 @@
-// Generated from C:/Users/amirp/Desktop/Compiler-TA/Sophia/src/main/grammar\Sophia.g4 by ANTLR 4.8
+// Generated from C:/Users/amirp/Desktop/Files/University/Term 7/Compiler-TA/Sophia/src/main/grammar\Sophia.g4 by ANTLR 4.8
 package parsers;
 
     import main.ast.types.*;
@@ -3825,6 +3825,7 @@ public class SophiaParser extends Parser {
 		public IdentifierContext id;
 		public ExpressionContext e;
 		public IdentifierContext inst;
+		public Token lb;
 		public ExpressionContext index;
 		public TerminalNode THIS() { return getToken(SophiaParser.THIS, 0); }
 		public NewExpressionContext newExpression() {
@@ -3841,8 +3842,8 @@ public class SophiaParser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode LBRACK() { return getToken(SophiaParser.LBRACK, 0); }
 		public TerminalNode RBRACK() { return getToken(SophiaParser.RBRACK, 0); }
+		public TerminalNode LBRACK() { return getToken(SophiaParser.LBRACK, 0); }
 		public OtherExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3924,14 +3925,14 @@ public class SophiaParser extends Parser {
 				setState(645);
 				((OtherExpressionContext)_localctx).inst = identifier();
 				setState(646);
-				match(LBRACK);
+				((OtherExpressionContext)_localctx).lb = match(LBRACK);
 				setState(647);
 				((OtherExpressionContext)_localctx).index = expression();
 				setState(648);
 				match(RBRACK);
 
 				        ((OtherExpressionContext)_localctx).otherExprRet =  new ListAccessByIndex(((OtherExpressionContext)_localctx).inst.idRet, ((OtherExpressionContext)_localctx).index.exprRet);
-				        _localctx.otherExprRet.setLine(((OtherExpressionContext)_localctx).inst.line);
+				        _localctx.otherExprRet.setLine((((OtherExpressionContext)_localctx).lb!=null?((OtherExpressionContext)_localctx).lb.getLine():0));
 				    
 				}
 				break;

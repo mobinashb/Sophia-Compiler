@@ -1,12 +1,12 @@
 .class public WordProcessor
-.super java/lang/Object
+.super Main
 		 
 		
 .method public <init>()V
 .limit stack 128
 .limit locals 128
 		aload 0
-		invokespecial java/lang/Object/<init>()V
+		invokespecial Main/<init>()V
 		return
 .end method
 		 

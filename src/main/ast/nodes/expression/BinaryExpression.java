@@ -3,6 +3,7 @@ package main.ast.nodes.expression;
 import main.ast.nodes.expression.operators.BinaryOperator;
 import main.visitor.IVisitor;
 
+//line -> ASSIGN or OR or AND or EQUAL or NOT_EQUAL or GREATER_THAN or LESS_THAN or PLUS or MINUS or MULT or DIVIDE or MOD
 public class BinaryExpression extends Expression {
     private Expression firstOperand;
     private Expression secondOperand;

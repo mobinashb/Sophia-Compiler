@@ -2,10 +2,9 @@ package main.ast.nodes.declaration.classDec.classMembersDec;
 
 import main.ast.nodes.declaration.Declaration;
 import main.ast.nodes.declaration.variableDec.VarDeclaration;
-import main.ast.nodes.expression.Identifier;
-import main.ast.types.Type;
 import main.visitor.IVisitor;
 
+//line -> IDENTIFIER
 public class FieldDeclaration extends Declaration {
     VarDeclaration varDeclaration;
 

@@ -5,6 +5,7 @@ import main.ast.nodes.expression.Identifier;
 import main.ast.nodes.statement.Statement;
 import main.visitor.IVisitor;
 
+//line -> FOREACH
 public class ForeachStmt extends Statement {
     private Identifier variable;
     private Expression list;

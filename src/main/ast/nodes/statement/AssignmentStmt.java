@@ -3,6 +3,7 @@ package main.ast.nodes.statement;
 import main.ast.nodes.expression.Expression;
 import main.visitor.IVisitor;
 
+//line -> ASSIGN
 public class AssignmentStmt extends Statement{
     private Expression lValue;
     private Expression rValue;

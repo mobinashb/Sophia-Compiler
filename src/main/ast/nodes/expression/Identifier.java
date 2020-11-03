@@ -2,6 +2,7 @@ package main.ast.nodes.expression;
 
 import main.visitor.IVisitor;
 
+//line -> IDENTIFIER
 public class Identifier extends Expression{
     private String name;
 

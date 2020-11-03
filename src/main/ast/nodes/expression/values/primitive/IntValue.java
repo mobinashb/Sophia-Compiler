@@ -3,6 +3,7 @@ package main.ast.nodes.expression.values.primitive;
 import main.ast.nodes.expression.values.Value;
 import main.visitor.IVisitor;
 
+//line -> INT_VALUE
 public class IntValue extends Value {
     private int constant;
 

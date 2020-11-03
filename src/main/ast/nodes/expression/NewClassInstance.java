@@ -5,6 +5,7 @@ import main.visitor.IVisitor;
 
 import java.util.ArrayList;
 
+//line -> NEW
 public class NewClassInstance extends Expression{
     private ClassType classType;
     private ArrayList<Expression> args = new ArrayList<>();

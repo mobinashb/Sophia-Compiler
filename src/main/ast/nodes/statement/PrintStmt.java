@@ -3,6 +3,7 @@ package main.ast.nodes.statement;
 import main.ast.nodes.expression.Expression;
 import main.visitor.IVisitor;
 
+//line -> PRINT
 public class PrintStmt extends Statement{
     private Expression arg;
 

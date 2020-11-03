@@ -5,6 +5,7 @@ import main.visitor.IVisitor;
 
 import java.util.ArrayList;
 
+//line -> 1
 public class Program extends Node {
     private ArrayList<ClassDeclaration> classes = new ArrayList<>();
 

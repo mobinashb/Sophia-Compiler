@@ -9,6 +9,7 @@ import main.visitor.IVisitor;
 
 import java.util.ArrayList;
 
+//line -> DEF
 public class MethodDeclaration extends Declaration {
     protected Identifier methodName;
     protected Type returnType;

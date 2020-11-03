@@ -2,6 +2,7 @@ package main.ast.nodes.expression;
 
 import main.visitor.IVisitor;
 
+//line -> IDENTIFIER
 public class ObjectOrListMemberAccess extends Expression{
     private Expression instance;
     private Identifier memberName;
@@ -29,7 +30,7 @@ public class ObjectOrListMemberAccess extends Expression{
 
     @Override
     public String toString() {
-        return "FieldOrListAccess_" + this.memberName.getName();
+        return "ObjectOrListMemberAccess_" + this.memberName.getName();
     }
 
     @Override

@@ -3,6 +3,7 @@ package main.ast.nodes.statement;
 import main.ast.nodes.expression.MethodCall;
 import main.visitor.IVisitor;
 
+//line -> LPAR before arguments
 public class MethodCallStmt extends Statement{
     private MethodCall methodCall;
 

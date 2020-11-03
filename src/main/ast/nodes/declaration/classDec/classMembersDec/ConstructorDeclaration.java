@@ -4,6 +4,7 @@ import main.ast.nodes.expression.Identifier;
 import main.ast.types.NullType;
 import main.visitor.IVisitor;
 
+//line -> DEF
 public class ConstructorDeclaration extends MethodDeclaration{
 
     public ConstructorDeclaration(Identifier methodName) {
@@ -12,7 +13,7 @@ public class ConstructorDeclaration extends MethodDeclaration{
 
     @Override
     public String toString() {
-        return "Constructor_" + this.methodName.getName();
+        return "ConstructorDeclaration_" + this.methodName.getName();
     }
 
     @Override

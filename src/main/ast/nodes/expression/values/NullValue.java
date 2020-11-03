@@ -2,6 +2,7 @@ package main.ast.nodes.expression.values;
 
 import main.visitor.IVisitor;
 
+//line -> NULL
 public class NullValue extends Value{
 
     @Override

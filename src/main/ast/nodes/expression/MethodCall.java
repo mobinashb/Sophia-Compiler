@@ -4,6 +4,7 @@ import main.visitor.IVisitor;
 
 import java.util.ArrayList;
 
+//line -> LPAR before arguments
 public class MethodCall extends Expression {
     private Expression instance;
     private ArrayList<Expression> args = new ArrayList<>();

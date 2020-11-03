@@ -9,6 +9,7 @@ import main.visitor.IVisitor;
 
 import java.util.ArrayList;
 
+//line -> CLASS
 public class ClassDeclaration extends Declaration {
     private Identifier className;
     private Identifier parentClassName;

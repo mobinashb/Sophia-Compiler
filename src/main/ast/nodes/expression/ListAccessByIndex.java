@@ -1,8 +1,8 @@
 package main.ast.nodes.expression;
 
-import main.ast.nodes.expression.Expression;
 import main.visitor.IVisitor;
 
+//line -> LBRACK before index
 public class ListAccessByIndex extends Expression {
     private Expression instance;
     private Expression index;

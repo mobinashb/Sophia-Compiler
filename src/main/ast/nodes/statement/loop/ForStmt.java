@@ -5,6 +5,7 @@ import main.ast.nodes.statement.AssignmentStmt;
 import main.ast.nodes.statement.Statement;
 import main.visitor.IVisitor;
 
+//line -> FOR
 public class ForStmt extends Statement {
     private AssignmentStmt initialize;
     private Expression condition;

@@ -5,6 +5,7 @@ import main.ast.nodes.expression.Identifier;
 import main.ast.types.Type;
 import main.visitor.IVisitor;
 
+//line -> IDENTIFIER
 public class VarDeclaration extends Declaration {
     private Identifier varName;
     private Type type;

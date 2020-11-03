@@ -2,6 +2,7 @@ package main.ast.nodes.expression;
 
 import main.visitor.IVisitor;
 
+//line -> THIS
 public class ThisClass extends Expression {
     @Override
     public String toString() {

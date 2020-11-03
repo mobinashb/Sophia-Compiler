@@ -3,6 +3,7 @@ package main.ast.nodes.expression.values.primitive;
 import main.ast.nodes.expression.values.Value;
 import main.visitor.IVisitor;
 
+//line -> TRUE or FALSE
 public class BoolValue extends Value {
     private boolean constant;
 

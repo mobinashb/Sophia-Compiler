@@ -150,7 +150,9 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         Type firstType = binaryExpression.getFirstOperand().accept(this);
         Type secondType = binaryExpression.getSecondOperand().accept(this);
         if((operator == BinaryOperator.eq) || (operator == BinaryOperator.neq)) {
-            if((firstType instanceof NoType && secondType instanceof FptrType) ||
+            if(firstType instanceof NoType && secondType instanceof NoType)
+                return new NoType();
+            else if((firstType instanceof NoType && secondType instanceof FptrType) ||
                     (secondType instanceof NoType && firstType instanceof FptrType)) {
                 UnsupportedOperandType exception = new UnsupportedOperandType(binaryExpression.getLine(), operator.name());
                 binaryExpression.addError(exception);
@@ -175,7 +177,9 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                 return new BoolType();
         }
         if((operator == BinaryOperator.gt) || (operator == BinaryOperator.lt)) {
-            if((firstType instanceof NoType && !(secondType instanceof IntType)) ||
+            if(firstType instanceof NoType && secondType instanceof NoType)
+                return new NoType();
+            else if((firstType instanceof NoType && !(secondType instanceof IntType)) ||
                     (secondType instanceof NoType && !(firstType instanceof IntType))) {
                 UnsupportedOperandType exception = new UnsupportedOperandType(binaryExpression.getLine(), operator.name());
                 binaryExpression.addError(exception);
@@ -188,7 +192,9 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         }
         if((operator == BinaryOperator.add) || (operator == BinaryOperator.sub) ||
                 (operator == BinaryOperator.mult) || (operator == BinaryOperator.div) || (operator == BinaryOperator.mod)) {
-            if((firstType instanceof NoType && !(secondType instanceof IntType)) ||
+            if(firstType instanceof NoType && secondType instanceof NoType)
+                return new NoType();
+            else if((firstType instanceof NoType && !(secondType instanceof IntType)) ||
                     (secondType instanceof NoType && !(firstType instanceof IntType))) {
                 UnsupportedOperandType exception = new UnsupportedOperandType(binaryExpression.getLine(), operator.name());
                 binaryExpression.addError(exception);
@@ -201,7 +207,9 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         }
 
         if((operator == BinaryOperator.or) || (operator == BinaryOperator.and)) {
-            if((firstType instanceof NoType && !(secondType instanceof BoolType)) ||
+            if(firstType instanceof NoType && secondType instanceof NoType)
+                return new NoType();
+            else if((firstType instanceof NoType && !(secondType instanceof BoolType)) ||
                     (secondType instanceof NoType && !(firstType instanceof BoolType))) {
                 UnsupportedOperandType exception = new UnsupportedOperandType(binaryExpression.getLine(), operator.name());
                 binaryExpression.addError(exception);

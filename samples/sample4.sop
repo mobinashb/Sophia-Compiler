@@ -7,6 +7,7 @@ class WordProcessor
 		found : bool;
 		result : list(100 # list(key:string, value:int)) ;
 		i : int;
+		tt: list(2 # int);
 
 		size = 0;
 		foreach ( name in processinglist)
@@ -42,7 +43,6 @@ class WordProcessor
 		{
 			result = operator(result,input.mylist[i].value);
 		}
-
 		return result;
 	}
 	def int add(opr1:int,opr2:int)

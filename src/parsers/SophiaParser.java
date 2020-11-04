@@ -333,7 +333,7 @@ public class SophiaParser extends Parser {
 			((SophiaClassContext)_localctx).cl = match(CLASS);
 			setState(108);
 			((SophiaClassContext)_localctx).name = identifier();
-			 
+
 			        ((SophiaClassContext)_localctx).sophiaClassRet =  new ClassDeclaration(((SophiaClassContext)_localctx).name.idRet);
 			        _localctx.sophiaClassRet.setLine(((SophiaClassContext)_localctx).cl.getLine());
 			    
@@ -1895,7 +1895,7 @@ public class SophiaParser extends Parser {
 			((AssignmentContext)_localctx).a = match(ASSIGN);
 			setState(357);
 			((AssignmentContext)_localctx).right = expression();
-			 
+
 			        ((AssignmentContext)_localctx).assignmentRet =  new AssignmentStmt(((AssignmentContext)_localctx).left.orExprRet, ((AssignmentContext)_localctx).right.exprRet);
 			        _localctx.assignmentRet.setLine(((AssignmentContext)_localctx).a.getLine());
 			    
@@ -4284,8 +4284,8 @@ public class SophiaParser extends Parser {
 			{
 			setState(685);
 			((IdentifierContext)_localctx).id = match(IDENTIFIER);
-			 
-			        ((IdentifierContext)_localctx).idRet =  new Identifier((((IdentifierContext)_localctx).id!=null?((IdentifierContext)_localctx).id.getText():null)); 
+
+			        ((IdentifierContext)_localctx).idRet =  new Identifier((((IdentifierContext)_localctx).id!=null?((IdentifierContext)_localctx).id.getText():null));
 			        _localctx.idRet.setLine(((IdentifierContext)_localctx).id.getLine());
 			        ((IdentifierContext)_localctx).line =  ((IdentifierContext)_localctx).id.getLine();
 			    

@@ -19,7 +19,7 @@ grammar Sophia;
 }
 
 sophia returns[Program sophiaProgram]:
-    p=program 
+    p=program
     { $sophiaProgram = $p.programRet; }
     EOF
     ;
@@ -35,17 +35,17 @@ program returns[Program programRet]:
     )*
     ;
 
-sophiaClass returns[ClassDeclaration sophiaClassRet]: 
-    cl=CLASS name=identifier 
-    { 
+sophiaClass returns[ClassDeclaration sophiaClassRet]:
+    cl=CLASS name=identifier
+    {
         $sophiaClassRet = new ClassDeclaration($name.idRet);
         $sophiaClassRet.setLine($cl.getLine());
     }
     (
         EXTENDS parentName=identifier
         { $sophiaClassRet.setParentClassName($parentName.idRet); }
-    )? 
-    LBRACE (v1=varDeclaration 
+    )?
+    LBRACE (v1=varDeclaration
     {
         FieldDeclaration f1 = new FieldDeclaration($v1.varDeclarationRet);
         f1.setLine($v1.line);
@@ -53,11 +53,11 @@ sophiaClass returns[ClassDeclaration sophiaClassRet]:
     }
     | m1=method
     { $sophiaClassRet.addMethod($m1.methodRet); }
-    )* 
+    )*
     (c=constructor
     { $sophiaClassRet.setConstructor($c.constructorRet); }
-    )? 
-    (v2=varDeclaration 
+    )?
+    (v2=varDeclaration
     {
         FieldDeclaration f2 = new FieldDeclaration($v2.varDeclarationRet);
         f2.setLine($v2.line);
@@ -247,8 +247,8 @@ statement returns[Statement sRet]:
     { $sRet = $b.blockRet; }
     ;
 
-block returns[BlockStmt blockRet]: 
-    l=LBRACE 
+block returns[BlockStmt blockRet]:
+    l=LBRACE
     {
         $blockRet = new BlockStmt();
         $blockRet.setLine($l.getLine());
@@ -258,23 +258,23 @@ block returns[BlockStmt blockRet]:
     )* RBRACE
     ;
 
-assignmentStatement returns[AssignmentStmt assignStmtRet]: 
-    a=assignment 
+assignmentStatement returns[AssignmentStmt assignStmtRet]:
+    a=assignment
     { $assignStmtRet = $a.assignmentRet; }
     SEMICOLLON
     ;
 
-assignment returns[AssignmentStmt assignmentRet]: 
+assignment returns[AssignmentStmt assignmentRet]:
     left=orExpression a=ASSIGN right=expression
-    { 
+    {
         $assignmentRet = new AssignmentStmt($left.orExprRet, $right.exprRet);
         $assignmentRet.setLine($a.getLine());
     }
     ;
 
-printStatement returns[PrintStmt printStmtRet]: 
-    p=PRINT LPAR 
-    e=expression 
+printStatement returns[PrintStmt printStmtRet]:
+    p=PRINT LPAR
+    e=expression
     {
         $printStmtRet = new PrintStmt($e.exprRet);
         $printStmtRet.setLine($p.getLine());
@@ -282,8 +282,8 @@ printStatement returns[PrintStmt printStmtRet]:
     RPAR SEMICOLLON
     ;
 
-returnStatement returns[ReturnStmt returnStmtRet]: 
-    r=RETURN 
+returnStatement returns[ReturnStmt returnStmtRet]:
+    r=RETURN
     {
         $returnStmtRet = new ReturnStmt();
         $returnStmtRet.setLine($r.getLine());
@@ -332,7 +332,7 @@ methodCall returns[Statement methodCallRet]
 
 methodCallArguments returns[ArrayList<Expression> methodCallArgsRet]:
     { $methodCallArgsRet = new ArrayList<>(); }
-    (e1=expression 
+    (e1=expression
     { $methodCallArgsRet.add($e1.exprRet); }
     (COMMA e2=expression
     { $methodCallArgsRet.add($e2.exprRet); }
@@ -340,8 +340,8 @@ methodCallArguments returns[ArrayList<Expression> methodCallArgsRet]:
     )?
     ;
 
-continueBreakStatement returns[Statement continueBreakRet]: 
-    (b=BREAK 
+continueBreakStatement returns[Statement continueBreakRet]:
+    (b=BREAK
     {
         $continueBreakRet = new BreakStmt();
         $continueBreakRet.setLine($b.getLine());
@@ -353,26 +353,26 @@ continueBreakStatement returns[Statement continueBreakRet]:
     }
     ) SEMICOLLON;
 
-forStatement returns[ForStmt forStmtRet]: 
-    f=FOR 
+forStatement returns[ForStmt forStmtRet]:
+    f=FOR
     {
         $forStmtRet = new ForStmt();
         $forStmtRet.setLine($f.getLine());
     }
     LPAR (init=assignment
     { $forStmtRet.setInitialize($init.assignmentRet); }
-    )? SEMICOLLON 
+    )? SEMICOLLON
     (cond=expression
     { $forStmtRet.setCondition($cond.exprRet); }
-    )? SEMICOLLON 
+    )? SEMICOLLON
     (update=assignment
     { $forStmtRet.setUpdate($update.assignmentRet); }
     )? RPAR body=singleOrMultiStatements
     { $forStmtRet.setBody($body.singOrMultRet); }
     ;
 
-foreachStatement returns[ForeachStmt foreachStmtRet]: 
-    f=FOREACH LPAR id=identifier IN list=expression 
+foreachStatement returns[ForeachStmt foreachStmtRet]:
+    f=FOREACH LPAR id=identifier IN list=expression
     {
         $foreachStmtRet = new ForeachStmt($id.idRet, $list.exprRet);
         $foreachStmtRet.setLine($f.getLine());
@@ -381,8 +381,8 @@ foreachStatement returns[ForeachStmt foreachStmtRet]:
     { $foreachStmtRet.setBody($body.singOrMultRet); }
     ;
 
-ifStatement returns[ConditionalStmt ifStmtRet]: 
-    i=IF LPAR e=expression RPAR thenBody=singleOrMultiStatements 
+ifStatement returns[ConditionalStmt ifStmtRet]:
+    i=IF LPAR e=expression RPAR thenBody=singleOrMultiStatements
     {
         $ifStmtRet = new ConditionalStmt($e.exprRet, $thenBody.singOrMultRet);
         $ifStmtRet.setLine($i.getLine());
@@ -392,8 +392,8 @@ ifStatement returns[ConditionalStmt ifStmtRet]:
     )?
     ;
 
-singleOrMultiStatements returns[Statement singOrMultRet]: 
-    b=block 
+singleOrMultiStatements returns[Statement singOrMultRet]:
+    b=block
     { $singOrMultRet = $b.blockRet; }
     | s=statement
     { $singOrMultRet = $s.sRet; }
@@ -621,7 +621,7 @@ otherExpression returns[Expression otherExprRet]:
     }
     ;
 
-newExpression returns[NewClassInstance newExprRet]: 
+newExpression returns[NewClassInstance newExprRet]:
     n=NEW c=classType LPAR m=methodCallArguments RPAR
     {
         $newExprRet = new NewClassInstance($c.classTypeRet, $m.methodCallArgsRet);
@@ -676,10 +676,10 @@ listValue returns[ListValue listValueRet]:
     RBRACK
     ;
 
-identifier returns[Identifier idRet, int line]: 
+identifier returns[Identifier idRet, int line]:
     id=IDENTIFIER
-    { 
-        $idRet = new Identifier($id.text); 
+    {
+        $idRet = new Identifier($id.text);
         $idRet.setLine($id.getLine());
         $line = $id.getLine();
     }

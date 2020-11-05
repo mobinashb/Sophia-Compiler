@@ -614,11 +614,6 @@ otherExpression returns[Expression otherExprRet]:
     { $otherExprRet = $id.idRet; }
     | LPAR (e=expression) RPAR
     { $otherExprRet = $e.exprRet; }
-    | inst=identifier lb=LBRACK index=expression RBRACK
-    {
-        $otherExprRet = new ListAccessByIndex($inst.idRet, $index.exprRet);
-        $otherExprRet.setLine($lb.line);
-    }
     ;
 
 newExpression returns[NewClassInstance newExprRet]:

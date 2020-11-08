@@ -325,16 +325,6 @@ public interface SophiaListener extends ParseTreeListener {
 	 */
 	void exitIfStatement(SophiaParser.IfStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SophiaParser#singleOrMultiStatements}.
-	 * @param ctx the parse tree
-	 */
-	void enterSingleOrMultiStatements(SophiaParser.SingleOrMultiStatementsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SophiaParser#singleOrMultiStatements}.
-	 * @param ctx the parse tree
-	 */
-	void exitSingleOrMultiStatements(SophiaParser.SingleOrMultiStatementsContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link SophiaParser#expression}.
 	 * @param ctx the parse tree
 	 */

@@ -45,7 +45,7 @@ sophiaClass returns[ClassDeclaration sophiaClassRet]:
         EXTENDS parentName=identifier
         { $sophiaClassRet.setParentClassName($parentName.idRet); }
     )?
-    LBRACE (v1=varDeclaration
+    LBRACE (((v1=varDeclaration
     {
         FieldDeclaration f1 = new FieldDeclaration($v1.varDeclarationRet);
         f1.setLine($v1.line);
@@ -56,7 +56,17 @@ sophiaClass returns[ClassDeclaration sophiaClassRet]:
     )*
     (c=constructor
     { $sophiaClassRet.setConstructor($c.constructorRet); }
-    )?
+    )
+    (v2=varDeclaration
+    {
+        FieldDeclaration f2 = new FieldDeclaration($v2.varDeclarationRet);
+        f2.setLine($v2.line);
+        $sophiaClassRet.addField(f2);
+    }
+    | m2=method
+    { $sophiaClassRet.addMethod($m2.methodRet); }
+    )*)
+    | (
     (v2=varDeclaration
     {
         FieldDeclaration f2 = new FieldDeclaration($v2.varDeclarationRet);
@@ -66,6 +76,7 @@ sophiaClass returns[ClassDeclaration sophiaClassRet]:
     | m2=method
     { $sophiaClassRet.addMethod($m2.methodRet); }
     )*
+    ))
     RBRACE
     ;
 
@@ -367,8 +378,8 @@ forStatement returns[ForStmt forStmtRet]:
     )? SEMICOLLON
     (update=assignment
     { $forStmtRet.setUpdate($update.assignmentRet); }
-    )? RPAR body=singleOrMultiStatements
-    { $forStmtRet.setBody($body.singOrMultRet); }
+    )? RPAR body=statement
+    { $forStmtRet.setBody($body.sRet); }
     ;
 
 foreachStatement returns[ForeachStmt foreachStmtRet]:
@@ -377,26 +388,19 @@ foreachStatement returns[ForeachStmt foreachStmtRet]:
         $foreachStmtRet = new ForeachStmt($id.idRet, $list.exprRet);
         $foreachStmtRet.setLine($f.getLine());
     }
-    RPAR body=singleOrMultiStatements
-    { $foreachStmtRet.setBody($body.singOrMultRet); }
+    RPAR body=statement
+    { $foreachStmtRet.setBody($body.sRet); }
     ;
 
 ifStatement returns[ConditionalStmt ifStmtRet]:
-    i=IF LPAR e=expression RPAR thenBody=singleOrMultiStatements
+    i=IF LPAR e=expression RPAR thenBody=statement
     {
-        $ifStmtRet = new ConditionalStmt($e.exprRet, $thenBody.singOrMultRet);
+        $ifStmtRet = new ConditionalStmt($e.exprRet, $thenBody.sRet);
         $ifStmtRet.setLine($i.getLine());
     }
-    (ELSE elseBody=singleOrMultiStatements
-    { $ifStmtRet.setElseBody($elseBody.singOrMultRet); }
+    (ELSE elseBody=statement
+    { $ifStmtRet.setElseBody($elseBody.sRet); }
     )?
-    ;
-
-singleOrMultiStatements returns[Statement singOrMultRet]:
-    b=block
-    { $singOrMultRet = $b.blockRet; }
-    | s=statement
-    { $singOrMultRet = $s.sRet; }
     ;
 
 expression returns[Expression exprRet]:

@@ -208,12 +208,6 @@ public interface SophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfStatement(SophiaParser.IfStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SophiaParser#singleOrMultiStatements}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSingleOrMultiStatements(SophiaParser.SingleOrMultiStatementsContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link SophiaParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

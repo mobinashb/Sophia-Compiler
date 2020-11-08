@@ -393,18 +393,6 @@ public class SophiaBaseListener implements SophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSingleOrMultiStatements(SophiaParser.SingleOrMultiStatementsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSingleOrMultiStatements(SophiaParser.SingleOrMultiStatementsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterExpression(SophiaParser.ExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -6,7 +6,7 @@ import main.compileErrorException.CompileErrorException;
 public class ConstructorArgsNotMatchDefinition extends CompileErrorException {
 
     public ConstructorArgsNotMatchDefinition(NewClassInstance newClassInstance) {
-        super(newClassInstance.getLine(), "Constructor args doesn't match class " + newClassInstance.getClassType().getClassName().getName() + "'s constructor");
+        super(newClassInstance.getLine(), "Constructor args do not match with definition of class " + newClassInstance.getClassType().getClassName().getName());
     }
 
 }

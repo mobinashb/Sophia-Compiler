@@ -6,7 +6,7 @@ import main.compileErrorException.CompileErrorException;
 public class NoMainClass extends CompileErrorException {
 
     public NoMainClass() {
-        super(1, "There is no class named Main");
+        super(1, "Main class is not found");
     }
 
 }

@@ -5,7 +5,7 @@ import main.compileErrorException.CompileErrorException;
 public class ConditionNotBool extends CompileErrorException {
 
     public ConditionNotBool(int line) {
-        super(line, "Condition not boolean type");
+        super(line, "Condition should be bool");
     }
 
 }

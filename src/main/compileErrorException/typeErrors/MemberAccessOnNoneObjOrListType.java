@@ -5,7 +5,7 @@ import main.compileErrorException.CompileErrorException;
 public class MemberAccessOnNoneObjOrListType extends CompileErrorException {
 
     public MemberAccessOnNoneObjOrListType(int line) {
-        super(line, "object or list member access on expression that is neither list nor object");
+        super(line, "Object or list member access on an expression that is neither a list nor an object");
     }
 
 }

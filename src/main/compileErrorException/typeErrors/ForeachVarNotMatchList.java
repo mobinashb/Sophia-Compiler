@@ -7,7 +7,7 @@ public class ForeachVarNotMatchList extends CompileErrorException {
 
     //compare with first element
     public ForeachVarNotMatchList(ForeachStmt foreachStmt) {
-        super(foreachStmt.getLine(), "Foreach variable " + foreachStmt.getVariable().getName() + " does not match list elements type");
+        super(foreachStmt.getLine(), "Foreach variable " + foreachStmt.getVariable().getName() + " and list elements types do not match");
     }
 
 }

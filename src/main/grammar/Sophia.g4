@@ -730,7 +730,6 @@ MINUS: '-';
 AND: '&&';
 OR: '||';
 NOT: '!';
-QUESTION_MARK: '?';
 
 ASSIGN: '=';
 

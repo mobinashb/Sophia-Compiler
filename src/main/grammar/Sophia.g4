@@ -309,31 +309,11 @@ methodCallStatement returns[Statement methodCallStmtRet]:
     SEMICOLLON
     ;
 
-methodCall returns[Statement methodCallRet]
-    locals[Expression tempExpr]:
-    oe=otherExpression
-    { $tempExpr = $oe.otherExprRet; }
-    (
-    (l=LPAR m1=methodCallArguments
-    {
-        $tempExpr = new MethodCall($tempExpr, $m1.methodCallArgsRet);
-        $tempExpr.setLine($l.line);
-    }
-    RPAR)
-    | (DOT i=identifier)
-    {
-        $tempExpr = new ObjectOrListMemberAccess($tempExpr, $i.idRet);
-        $tempExpr.setLine($i.line);
-    }
-    | (l=LBRACK index=expression RBRACK)
-    {
-        $tempExpr = new ListAccessByIndex($tempExpr, $index.exprRet);
-        $tempExpr.setLine($l.getLine());
-    }
-    )*
+methodCall returns[Statement methodCallRet]:
+    ae=accessExpression
     (l=LPAR m2=methodCallArguments
     {
-        MethodCall methodCall = new MethodCall($tempExpr, $m2.methodCallArgsRet);
+        MethodCall methodCall = new MethodCall($ae.accessExprRet, $m2.methodCallArgsRet);
         methodCall.setLine($l.line);
         $methodCallRet = new MethodCallStmt(methodCall);
         $methodCallRet.setLine($l.line);

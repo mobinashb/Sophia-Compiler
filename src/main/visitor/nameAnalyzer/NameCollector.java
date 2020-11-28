@@ -2,9 +2,7 @@ package main.visitor.nameAnalyzer;
 
 import main.ast.nodes.Program;
 import main.ast.nodes.declaration.classDec.ClassDeclaration;
-import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaration;
-import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
-import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.*;
 import main.ast.nodes.declaration.variableDec.VarDeclaration;
 import main.compileErrorException.nameErrors.*;
 import main.symbolTable.SymbolTable;

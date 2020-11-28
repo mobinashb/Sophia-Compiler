@@ -1,37 +1,24 @@
 package main.visitor.typeChecker;
 
-import main.ast.nodes.Node;
-import main.ast.nodes.Program;
-import main.ast.nodes.declaration.classDec.ClassDeclaration;
-import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaration;
-import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
-import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
-import main.ast.nodes.declaration.variableDec.VarDeclaration;
-import main.ast.nodes.expression.MethodCall;
-import main.ast.nodes.expression.operators.BinaryOperator;
+import main.ast.types.*;
+import main.ast.types.functionPointer.*;
+import main.ast.types.list.*;
+import main.ast.types.single.*;
+import main.ast.nodes.*;
+import main.ast.nodes.declaration.classDec.*;
+import main.ast.nodes.declaration.classDec.classMembersDec.*;
+import main.ast.nodes.declaration.variableDec.*;
+import main.ast.nodes.expression.*;
+import main.ast.nodes.expression.operators.*;
 import main.ast.nodes.statement.*;
-import main.ast.nodes.statement.loop.BreakStmt;
-import main.ast.nodes.statement.loop.ContinueStmt;
-import main.ast.nodes.statement.loop.ForStmt;
-import main.ast.nodes.statement.loop.ForeachStmt;
-import main.ast.types.NoType;
-import main.ast.types.NullType;
-import main.ast.types.Type;
-import main.ast.types.functionPointer.FptrType;
-import main.ast.types.list.ListNameType;
-import main.ast.types.list.ListType;
-import main.ast.types.single.BoolType;
-import main.ast.types.single.ClassType;
-import main.ast.types.single.IntType;
-import main.ast.types.single.StringType;
-import main.compileErrorException.nameErrors.ClassInCyclicInheritance;
+import main.ast.nodes.statement.loop.*;
 import main.compileErrorException.typeErrors.*;
 import main.symbolTable.utils.graph.Graph;
 import main.visitor.Visitor;
 
 import java.util.ArrayList;
 
-public class TypeChecker extends Visitor<RetConBreak> {
+public class TypeChecker extends Visitor<RetConBrk> {
     private final Graph<String> classHierarchy;
     private final ExpressionTypeChecker expressionTypeChecker;
     private ClassDeclaration currentClass;
@@ -90,7 +77,7 @@ public class TypeChecker extends Visitor<RetConBreak> {
     }
 
     @Override
-    public RetConBreak visit(Program program) {
+    public RetConBrk visit(Program program) {
         boolean mainCheck = false;
         for(ClassDeclaration classDeclaration : program.getClasses()) {
             this.expressionTypeChecker.setCurrentClass(classDeclaration);
@@ -107,7 +94,7 @@ public class TypeChecker extends Visitor<RetConBreak> {
     }
 
     @Override
-    public RetConBreak visit(ClassDeclaration classDeclaration) {
+    public RetConBrk visit(ClassDeclaration classDeclaration) {
         if(classDeclaration.getParentClassName() != null) {
             this.checkTypeValidation(new ClassType(classDeclaration.getParentClassName()), classDeclaration);
             if(classDeclaration.getClassName().getName().equals("Main")) {
@@ -149,7 +136,7 @@ public class TypeChecker extends Visitor<RetConBreak> {
     }
 
     @Override
-    public RetConBreak visit(ConstructorDeclaration constructorDeclaration) {
+    public RetConBrk visit(ConstructorDeclaration constructorDeclaration) {
         if(!this.currentClass.getClassName().getName().equals(constructorDeclaration.getMethodName().getName())) {
             ConstructorNotSameNameAsClass exception = new ConstructorNotSameNameAsClass(constructorDeclaration.getLine());
             constructorDeclaration.addError(exception);
@@ -164,7 +151,7 @@ public class TypeChecker extends Visitor<RetConBreak> {
     }
 
     @Override
-    public RetConBreak visit(MethodDeclaration methodDeclaration) {
+    public RetConBrk visit(MethodDeclaration methodDeclaration) {
         this.checkTypeValidation(methodDeclaration.getReturnType(), methodDeclaration);
         for(VarDeclaration varDeclaration : methodDeclaration.getArgs()) {
             varDeclaration.accept(this);
@@ -181,23 +168,23 @@ public class TypeChecker extends Visitor<RetConBreak> {
             }
             doesReturn = doesReturn || statement.accept(this).doesReturn;
         }
-        return new RetConBreak(doesReturn, false);
+        return new RetConBrk(doesReturn, false);
     }
 
     @Override
-    public RetConBreak visit(FieldDeclaration fieldDeclaration) {
+    public RetConBrk visit(FieldDeclaration fieldDeclaration) {
 //        fieldDeclaration.getVarDeclaration().accept(this);
         return null;
     }
 
     @Override
-    public RetConBreak visit(VarDeclaration varDeclaration) {
+    public RetConBrk visit(VarDeclaration varDeclaration) {
         this.checkTypeValidation(varDeclaration.getType(), varDeclaration);
         return null;
     }
 
     @Override
-    public RetConBreak visit(AssignmentStmt assignmentStmt) {
+    public RetConBrk visit(AssignmentStmt assignmentStmt) {
         Type firstType = assignmentStmt.getlValue().accept(expressionTypeChecker);
         Type secondType = assignmentStmt.getrValue().accept(expressionTypeChecker);
         boolean isFirstLvalue = expressionTypeChecker.isLvalue(assignmentStmt.getlValue());
@@ -206,19 +193,19 @@ public class TypeChecker extends Visitor<RetConBreak> {
             assignmentStmt.addError(exception);
         }
         if(firstType instanceof NoType || secondType instanceof NoType) {
-            return new RetConBreak(false, false);
+            return new RetConBrk(false, false);
         }
         boolean isSubtype = expressionTypeChecker.isFirstSubTypeOfSecond(secondType, firstType);
         if((assignmentStmt.getrValue() instanceof MethodCall && secondType instanceof NullType) || !isSubtype) {
             UnsupportedOperandType exception = new UnsupportedOperandType(assignmentStmt.getLine(), BinaryOperator.assign.name());
             assignmentStmt.addError(exception);
-            return new RetConBreak(false, false);
+            return new RetConBrk(false, false);
         }
-        return new RetConBreak(false, false);
+        return new RetConBrk(false, false);
     }
 
     @Override
-    public RetConBreak visit(BlockStmt blockStmt) {
+    public RetConBrk visit(BlockStmt blockStmt) {
         boolean doesReturn = false, returnErroredYet= false;
         boolean doesContinueBreak = false, continueBreakErroredYet = false;
         for(Statement statement : blockStmt.getStatements()) {
@@ -232,79 +219,79 @@ public class TypeChecker extends Visitor<RetConBreak> {
                 statement.addError(exception);
                 continueBreakErroredYet = true;
             }
-            RetConBreak stmtRetConBreak = statement.accept(this);
-            doesReturn = doesReturn || stmtRetConBreak.doesReturn;
-            doesContinueBreak = doesContinueBreak || stmtRetConBreak.doesBreakContinue;
+            RetConBrk stmtRetConBrk = statement.accept(this);
+            doesReturn = doesReturn || stmtRetConBrk.doesReturn;
+            doesContinueBreak = doesContinueBreak || stmtRetConBrk.doesBreakContinue;
         }
-        return new RetConBreak(doesReturn, doesContinueBreak);
+        return new RetConBrk(doesReturn, doesContinueBreak);
     }
 
     @Override
-    public RetConBreak visit(ConditionalStmt conditionalStmt) {
+    public RetConBrk visit(ConditionalStmt conditionalStmt) {
         Type condType = conditionalStmt.getCondition().accept(expressionTypeChecker);
         if(!(condType instanceof BoolType || condType instanceof NoType)) {
             ConditionNotBool exception = new ConditionNotBool(conditionalStmt.getLine());
             conditionalStmt.addError(exception);
         }
-        RetConBreak thenRetConBreak = conditionalStmt.getThenBody().accept(this);
+        RetConBrk thenRetConBrk = conditionalStmt.getThenBody().accept(this);
         if(conditionalStmt.getElseBody() != null) {
-            RetConBreak elseRetConBreak = conditionalStmt.getElseBody().accept(this);
-            return new RetConBreak(thenRetConBreak.doesReturn && elseRetConBreak.doesReturn,
-                    thenRetConBreak.doesBreakContinue && elseRetConBreak.doesBreakContinue);
+            RetConBrk elseRetConBrk = conditionalStmt.getElseBody().accept(this);
+            return new RetConBrk(thenRetConBrk.doesReturn && elseRetConBrk.doesReturn,
+                    thenRetConBrk.doesBreakContinue && elseRetConBrk.doesBreakContinue);
         }
-        return new RetConBreak(false, false);
+        return new RetConBrk(false, false);
     }
 
     @Override
-    public RetConBreak visit(MethodCallStmt methodCallStmt) {
+    public RetConBrk visit(MethodCallStmt methodCallStmt) {
         expressionTypeChecker.setIsInMethodCallStmt(true);
         methodCallStmt.getMethodCall().accept(expressionTypeChecker);
         expressionTypeChecker.setIsInMethodCallStmt(false);
-        return new RetConBreak(false, false);
+        return new RetConBrk(false, false);
     }
 
     @Override
-    public RetConBreak visit(PrintStmt print) {
+    public RetConBrk visit(PrintStmt print) {
         Type argType = print.getArg().accept(expressionTypeChecker);
         if(!(argType instanceof IntType || argType instanceof StringType ||
                 argType instanceof BoolType || argType instanceof NoType)) {
             UnsupportedTypeForPrint exception = new UnsupportedTypeForPrint(print.getLine());
             print.addError(exception);
         }
-        return new RetConBreak(false, false);
+        return new RetConBrk(false, false);
     }
 
     @Override
-    public RetConBreak visit(ReturnStmt returnStmt) {
+    public RetConBrk visit(ReturnStmt returnStmt) {
         Type retType = returnStmt.getReturnedExpr().accept(expressionTypeChecker);
         Type actualRetType = this.currentMethod.getReturnType();
         if(!expressionTypeChecker.isFirstSubTypeOfSecond(retType, actualRetType)) {
             ReturnValueNotMatchMethodReturnType exception = new ReturnValueNotMatchMethodReturnType(returnStmt);
             returnStmt.addError(exception);
         }
-        return new RetConBreak(true, false);
+        return new RetConBrk(true, false);
     }
 
     @Override
-    public RetConBreak visit(BreakStmt breakStmt) {
+    public RetConBrk visit(BreakStmt breakStmt) {
         if(!isInFor) {
             ContinueBreakNotInLoop exception = new ContinueBreakNotInLoop(breakStmt.getLine(), 0);
             breakStmt.addError(exception);
         }
-        return new RetConBreak(false, true);
+        return new RetConBrk(false, true);
     }
 
     @Override
-    public RetConBreak visit(ContinueStmt continueStmt) {
+    public RetConBrk visit(ContinueStmt continueStmt) {
         if(!isInFor) {
             ContinueBreakNotInLoop exception = new ContinueBreakNotInLoop(continueStmt.getLine(), 1);
             continueStmt.addError(exception);
         }
-        return new RetConBreak(false, true);
+        return new RetConBrk(false, true);
     }
 
     @Override
-    public RetConBreak visit(ForeachStmt foreachStmt) {
+    public RetConBrk visit(ForeachStmt foreachStmt) {
         Type varType = foreachStmt.getVariable().accept(expressionTypeChecker);
         Type listType = foreachStmt.getList().accept(expressionTypeChecker);
         if(!(listType instanceof ListType || listType instanceof NoType)) {
@@ -319,7 +306,7 @@ public class TypeChecker extends Visitor<RetConBreak> {
                 ForeachListElementsNotSameType exception = new ForeachListElementsNotSameType(foreachStmt.getLine());
                 foreachStmt.addError(exception);
             }
-            else if(!expressionTypeChecker.isSameType(varType, types.get(0))) {
+            if(!expressionTypeChecker.isSameType(varType, types.get(0))) {
                 ForeachVarNotMatchList exception = new ForeachVarNotMatchList(foreachStmt);
                 foreachStmt.addError(exception);
             }
@@ -328,11 +315,11 @@ public class TypeChecker extends Visitor<RetConBreak> {
         this.isInFor = true;
         foreachStmt.getBody().accept(this);
         this.isInFor = lastIsInFor;
-        return new RetConBreak(false, false);
+        return new RetConBrk(false, false);
     }
 
     @Override
-    public RetConBreak visit(ForStmt forStmt) {
+    public RetConBrk visit(ForStmt forStmt) {
         if(forStmt.getInitialize() != null) {
             forStmt.getInitialize().accept(this);
         }
@@ -350,7 +337,7 @@ public class TypeChecker extends Visitor<RetConBreak> {
         this.isInFor = true;
         forStmt.getBody().accept(this);
         this.isInFor = lastIsInFor;
-        return new RetConBreak(false, false);
+        return new RetConBrk(false, false);
     }
 
 }

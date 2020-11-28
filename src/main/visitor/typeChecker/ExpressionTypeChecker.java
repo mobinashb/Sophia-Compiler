@@ -1,26 +1,16 @@
 package main.visitor.typeChecker;
 
-import main.ast.nodes.Node;
-import main.ast.nodes.declaration.classDec.ClassDeclaration;
-import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
+import main.ast.types.*;
+import main.ast.types.functionPointer.*;
+import main.ast.types.list.*;
+import main.ast.types.single.*;
+import main.ast.nodes.*;
+import main.ast.nodes.declaration.classDec.*;
+import main.ast.nodes.declaration.classDec.classMembersDec.*;
 import main.ast.nodes.expression.*;
-import main.ast.nodes.expression.operators.BinaryOperator;
-import main.ast.nodes.expression.operators.UnaryOperator;
-import main.ast.nodes.expression.values.ListValue;
-import main.ast.nodes.expression.values.NullValue;
-import main.ast.nodes.expression.values.primitive.BoolValue;
-import main.ast.nodes.expression.values.primitive.IntValue;
-import main.ast.nodes.expression.values.primitive.StringValue;
-import main.ast.types.NoType;
-import main.ast.types.NullType;
-import main.ast.types.Type;
-import main.ast.types.functionPointer.FptrType;
-import main.ast.types.list.ListNameType;
-import main.ast.types.list.ListType;
-import main.ast.types.single.BoolType;
-import main.ast.types.single.ClassType;
-import main.ast.types.single.IntType;
-import main.ast.types.single.StringType;
+import main.ast.nodes.expression.operators.*;
+import main.ast.nodes.expression.values.*;
+import main.ast.nodes.expression.values.primitive.*;
 import main.compileErrorException.typeErrors.*;
 import main.symbolTable.SymbolTable;
 import main.symbolTable.exceptions.ItemNotFoundException;
@@ -152,8 +142,8 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         if((operator == BinaryOperator.eq) || (operator == BinaryOperator.neq)) {
             if(firstType instanceof NoType && secondType instanceof NoType)
                 return new NoType();
-            else if((firstType instanceof NoType && secondType instanceof FptrType) ||
-                    (secondType instanceof NoType && firstType instanceof FptrType)) {
+            else if((firstType instanceof NoType && secondType instanceof ListType) ||
+                    (secondType instanceof NoType && firstType instanceof ListType)) {
                 UnsupportedOperandType exception = new UnsupportedOperandType(binaryExpression.getLine(), operator.name());
                 binaryExpression.addError(exception);
                 return new NoType();
@@ -170,7 +160,8 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                 return new BoolType();
             }
             if((firstType instanceof FptrType && secondType instanceof NullType) ||
-                    (firstType instanceof NullType && secondType instanceof FptrType)) {
+                    (firstType instanceof NullType && secondType instanceof FptrType) ||
+                    (firstType instanceof FptrType && secondType instanceof FptrType)) {
                 return new BoolType();
             }
             if(firstType instanceof NullType && secondType instanceof NullType)

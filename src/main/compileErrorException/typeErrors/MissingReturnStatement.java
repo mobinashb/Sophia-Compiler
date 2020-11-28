@@ -1,6 +1,5 @@
 package main.compileErrorException.typeErrors;
 
-import main.ast.nodes.declaration.classDec.ClassDeclaration;
 import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
 import main.compileErrorException.CompileErrorException;
 

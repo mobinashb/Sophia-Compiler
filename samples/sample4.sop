@@ -62,6 +62,16 @@ class WordProcessor
 	}
 }
 
+class A {
+
+}
+
+class B {
+    def void foo() {
+
+    }
+}
+
 class Main {
     def Main() {
         wordProcessor : WordProcessor;

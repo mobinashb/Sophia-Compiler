@@ -6,7 +6,10 @@ import main.symbolTable.exceptions.ItemNotFoundException;
 import main.symbolTable.items.SymbolTableItem;
 import main.symbolTable.utils.stack.Stack;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 
 

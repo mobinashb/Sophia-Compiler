@@ -1,7 +1,6 @@
 package main.compileErrorException.nameErrors;
 
 import main.ast.nodes.declaration.classDec.ClassDeclaration;
-import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
 import main.compileErrorException.CompileErrorException;
 
 public class ClassInCyclicInheritance extends CompileErrorException {

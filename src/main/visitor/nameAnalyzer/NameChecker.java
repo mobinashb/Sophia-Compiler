@@ -2,7 +2,9 @@ package main.visitor.nameAnalyzer;
 
 import main.ast.nodes.Program;
 import main.ast.nodes.declaration.classDec.ClassDeclaration;
-import main.ast.nodes.declaration.classDec.classMembersDec.*;
+import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
 import main.compileErrorException.nameErrors.ClassInCyclicInheritance;
 import main.compileErrorException.nameErrors.FieldRedefinition;
 import main.compileErrorException.nameErrors.MethodNameConflictWithField;
@@ -10,8 +12,8 @@ import main.compileErrorException.nameErrors.MethodRedefinition;
 import main.symbolTable.SymbolTable;
 import main.symbolTable.exceptions.ItemNotFoundException;
 import main.symbolTable.items.ClassSymbolTableItem;
-import main.symbolTable.items.MethodSymbolTableItem;
 import main.symbolTable.items.FieldSymbolTableItem;
+import main.symbolTable.items.MethodSymbolTableItem;
 import main.symbolTable.utils.graph.Graph;
 import main.visitor.Visitor;
 

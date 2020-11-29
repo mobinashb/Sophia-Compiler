@@ -1,17 +1,28 @@
 package main.visitor.typeChecker;
 
-import main.ast.types.*;
-import main.ast.types.functionPointer.*;
-import main.ast.types.list.*;
-import main.ast.types.single.*;
-import main.ast.nodes.*;
-import main.ast.nodes.declaration.classDec.*;
-import main.ast.nodes.declaration.classDec.classMembersDec.*;
-import main.ast.nodes.declaration.variableDec.*;
-import main.ast.nodes.expression.*;
-import main.ast.nodes.expression.operators.*;
+import main.ast.nodes.Node;
+import main.ast.nodes.Program;
+import main.ast.nodes.declaration.classDec.ClassDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
+import main.ast.nodes.declaration.variableDec.VarDeclaration;
+import main.ast.nodes.expression.operators.BinaryOperator;
 import main.ast.nodes.statement.*;
-import main.ast.nodes.statement.loop.*;
+import main.ast.nodes.statement.loop.BreakStmt;
+import main.ast.nodes.statement.loop.ContinueStmt;
+import main.ast.nodes.statement.loop.ForStmt;
+import main.ast.nodes.statement.loop.ForeachStmt;
+import main.ast.types.NoType;
+import main.ast.types.NullType;
+import main.ast.types.Type;
+import main.ast.types.functionPointer.FptrType;
+import main.ast.types.list.ListNameType;
+import main.ast.types.list.ListType;
+import main.ast.types.single.BoolType;
+import main.ast.types.single.ClassType;
+import main.ast.types.single.IntType;
+import main.ast.types.single.StringType;
 import main.compileErrorException.typeErrors.*;
 import main.symbolTable.utils.graph.Graph;
 import main.visitor.Visitor;
@@ -28,52 +39,6 @@ public class TypeChecker extends Visitor<RetConBrk> {
     public TypeChecker(Graph<String> classHierarchy) {
         this.classHierarchy = classHierarchy;
         this.expressionTypeChecker = new ExpressionTypeChecker(classHierarchy);
-    }
-
-    private void checkTypeValidation(Type type, Node node) {
-        if(!(type instanceof ClassType || type instanceof FptrType || type instanceof ListType))
-            return;
-        if(type instanceof ListType) {
-            ArrayList<ListNameType> types = ((ListType) type).getElementsTypes();
-            if(types.size() == 0) {
-                CannotHaveEmptyList exception = new CannotHaveEmptyList(node.getLine());
-                node.addError(exception);
-                return;
-            }
-            boolean flag = false;
-            for(int i = 0; i < types.size()-1; i++) {
-                for(int j = i+1; j < types.size(); j++) {
-                    String first = types.get(i).getName().getName();
-                    String second = types.get(j).getName().getName();
-                    if(first.equals("") || second.equals(""))
-                        continue;
-                    if(first.equals(second)) {
-                        DuplicateListId exception = new DuplicateListId(node.getLine());
-                        node.addError(exception);
-                        flag = true;
-                        break;
-                    }
-                }
-                if(flag)
-                    break;
-            }
-            for(ListNameType listNameType : types)
-                this.checkTypeValidation(listNameType.getType(), node);
-        }
-        if(type instanceof ClassType) {
-            String className = ((ClassType)type).getClassName().getName();
-            if(!this.classHierarchy.doesGraphContainNode(className)) {
-                ClassNotDeclared exception = new ClassNotDeclared(node.getLine(), className);
-                node.addError(exception);
-            }
-        }
-        if(type instanceof FptrType) {
-            Type retType = ((FptrType) type).getReturnType();
-            ArrayList<Type> argsType = ((FptrType) type).getArgumentsTypes();
-            this.checkTypeValidation(retType, node);
-            for(Type argType : argsType)
-                this.checkTypeValidation(argType, node);
-        }
     }
 
     @Override
@@ -96,7 +61,7 @@ public class TypeChecker extends Visitor<RetConBrk> {
     @Override
     public RetConBrk visit(ClassDeclaration classDeclaration) {
         if(classDeclaration.getParentClassName() != null) {
-            this.checkTypeValidation(new ClassType(classDeclaration.getParentClassName()), classDeclaration);
+            this.expressionTypeChecker.checkTypeValidation(new ClassType(classDeclaration.getParentClassName()), classDeclaration);
             if(classDeclaration.getClassName().getName().equals("Main")) {
                 MainClassCantExtend exception = new MainClassCantExtend(classDeclaration.getLine());
                 classDeclaration.addError(exception);
@@ -112,11 +77,7 @@ public class TypeChecker extends Visitor<RetConBrk> {
         if(classDeclaration.getConstructor() != null) {
             this.expressionTypeChecker.setCurrentMethod(classDeclaration.getConstructor());
             this.currentMethod = classDeclaration.getConstructor();
-            boolean doesReturn = classDeclaration.getConstructor().accept(this).doesReturn;
-            if(!doesReturn && !(classDeclaration.getConstructor().getReturnType() instanceof NullType)) {
-                MissingReturnStatement exception = new MissingReturnStatement(classDeclaration.getConstructor());
-                classDeclaration.getConstructor().addError(exception);
-            }
+            classDeclaration.getConstructor().accept(this);
         }
         else if(classDeclaration.getClassName().getName().equals("Main")) {
             NoConstructorInMainClass exception = new NoConstructorInMainClass(classDeclaration);
@@ -152,7 +113,7 @@ public class TypeChecker extends Visitor<RetConBrk> {
 
     @Override
     public RetConBrk visit(MethodDeclaration methodDeclaration) {
-        this.checkTypeValidation(methodDeclaration.getReturnType(), methodDeclaration);
+        this.expressionTypeChecker.checkTypeValidation(methodDeclaration.getReturnType(), methodDeclaration);
         for(VarDeclaration varDeclaration : methodDeclaration.getArgs()) {
             varDeclaration.accept(this);
         }
@@ -173,13 +134,13 @@ public class TypeChecker extends Visitor<RetConBrk> {
 
     @Override
     public RetConBrk visit(FieldDeclaration fieldDeclaration) {
-//        fieldDeclaration.getVarDeclaration().accept(this);
+        fieldDeclaration.getVarDeclaration().accept(this);
         return null;
     }
 
     @Override
     public RetConBrk visit(VarDeclaration varDeclaration) {
-        this.checkTypeValidation(varDeclaration.getType(), varDeclaration);
+        this.expressionTypeChecker.checkTypeValidation(varDeclaration.getType(), varDeclaration);
         return null;
     }
 
@@ -196,7 +157,7 @@ public class TypeChecker extends Visitor<RetConBrk> {
             return new RetConBrk(false, false);
         }
         boolean isSubtype = expressionTypeChecker.isFirstSubTypeOfSecond(secondType, firstType);
-        if((assignmentStmt.getrValue() instanceof MethodCall && secondType instanceof NullType) || !isSubtype) {
+        if(!isSubtype) {
             UnsupportedOperandType exception = new UnsupportedOperandType(assignmentStmt.getLine(), BinaryOperator.assign.name());
             assignmentStmt.addError(exception);
             return new RetConBrk(false, false);
@@ -301,7 +262,7 @@ public class TypeChecker extends Visitor<RetConBrk> {
         else if(!(listType instanceof NoType)) {
             ArrayList<Type> types = new ArrayList<>();
             for(ListNameType listNameType : ((ListType) listType).getElementsTypes())
-                    types.add(listNameType.getType());
+                types.add(listNameType.getType());
             if(!expressionTypeChecker.areAllSameType(types)) {
                 ForeachListElementsNotSameType exception = new ForeachListElementsNotSameType(foreachStmt.getLine());
                 foreachStmt.addError(exception);

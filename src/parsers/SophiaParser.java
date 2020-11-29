@@ -1,30 +1,47 @@
 // Generated from C:/Users/amirp/Desktop/Files/University/Term 7/Compiler-TA/Sophia-Phases/Phase 3/Sophia-Phase3/src/main/grammar\Sophia.g4 by ANTLR 4.8
 package parsers;
 
-    import main.ast.types.*;
-    import main.ast.types.functionPointer.*;
-    import main.ast.types.list.*;
-    import main.ast.types.single.*;
-    import main.ast.nodes.*;
-    import main.ast.nodes.declaration.*;
-    import main.ast.nodes.declaration.classDec.*;
-    import main.ast.nodes.declaration.classDec.classMembersDec.*;
-    import main.ast.nodes.declaration.variableDec.*;
-    import main.ast.nodes.expression.*;
-    import main.ast.nodes.expression.operators.*;
-    import main.ast.nodes.expression.values.*;
-    import main.ast.nodes.expression.values.primitive.*;
-    import main.ast.nodes.statement.*;
-    import main.ast.nodes.statement.loop.*;
-
-import org.antlr.v4.runtime.atn.*;
-import org.antlr.v4.runtime.dfa.DFA;
+import main.ast.nodes.Program;
+import main.ast.nodes.declaration.classDec.ClassDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.ConstructorDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
+import main.ast.nodes.declaration.variableDec.VarDeclaration;
+import main.ast.nodes.expression.*;
+import main.ast.nodes.expression.operators.BinaryOperator;
+import main.ast.nodes.expression.operators.UnaryOperator;
+import main.ast.nodes.expression.values.ListValue;
+import main.ast.nodes.expression.values.NullValue;
+import main.ast.nodes.expression.values.Value;
+import main.ast.nodes.expression.values.primitive.BoolValue;
+import main.ast.nodes.expression.values.primitive.IntValue;
+import main.ast.nodes.expression.values.primitive.StringValue;
+import main.ast.nodes.statement.*;
+import main.ast.nodes.statement.loop.BreakStmt;
+import main.ast.nodes.statement.loop.ContinueStmt;
+import main.ast.nodes.statement.loop.ForStmt;
+import main.ast.nodes.statement.loop.ForeachStmt;
+import main.ast.types.NullType;
+import main.ast.types.Type;
+import main.ast.types.functionPointer.FptrType;
+import main.ast.types.list.ListNameType;
+import main.ast.types.list.ListType;
+import main.ast.types.single.BoolType;
+import main.ast.types.single.ClassType;
+import main.ast.types.single.IntType;
+import main.ast.types.single.StringType;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
-import org.antlr.v4.runtime.tree.*;
-import java.util.List;
-import java.util.Iterator;
+import org.antlr.v4.runtime.atn.ATN;
+import org.antlr.v4.runtime.atn.ATNDeserializer;
+import org.antlr.v4.runtime.atn.ParserATNSimulator;
+import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class SophiaParser extends Parser {

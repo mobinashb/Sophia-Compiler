@@ -3,7 +3,6 @@ package main.symbolTable.items;
 
 import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
 import main.ast.types.Type;
-import main.symbolTable.items.SymbolTableItem;
 
 public class FieldSymbolTableItem extends SymbolTableItem {
     public static String START_KEY = "Field_";

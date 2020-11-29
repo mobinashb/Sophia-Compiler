@@ -1,7 +1,7 @@
 package main.ast.nodes;
 
-import main.visitor.IVisitor;
 import main.compileErrorException.CompileErrorException;
+import main.visitor.IVisitor;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,6 @@ class WordProcessor
 		found : bool;
 		result : list(100 # list(key:string, value:int)) ;
 		i : int;
-		tt: list(2 # int);
 
 		size = 0;
 		foreach ( name in processinglist)
@@ -62,15 +61,6 @@ class WordProcessor
 	}
 }
 
-class A {
-
-}
-
-class B {
-    def void foo() {
-
-    }
-}
 
 class Main {
     def Main() {

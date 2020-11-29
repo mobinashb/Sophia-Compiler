@@ -1,10 +1,8 @@
 package main.symbolTable.items;
 
 
-import main.ast.nodes.declaration.classDec.classMembersDec.FieldDeclaration;
 import main.ast.nodes.declaration.variableDec.VarDeclaration;
 import main.ast.types.Type;
-import main.symbolTable.items.SymbolTableItem;
 
 public class LocalVariableSymbolTableItem extends SymbolTableItem {
     public static String START_KEY = "Var_";

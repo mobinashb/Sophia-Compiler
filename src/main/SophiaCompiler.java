@@ -4,7 +4,6 @@ import main.ast.nodes.Program;
 import main.visitor.codeGenerator.CodeGenerator;
 import main.visitor.nameAnalyzer.NameAnalyzer;
 import main.visitor.typeChecker.TypeChecker;
-import main.visitor.utils.ASTTreePrinter;
 import main.visitor.utils.ErrorReporter;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;

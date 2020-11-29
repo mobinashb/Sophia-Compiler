@@ -1,16 +1,26 @@
 package main.visitor.typeChecker;
 
-import main.ast.types.*;
-import main.ast.types.functionPointer.*;
-import main.ast.types.list.*;
-import main.ast.types.single.*;
-import main.ast.nodes.*;
-import main.ast.nodes.declaration.classDec.*;
-import main.ast.nodes.declaration.classDec.classMembersDec.*;
+import main.ast.nodes.Node;
+import main.ast.nodes.declaration.classDec.ClassDeclaration;
+import main.ast.nodes.declaration.classDec.classMembersDec.MethodDeclaration;
 import main.ast.nodes.expression.*;
-import main.ast.nodes.expression.operators.*;
-import main.ast.nodes.expression.values.*;
-import main.ast.nodes.expression.values.primitive.*;
+import main.ast.nodes.expression.operators.BinaryOperator;
+import main.ast.nodes.expression.operators.UnaryOperator;
+import main.ast.nodes.expression.values.ListValue;
+import main.ast.nodes.expression.values.NullValue;
+import main.ast.nodes.expression.values.primitive.BoolValue;
+import main.ast.nodes.expression.values.primitive.IntValue;
+import main.ast.nodes.expression.values.primitive.StringValue;
+import main.ast.types.NoType;
+import main.ast.types.NullType;
+import main.ast.types.Type;
+import main.ast.types.functionPointer.FptrType;
+import main.ast.types.list.ListNameType;
+import main.ast.types.list.ListType;
+import main.ast.types.single.BoolType;
+import main.ast.types.single.ClassType;
+import main.ast.types.single.IntType;
+import main.ast.types.single.StringType;
 import main.compileErrorException.typeErrors.*;
 import main.symbolTable.SymbolTable;
 import main.symbolTable.exceptions.ItemNotFoundException;
@@ -27,6 +37,7 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     private final Graph<String> classHierarchy;
     private ClassDeclaration currentClass;
     private MethodDeclaration currentMethod;
+    private int typeValidationNumberOfErrors;
     private boolean seenNoneLvalue = false;
     private boolean isInMethodCallStmt = false;
 
@@ -99,14 +110,60 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     }
 
     public Type refineType(Type type) {
-        if(type instanceof ClassType) {
-            if(this.classHierarchy.doesGraphContainNode(((ClassType)type).getClassName().getName()))
-                return type;
+        typeValidationNumberOfErrors = 0;
+        this.checkTypeValidation(type, new NullValue());
+        if(typeValidationNumberOfErrors > 0)
             return new NoType();
-        }
-        else if(type instanceof ListType && (((ListType) type).getElementsTypes().size() == 0))
-                return new NoType();
         return type;
+    }
+
+    public void checkTypeValidation(Type type, Node node) {
+        if(!(type instanceof ClassType || type instanceof FptrType || type instanceof ListType))
+            return;
+        if(type instanceof ListType) {
+            ArrayList<ListNameType> types = ((ListType) type).getElementsTypes();
+            if(types.size() == 0) {
+                CannotHaveEmptyList exception = new CannotHaveEmptyList(node.getLine());
+                node.addError(exception);
+                typeValidationNumberOfErrors += 1;
+                return;
+            }
+            boolean flag = false;
+            for(int i = 0; i < types.size()-1; i++) {
+                for(int j = i+1; j < types.size(); j++) {
+                    String first = types.get(i).getName().getName();
+                    String second = types.get(j).getName().getName();
+                    if(first.equals("") || second.equals(""))
+                        continue;
+                    if(first.equals(second)) {
+                        DuplicateListId exception = new DuplicateListId(node.getLine());
+                        node.addError(exception);
+                        typeValidationNumberOfErrors += 1;
+                        flag = true;
+                        break;
+                    }
+                }
+                if(flag)
+                    break;
+            }
+            for(ListNameType listNameType : types)
+                this.checkTypeValidation(listNameType.getType(), node);
+        }
+        if(type instanceof ClassType) {
+            String className = ((ClassType)type).getClassName().getName();
+            if(!this.classHierarchy.doesGraphContainNode(className)) {
+                ClassNotDeclared exception = new ClassNotDeclared(node.getLine(), className);
+                node.addError(exception);
+                typeValidationNumberOfErrors += 1;
+            }
+        }
+        if(type instanceof FptrType) {
+            Type retType = ((FptrType) type).getReturnType();
+            ArrayList<Type> argsType = ((FptrType) type).getArgumentsTypes();
+            this.checkTypeValidation(retType, node);
+            for(Type argType : argsType)
+                this.checkTypeValidation(argType, node);
+        }
     }
 
     public boolean areAllSameType(ArrayList<Type> types) {
@@ -279,7 +336,10 @@ public class ExpressionTypeChecker extends Visitor<Type> {
 
     @Override
     public Type visit(ObjectOrListMemberAccess objectOrListMemberAccess) {
+        boolean prevSeenNoneLvalue = this.seenNoneLvalue;
         Type instanceType = objectOrListMemberAccess.getInstance().accept(this);
+        if(objectOrListMemberAccess.getInstance() instanceof ThisClass)
+            this.seenNoneLvalue = prevSeenNoneLvalue;
         String memberName = objectOrListMemberAccess.getMemberName().getName();
         if(instanceType instanceof NoType)
             return new NoType();
@@ -345,12 +405,13 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         boolean prevSeenNoneLvalue = this.seenNoneLvalue;
         Type indexType = listAccessByIndex.getIndex().accept(this);
         this.seenNoneLvalue = prevSeenNoneLvalue;
+        boolean indexErrored = false;
+        if(!(indexType instanceof IntType)) {
+            ListIndexNotInt exception = new ListIndexNotInt(listAccessByIndex.getLine());
+            listAccessByIndex.addError(exception);
+            indexErrored = true;
+        }
         if(instanceType instanceof ListType) {
-            if(!(indexType instanceof IntType)) {
-                ListIndexNotInt exception = new ListIndexNotInt(listAccessByIndex.getLine());
-                listAccessByIndex.addError(exception);
-                return new NoType();
-            }
             ArrayList<Type> types = new ArrayList<>();
             for(ListNameType listNameType : ((ListType)instanceType).getElementsTypes())
                 types.add(listNameType.getType());
@@ -360,6 +421,8 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                 listAccessByIndex.addError(exception);
                 return new NoType();
             }
+            if(indexErrored)
+                return new NoType();
             if(areAllSame) {
                 return this.refineType(((ListType)instanceType).getElementsTypes().get(0).getType());
             }
@@ -398,7 +461,7 @@ public class ExpressionTypeChecker extends Visitor<Type> {
             ArrayList<Type> actualArgsTypes = ((FptrType) instanceType).getArgumentsTypes();
             Type returnType = ((FptrType) instanceType).getReturnType();
             boolean hasError = false;
-            if(!isInMethodCallStmt && returnType instanceof NullType) {
+            if(!isInMethodCallStmt && (returnType instanceof NullType)) {
                 CantUseValueOfVoidMethod exception = new CantUseValueOfVoidMethod(methodCall.getLine());
                 methodCall.addError(exception);
                 hasError = true;
@@ -451,16 +514,13 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         else {
             ClassNotDeclared exception = new ClassNotDeclared(newClassInstance.getLine(), className);
             newClassInstance.addError(exception);
-            //to also catch errors in args
-            for(Expression expression : newClassInstance.getArgs()) {
-                expression.accept(this);
-            }
             return new NoType();
         }
     }
 
     @Override
     public Type visit(ThisClass thisClass) {
+        this.seenNoneLvalue = true;
         return new ClassType(currentClass.getClassName());
     }
 

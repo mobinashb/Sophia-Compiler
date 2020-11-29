@@ -20,6 +20,7 @@ import main.visitor.Visitor;
 public class NameChecker extends Visitor<Void> {
     private String currentClassName;
     private Graph<String> classHierarchy;
+    Program root;
 
     public NameChecker(Graph<String> classHierarchy) {
         this.classHierarchy = classHierarchy;
@@ -37,6 +38,7 @@ public class NameChecker extends Visitor<Void> {
 
     @Override
     public Void visit(Program program) {
+        this.root = program;
         for(ClassDeclaration classDeclaration : program.getClasses()) {
             this.currentClassName = classDeclaration.getClassName().getName();
             classDeclaration.accept(this);
@@ -81,13 +83,30 @@ public class NameChecker extends Visitor<Void> {
             } catch (ItemNotFoundException ignored) {
             }
         }
+        boolean errored = false;
         try {
             SymbolTable classSymbolTable = this.getCurrentClassSymbolTable();
             classSymbolTable.getItem(FieldSymbolTableItem.START_KEY + methodDeclaration.getMethodName().getName(), true);
             MethodNameConflictWithField exception = new MethodNameConflictWithField(methodDeclaration);
             methodDeclaration.addError(exception);
+            errored = true;
         } catch (ItemNotFoundException ignored) {
         }
+        if(!errored)
+            for(ClassDeclaration classDeclaration : root.getClasses()) {
+                String childName = classDeclaration.getClassName().getName();
+                if(classHierarchy.isSecondNodeAncestorOf(childName, currentClassName)) {
+                    try {
+                        ClassSymbolTableItem childSymbolTableItem = (ClassSymbolTableItem) SymbolTable.root.getItem(ClassSymbolTableItem.START_KEY + childName, true);
+                        SymbolTable childSymbolTable = childSymbolTableItem.getClassSymbolTable();
+                        childSymbolTable.getItem(FieldSymbolTableItem.START_KEY + methodDeclaration.getMethodName().getName(), true);
+                        MethodNameConflictWithField exception = new MethodNameConflictWithField(methodDeclaration);
+                        methodDeclaration.addError(exception);
+                        break;
+                    } catch (ItemNotFoundException ignored) {
+                    }
+                }
+            }
         return null;
     }
 

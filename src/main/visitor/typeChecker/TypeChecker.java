@@ -127,7 +127,7 @@ public class TypeChecker extends Visitor<RetConBrk> {
                 statement.addError(exception);
                 erroredYet = true;
             }
-            doesReturn = doesReturn || statement.accept(this).doesReturn;
+            doesReturn = statement.accept(this).doesReturn || doesReturn;
         }
         return new RetConBrk(doesReturn, false);
     }

@@ -1,84 +1,45 @@
-//Sophia sample code
+class A extends L {
+    a:int;
+    b:func<list(0 # int), bool->void>;
 
-class A  {
-  a:int;
-  b3:bool;
-  c:E;
-  d:func<int,bool->int>;
-  e:list(2 # list(3 # int));
-  f:list(y:int, y:bool, func<int,F->int>);
+    def A2(m:list(int, list(a:int, a:bool)), r:string) {
+        t: int;
+        b: bool;
+        f: func<void->string>;
 
-  def A(a:int, b:string) {
-    a1:string;
-    this.a = a1;
-  }
-
-  def void b2(r:int) {
-    print("hi");
-  }
-}
-
-class B extends A{
-    b:int;
-    b2: int;
-
-    def void b2() {
-
-    }
-
-  def B(b:string) {
-    print(b);
-  }
-
-  def int bar(a:bool, b:int) {
-        if(a == true) {
-            return 1;
+        a = this.a.b + a - r * m[1].a;
+        print(m + this.a);
+        this.foo.a = 2;
+        t = (this.foo())++;
+        return;
+        print("Unreachable statements 1");
+        this.bar() = t - this;
+        for(t = 0 = 1; t % 2; t = !(t--)) {
+            if(b && !b) {
+                break;
+            }
+            else {
+                continue;
+            }
+            print("Unreachable statement 2");
         }
-        else {
-            return 0;
+        t = new L();
+        f = this.foo;
+        if(f != null) {
+            t = f();
+            t = f.b;
         }
     }
 
-  def func<bool,int->int> bar2() {
-        r:int;
-        myFptr:func<bool,int->int>;
-        myList:list(first:int, func<bool,int->int>, bool);
-        myList2:list(2 # func<bool,int->int>);
-        anotherList:list(2 # list(3 # int));
-        fptr:func<bool,int->int>;
-        myFptr = this.bar;
-        myList = [2, myFptr, true];
-        print(myList[0]);
-    print(myList.first);
-        r = myList[1]();
-        if(true){
-            r=1;
-        } else if(true) {
-            r=1;
-        } else {
-            r=1;
-        }
-        if(true) print(2);
-        for(;;) {
-            print(1);
-        }
-        myList2 = [myFptr, myFptr];
-        foreach(fptr in myList2) {
-            fptr();
-        }
-        anotherList = [[1,2,3],[4,5,6]];
-        {
-            a = b = c[1].t() + 1 * r.t[1](2)().b[1].e() + [2,[r.t[1](),r],4] + this.a;
-            this.b(new R());
-        }
-        return myList2[0];
+    def string foo() {
+
+    }
+
+    def void bar(a:int) {
+
     }
 }
 
-class Main {
-  def Main() {
-      a:A;
-    a = new A(2, "hello");
-    this.a()();
-  }
+class B {
+
 }

@@ -301,7 +301,15 @@ returnStatement returns[ReturnStmt returnStmtRet]:
     }
     (e=expression
     { $returnStmtRet.setReturnedExpr($e.exprRet); }
-    )? SEMICOLLON;
+    )?
+    {
+        if($returnStmtRet.getReturnedExpr() instanceof NullValue) {
+            NullValue newNullValue = new NullValue();
+            newNullValue.setLine($r.getLine());
+            $returnStmtRet.setReturnedExpr(newNullValue);
+        }
+    }
+    SEMICOLLON;
 
 methodCallStatement returns[Statement methodCallStmtRet]:
     m=methodCall

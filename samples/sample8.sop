@@ -1,0 +1,13 @@
+class Z {
+    def void k() {
+    }
+}
+
+class Y extends Z {
+    def void k() {
+    }
+}
+
+class X extends Y {
+    k:int;
+}

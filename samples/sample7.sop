@@ -1,45 +1,102 @@
-class A extends L {
+class A extends B {
     a:int;
-    b:func<list(0 # int), bool->void>;
+    a:string;
+    def void a() {
+    }
+    def void a() {
+    }
+}
 
-    def A2(m:list(int, list(a:int, a:bool)), r:string) {
-        t: int;
-        b: bool;
-        f: func<void->string>;
+class B extends C {
+    a:int;
+    a:string;
+    def void a() {
+    }
+    def void a() {
+    }
+}
 
-        a = this.a.b + a - r * m[1].a;
-        print(m + this.a);
-        this.foo.a = 2;
-        t = (this.foo())++;
-        return;
-        print("Unreachable statements 1");
-        this.bar() = t - this;
-        for(t = 0 = 1; t % 2; t = !(t--)) {
-            if(b && !b) {
-                break;
-            }
-            else {
-                continue;
-            }
-            print("Unreachable statement 2");
-        }
-        t = new L();
-        f = this.foo;
-        if(f != null) {
-            t = f();
-            t = f.b;
-        }
+class C extends B {
+    a:int;
+    a:string;
+    def void a() {
+    }
+    def void a() {
+    }
+}
+
+class Z {
+    n:int;
+    def void k() {
+    }
+    def int p() {
+    }
+}
+
+class Y extends Z {
+    m:int;
+    m:string;
+    def void m() {
+    }
+    def void m() {
     }
 
-    def string foo() {
+}
 
+class X extends Y {
+    m:int;
+    m:string;
+    n:int;
+    k:int;
+    def void m() {
     }
+    def void m() {
+    }
+    def int p(m:int, g:int, g:string, t:int) {
+        m:int;
+        g:int;
+        t:string;
+        k:int;
+    }
+}
 
-    def void bar(a:int) {
+class W {
+    a:int;
+    def void o1() {
+    }
+}
+
+class W {
+    b:int;
+    a:int;
+    def void o2() {
+    }
+    def void o1() {
+    }
+}
+
+class W {
+    c:int;
+    def void o3() {
+    }
+}
+
+class Y extends W {
+    a:int;
+    b:int;
+    c:int;
+    def void o1() {
+    }
+    def void o2() {
+    }
+    def void o3() {
+    }
+}
+
+
+class Main {
+    def Main() {
 
     }
 }
 
-class B {
-
-}

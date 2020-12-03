@@ -39,7 +39,7 @@ public class SophiaCompiler {
         }
         CodeGenerator codeGenerator = new CodeGenerator(nameAnalyzer.getClassHierarchy());
         program.accept(codeGenerator);
-        System.out.println("Compilation Successful");
+        System.out.println("Compilation successful");
         runJasminFiles();
     }
 

@@ -3885,7 +3885,7 @@ public class SophiaParser extends Parser {
 	public static class ValuesContext extends ParserRuleContext {
 		public Value valuesRet;
 		public BoolValueContext b;
-		public Token s;
+		public Token STRING_VALUE;
 		public Token i;
 		public Token n;
 		public ListValueContext l;
@@ -3940,10 +3940,10 @@ public class SophiaParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(637);
-				((ValuesContext)_localctx).s = match(STRING_VALUE);
+				((ValuesContext)_localctx).STRING_VALUE = match(STRING_VALUE);
 
-				        ((ValuesContext)_localctx).valuesRet =  new StringValue(((((ValuesContext)_localctx).s!=null?((ValuesContext)_localctx).s.getText():null)).substring(1, ((((ValuesContext)_localctx).s!=null?((ValuesContext)_localctx).s.getText():null)).length()-1));
-				        _localctx.valuesRet.setLine(((ValuesContext)_localctx).s.getLine());
+				        ((ValuesContext)_localctx).valuesRet =  new StringValue(((((ValuesContext)_localctx).STRING_VALUE!=null?((ValuesContext)_localctx).STRING_VALUE.getText():null)).substring(1, ((((ValuesContext)_localctx).STRING_VALUE!=null?((ValuesContext)_localctx).STRING_VALUE.getText():null)).length()-1));
+				        _localctx.valuesRet.setLine(((ValuesContext)_localctx).STRING_VALUE.getLine());
 				    
 				}
 				break;

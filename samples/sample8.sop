@@ -1,13 +1,31 @@
-class Z {
-    def void k() {
+class a extends MainMain {
+    def a(a:a) {
+
     }
 }
 
-class Y extends Z {
-    def void k() {
+class a {
+    a:a;
+    def a() {
+        a:a;
+        c:a;
+
     }
 }
 
-class X extends Y {
-    k:int;
+class Main extends a {
+    def Main(a:int) {
+        a: a;
+        c:a;
+        a:a;
+        c:a;
+        c:c;
+        c:c;
+    }
+
+    def a a() {
+        a:a;
+
+    }
+
 }

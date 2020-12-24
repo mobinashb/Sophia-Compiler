@@ -406,7 +406,7 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         Type indexType = listAccessByIndex.getIndex().accept(this);
         this.seenNoneLvalue = prevSeenNoneLvalue;
         boolean indexErrored = false;
-        if(!(indexType instanceof IntType)) {
+        if(!(indexType instanceof NoType || indexType instanceof IntType)) {
             ListIndexNotInt exception = new ListIndexNotInt(listAccessByIndex.getLine());
             listAccessByIndex.addError(exception);
             indexErrored = true;
@@ -423,12 +423,12 @@ public class ExpressionTypeChecker extends Visitor<Type> {
             }
             if(indexErrored)
                 return new NoType();
-            if(areAllSame) {
-                return this.refineType(((ListType)instanceType).getElementsTypes().get(0).getType());
-            }
-            else {
+            if((listAccessByIndex.getIndex() instanceof IntValue) && areAllSame && (((IntValue)listAccessByIndex.getIndex()).getConstant() < ((ListType)instanceType).getElementsTypes().size())) {
                 int index = ((IntValue)listAccessByIndex.getIndex()).getConstant();
                 return this.refineType(((ListType) instanceType).getElementsTypes().get(index).getType());
+            }
+            else {
+                return this.refineType(((ListType) instanceType).getElementsTypes().get(0).getType());
             }
         }
         else if(!(instanceType instanceof NoType)) {

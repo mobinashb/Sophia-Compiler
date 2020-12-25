@@ -175,7 +175,7 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     }
 
     public boolean isSameType(Type t1, Type t2) {
-        return isFirstSubTypeOfSecond(t1, t2) && isFirstSubTypeOfSecond(t2, t1);
+        return (t1 instanceof NoType) || (t2 instanceof NoType) || isFirstSubTypeOfSecond(t1, t2) && isFirstSubTypeOfSecond(t2, t1);
     }
 
     public boolean isLvalue(Expression expression) {

@@ -101,9 +101,10 @@ public class ExpressionTypeChecker extends Visitor<Type> {
             ArrayList<ListNameType> secondElements = ((ListType)second).getElementsTypes();
             if(firstElements.size() != secondElements.size())
                 return false;
-            for(int i = 0; i < firstElements.size(); i++)
-                if(!isFirstSubTypeOfSecond(firstElements.get(i).getType(), secondElements.get(i).getType()))
+            for(int i = 0; i < firstElements.size(); i++) {
+                if (!isFirstSubTypeOfSecond(firstElements.get(i).getType(), secondElements.get(i).getType()))
                     return false;
+            }
             return true;
         }
         return false;
@@ -175,7 +176,7 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     }
 
     public boolean isSameType(Type t1, Type t2) {
-        return (t1 instanceof NoType) || (t2 instanceof NoType) || isFirstSubTypeOfSecond(t1, t2) && isFirstSubTypeOfSecond(t2, t1);
+        return (t1 instanceof NoType) || (t2 instanceof NoType) || (isFirstSubTypeOfSecond(t1, t2) && isFirstSubTypeOfSecond(t2, t1));
     }
 
     public boolean isLvalue(Expression expression) {
@@ -423,7 +424,7 @@ public class ExpressionTypeChecker extends Visitor<Type> {
             }
             if(indexErrored)
                 return new NoType();
-            if((listAccessByIndex.getIndex() instanceof IntValue) && areAllSame && (((IntValue)listAccessByIndex.getIndex()).getConstant() < ((ListType)instanceType).getElementsTypes().size())) {
+            if((listAccessByIndex.getIndex() instanceof IntValue) && !areAllSame && (((IntValue)listAccessByIndex.getIndex()).getConstant() < ((ListType)instanceType).getElementsTypes().size())) {
                 int index = ((IntValue)listAccessByIndex.getIndex()).getConstant();
                 return this.refineType(((ListType) instanceType).getElementsTypes().get(index).getType());
             }

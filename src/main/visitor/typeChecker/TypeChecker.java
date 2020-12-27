@@ -267,7 +267,7 @@ public class TypeChecker extends Visitor<RetConBrk> {
                 ForeachListElementsNotSameType exception = new ForeachListElementsNotSameType(foreachStmt.getLine());
                 foreachStmt.addError(exception);
             }
-            if(!expressionTypeChecker.isSameType(varType, types.get(0))) {
+            if((types.size() > 0) && !expressionTypeChecker.isSameType(varType, types.get(0))) {
                 ForeachVarNotMatchList exception = new ForeachVarNotMatchList(foreachStmt);
                 foreachStmt.addError(exception);
             }

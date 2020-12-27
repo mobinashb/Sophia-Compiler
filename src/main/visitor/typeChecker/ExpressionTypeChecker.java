@@ -168,6 +168,8 @@ public class ExpressionTypeChecker extends Visitor<Type> {
     }
 
     public boolean areAllSameType(ArrayList<Type> types) {
+        if(types.size() == 0)
+            return true;
         Type firstType = types.get(0);
         for(Type type : types)
             if(!isSameType(firstType, type))
@@ -466,7 +468,6 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                 CantUseValueOfVoidMethod exception = new CantUseValueOfVoidMethod(methodCall.getLine());
                 methodCall.addError(exception);
                 hasError = true;
-
             }
             if(this.isFirstSubTypeOfSecondMultiple(argsTypes, actualArgsTypes)) {
                 if(hasError)

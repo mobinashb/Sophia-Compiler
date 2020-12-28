@@ -68,8 +68,7 @@ class Main{
         myList : list(100 # string);
         i : int;
 
-        r:R;
-        i = r.R() + 2;
+        this = 1;
 
         wordProcessor = new WordProcessor();
         for(i = 0; i < 50; i = i + 1) {

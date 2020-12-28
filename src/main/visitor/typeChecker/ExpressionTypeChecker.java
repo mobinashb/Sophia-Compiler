@@ -363,6 +363,9 @@ public class ExpressionTypeChecker extends Visitor<Type> {
                     this.seenNoneLvalue = true;
                     return new FptrType(methodSymbolTableItem.getArgTypes(), methodSymbolTableItem.getReturnType());
                 } catch (ItemNotFoundException memberNotFound) {
+                    if(memberName.equals(className)) {
+                        return new FptrType(new ArrayList<>(), new NullType());
+                    }
                     MemberNotAvailableInClass exception = new MemberNotAvailableInClass(objectOrListMemberAccess.getLine(), memberName, className);
                     objectOrListMemberAccess.addError(exception);
                     return new NoType();

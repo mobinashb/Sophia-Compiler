@@ -315,6 +315,8 @@ public class CodeGenerator extends Visitor<String> {
     public String visit(ConstructorDeclaration constructorDeclaration) {
         if(constructorDeclaration.getArgs().size() != 0)
             addDefaultConstructor();
+        if (constructorDeclaration.getMethodName().getName().equals("Main"))
+            this.addStaticMainMethod();
         this.visit((MethodDeclaration) constructorDeclaration);
         return null;
     }
@@ -324,11 +326,8 @@ public class CodeGenerator extends Visitor<String> {
         String argsSignature = "";
         for(VarDeclaration arg : methodDeclaration.getArgs())
             argsSignature += makeTypeSignature(arg.getType());
-        if(methodDeclaration instanceof ConstructorDeclaration) {
-            if (methodDeclaration.getMethodName().getName().equals("Main"))
-                this.addStaticMainMethod();
+        if(methodDeclaration instanceof ConstructorDeclaration)
             addCommand(".method public <init>(" + argsSignature + ")V");
-        }
         else
             addCommand(".method public " + methodDeclaration.getMethodName().getName() + "(" + argsSignature + ")" + makeTypeSignature(methodDeclaration.getReturnType()));
         addCommand(".limit stack 128");
@@ -606,7 +605,7 @@ public class CodeGenerator extends Visitor<String> {
                     commands += "invokestatic java/lang/Boolean/valueOf(Z)Ljava/lang/Boolean;\n";
                 commands += "invokevirtual List/setElement(ILjava/lang/Object;)V";
             }
-            else if(binaryExpression.getFirstOperand()  instanceof ObjectOrListMemberAccess) {
+            else if(binaryExpression.getFirstOperand() instanceof ObjectOrListMemberAccess) {
                 Expression instance = ((ObjectOrListMemberAccess) binaryExpression.getFirstOperand()).getInstance();
                 Type memberType = binaryExpression.getFirstOperand().accept(expressionTypeChecker);
                 String memberName = ((ObjectOrListMemberAccess) binaryExpression.getFirstOperand()).getMemberName().getName();
@@ -616,7 +615,7 @@ public class CodeGenerator extends Visitor<String> {
                     for(int i = 0; i < ((ListType) instanceType).getElementsTypes().size(); i++)
                         if(((ListType) instanceType).getElementsTypes().get(i).getName().getName().equals(memberName))
                             index = i;
-                    commands += ((ObjectOrListMemberAccess) binaryExpression.getFirstOperand()).getInstance().accept(this) + "\n";
+                    commands += instance.accept(this) + "\n";
                     commands += "ldc " + index + "\n";
                     commands += secondCommands + "\n";
                     commands += "dup_x2\n";
@@ -855,7 +854,7 @@ public class CodeGenerator extends Visitor<String> {
         commands += "checkcast " + getClass(type);
         if(type instanceof IntType)
             commands += "\ninvokevirtual java/lang/Integer/intValue()I";
-        else if(type instanceof  BoolType)
+        else if(type instanceof BoolType)
             commands += "\ninvokevirtual java/lang/Boolean/booleanValue()Z";
         return commands;
     }

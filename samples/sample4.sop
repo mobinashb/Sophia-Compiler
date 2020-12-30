@@ -55,21 +55,16 @@ class WordProcessor
 
 	def void wordProcess(stlist : list(100 # string))
 	{
-
 		print("the total number of names: ");
 		print(this.reduce(this.map(stlist),this.add));
 	}
 }
-
 
 class Main{
     def Main() {
         wordProcessor : WordProcessor;
         myList : list(100 # string);
         i : int;
-
-        this = 1;
-
         wordProcessor = new WordProcessor();
         for(i = 0; i < 50; i = i + 1) {
             myList[i] = "amir";
@@ -79,13 +74,5 @@ class Main{
         }
         wordProcessor.wordProcess(myList);
     }
-
-    def void foo() {
-
-    }
-
 }
 
-class R {
-
-}

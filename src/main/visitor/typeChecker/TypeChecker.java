@@ -120,16 +120,16 @@ public class TypeChecker extends Visitor<RetConBrk> {
         for(VarDeclaration varDeclaration : methodDeclaration.getLocalVars()) {
             varDeclaration.accept(this);
         }
-        boolean doesReturn = false, erroredYet = false;
+        boolean doesReturn = false, doesMethodReturn = false;
         for(Statement statement : methodDeclaration.getBody()) {
-            if(doesReturn && !erroredYet) {
+            if(doesReturn) {
                 UnreachableStatements exception = new UnreachableStatements(statement);
                 statement.addError(exception);
-                erroredYet = true;
             }
-            doesReturn = statement.accept(this).doesReturn || doesReturn;
+            doesReturn = statement.accept(this).doesReturn;
+            doesMethodReturn = doesReturn || doesMethodReturn;
         }
-        return new RetConBrk(doesReturn, false);
+        return new RetConBrk(doesMethodReturn, false);
     }
 
     @Override
@@ -167,24 +167,24 @@ public class TypeChecker extends Visitor<RetConBrk> {
 
     @Override
     public RetConBrk visit(BlockStmt blockStmt) {
-        boolean doesReturn = false, returnErroredYet= false;
-        boolean doesContinueBreak = false, continueBreakErroredYet = false;
+        boolean doesReturn = false, doesBlockReturn = false;
+        boolean doesContinueBreak = false, doesBlockContinueBreak = false;
         for(Statement statement : blockStmt.getStatements()) {
-            if(doesReturn && !returnErroredYet) {
+            if(doesReturn) {
                 UnreachableStatements exception = new UnreachableStatements(statement);
                 statement.addError(exception);
-                returnErroredYet = true;
             }
-            if(isInFor && doesContinueBreak && !continueBreakErroredYet) {
+            if(isInFor && doesContinueBreak) {
                 UnreachableStatements exception = new UnreachableStatements(statement);
                 statement.addError(exception);
-                continueBreakErroredYet = true;
             }
             RetConBrk stmtRetConBrk = statement.accept(this);
-            doesReturn = doesReturn || stmtRetConBrk.doesReturn;
-            doesContinueBreak = doesContinueBreak || stmtRetConBrk.doesBreakContinue;
+            doesReturn = stmtRetConBrk.doesReturn;
+            doesBlockReturn = doesReturn || doesBlockReturn;
+            doesContinueBreak = stmtRetConBrk.doesBreakContinue;
+            doesBlockContinueBreak = doesContinueBreak || doesBlockContinueBreak;
         }
-        return new RetConBrk(doesReturn, doesContinueBreak);
+        return new RetConBrk(doesBlockReturn, doesBlockContinueBreak);
     }
 
     @Override

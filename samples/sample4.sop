@@ -61,10 +61,15 @@ class WordProcessor
 }
 
 class Main{
+
+    rrr: func<int->void>;
+
     def Main() {
         wordProcessor : WordProcessor;
         myList : list(100 # string);
         i : int;
+
+
         wordProcessor = new WordProcessor();
         for(i = 0; i < 50; i = i + 1) {
             myList[i] = "amir";
@@ -74,5 +79,6 @@ class Main{
         }
         wordProcessor.wordProcess(myList);
     }
+
 }
 

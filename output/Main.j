@@ -1,6 +1,7 @@
 .class public Main
 .super java/lang/Object
 		 
+.field rrr LFptr;
 		
 .method public static main([Ljava/lang/String;)V
 .limit stack 128
@@ -15,6 +16,9 @@
 .limit locals 128
 		aload 0
 		invokespecial java/lang/Object/<init>()V
+		aload 0
+		aconst_null
+		putfield Main/rrr LFptr;
 		aconst_null
 		astore 1
 		new java/util/ArrayList

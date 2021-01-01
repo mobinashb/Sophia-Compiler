@@ -75,15 +75,11 @@ public class ExpressionTypeChecker extends Visitor<Type> {
         else if(first instanceof NullType)
             return second instanceof NullType || second instanceof FptrType || second instanceof ClassType;
         else if(first instanceof ClassType) {
-            if(second instanceof NullType)
-                return true;
             if(!(second instanceof ClassType))
                 return false;
             return this.classHierarchy.isSecondNodeAncestorOf(((ClassType) first).getClassName().getName(), ((ClassType) second).getClassName().getName());
         }
         else if(first instanceof FptrType) {
-            if(second instanceof NullType)
-                return true;
             if(!(second instanceof FptrType))
                 return false;
             Type firstRetType = ((FptrType) first).getReturnType();

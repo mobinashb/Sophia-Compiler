@@ -31,9 +31,9 @@ import java.util.ArrayList;
 
 public class TypeChecker extends Visitor<RetConBrk> {
     private final Graph<String> classHierarchy;
-    private final ExpressionTypeChecker expressionTypeChecker;
-    private ClassDeclaration currentClass;
-    private MethodDeclaration currentMethod;
+    public ExpressionTypeChecker expressionTypeChecker;
+    public ClassDeclaration currentClass;
+    public MethodDeclaration currentMethod;
     private boolean isInFor = false;
 
     public TypeChecker(Graph<String> classHierarchy) {

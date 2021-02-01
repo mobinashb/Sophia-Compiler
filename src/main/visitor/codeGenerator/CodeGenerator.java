@@ -34,12 +34,15 @@ import main.symbolTable.items.ClassSymbolTableItem;
 import main.symbolTable.items.FieldSymbolTableItem;
 import main.symbolTable.utils.graph.Graph;
 import main.visitor.Visitor;
+import main.visitor.nameAnalyzer.NameChecker;
 import main.visitor.typeChecker.ExpressionTypeChecker;
+import main.visitor.typeChecker.TypeChecker;
 
 import java.io.*;
 
 public class CodeGenerator extends Visitor<String> {
     ExpressionTypeChecker expressionTypeChecker;
+    TypeChecker typeChecker;
     Graph<String> classHierarchy;
     private String outputPath;
     private int labelCounter;
@@ -52,7 +55,8 @@ public class CodeGenerator extends Visitor<String> {
 
     public CodeGenerator(Graph<String> classHierarchy) {
         this.classHierarchy = classHierarchy;
-        this.expressionTypeChecker = new ExpressionTypeChecker(classHierarchy);
+        this.typeChecker = new TypeChecker(classHierarchy);
+        this.expressionTypeChecker = this.typeChecker.expressionTypeChecker;
         this.labelCounter = 0;
         this.tempVarSlot = 0;
         this.prepareOutputFolder();
@@ -276,7 +280,8 @@ public class CodeGenerator extends Visitor<String> {
     @Override
     public String visit(Program program) {
         for(ClassDeclaration classDeclaration : program.getClasses()) {
-            this.expressionTypeChecker.setCurrentClass(classDeclaration);
+            this.typeChecker.currentClass = classDeclaration;
+            this.typeChecker.expressionTypeChecker.setCurrentClass(classDeclaration);
             this.currentClass = classDeclaration;
             classDeclaration.accept(this);
         }
@@ -297,14 +302,16 @@ public class CodeGenerator extends Visitor<String> {
         }
         addCommand("");
         if(classDeclaration.getConstructor() != null) {
-            this.expressionTypeChecker.setCurrentMethod(classDeclaration.getConstructor());
+            this.typeChecker.currentMethod = classDeclaration.getConstructor();
+            this.typeChecker.expressionTypeChecker.setCurrentMethod(classDeclaration.getConstructor());
             this.currentMethod = classDeclaration.getConstructor();
             classDeclaration.getConstructor().accept(this);
         }
         else
             addDefaultConstructor();
         for(MethodDeclaration methodDeclaration : classDeclaration.getMethods()) {
-            this.expressionTypeChecker.setCurrentMethod(methodDeclaration);
+            this.typeChecker.currentMethod = methodDeclaration;
+            this.typeChecker.expressionTypeChecker.setCurrentMethod(methodDeclaration);
             this.currentMethod = methodDeclaration;
             methodDeclaration.accept(this);
         }
@@ -385,8 +392,9 @@ public class CodeGenerator extends Visitor<String> {
         String exitLabel = getFreshLabel();
         addCommand(conditionalStmt.getCondition().accept(this));
         addCommand("ifeq " + elseLabel);
-            conditionalStmt.getThenBody().accept(this);
-        addCommand("goto " + exitLabel);
+        conditionalStmt.getThenBody().accept(this);
+        if(!(conditionalStmt.getThenBody().accept(this.typeChecker)).doesReturn)
+            addCommand("goto " + exitLabel);
         addCommand(elseLabel + ":");
         if(conditionalStmt.getElseBody() != null)
             conditionalStmt.getElseBody().accept(this);

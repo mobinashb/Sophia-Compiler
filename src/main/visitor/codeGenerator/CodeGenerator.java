@@ -428,8 +428,13 @@ public class CodeGenerator extends Visitor<String> {
     @Override
     public String visit(ReturnStmt returnStmt) {
         Type type = returnStmt.getReturnedExpr().accept(expressionTypeChecker);
-        if(type instanceof NullType)
+        if(type instanceof NullType) {
+            if(!(currentMethod.getReturnType() instanceof NullType)) {
+                addCommand(returnStmt.getReturnedExpr().accept(this));
+                addCommand("areturn");
+            }
             addCommand("return");
+        }
         else {
             addCommand(returnStmt.getReturnedExpr().accept(this));
             if(type instanceof IntType)
